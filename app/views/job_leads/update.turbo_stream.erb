@@ -1,0 +1,17 @@
+<%= turbo_stream.remove @job_lead %>
+
+<% if previous_lead = @job_lead.previous_lead %>
+
+  <%= turbo_stream.after previous_lead do %>
+    <%= render @job_lead, job_feed: @job_feed %>
+  <% end %>
+
+<% else %>
+
+  <%= turbo_stream.prepend "job_leads" do %>
+    <%= render @job_lead, job_feed: @job_feed %>
+  <% end %>
+
+<% end %>
+
+<%= render_turbo_stream_flash_messages %>

@@ -1,0 +1,16 @@
+<%= turbo_frame_tag job_feed do %>
+  <div class="job_feed">
+    <%= link_to job_feed.name,
+                job_feed_path(job_feed),
+                data: { turbo_frame: "_top" } %>
+    <div class="job_feed__actions">
+      <%= button_to "Delete",
+                    job_feed_path(job_feed),
+                    method: :delete,
+                    class: "btn btn--light" %>
+      <%= link_to "Edit",
+                  edit_job_feed_path(job_feed),
+                  class: "btn btn--light" %>
+    </div>
+  </div>
+<% end %>

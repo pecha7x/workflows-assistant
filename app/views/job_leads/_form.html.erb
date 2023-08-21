@@ -1,0 +1,7 @@
+<%= simple_form_for [job_feed, job_lead], html: { class: "form job-lead" } do |f| %>
+  <%= form_error_notification(job_lead) %>
+
+  <%= f.input :published_at, html5: true, input_html: { autofocus: true } %>
+  <%= link_to "Cancel", job_feed_path(job_feed), class: "btn btn--light" %>
+  <%= f.submit class: "btn btn--secondary" %>
+<% end %>

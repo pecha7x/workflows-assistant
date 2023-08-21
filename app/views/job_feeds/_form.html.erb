@@ -1,0 +1,7 @@
+<%= simple_form_for job_feed, html: { class: "job_feed form" } do |f| %>
+  <%= form_error_notification(job_feed) %>
+
+  <%= f.input :name, input_html: { autofocus: true } %>
+  <%= link_to "Cancel", job_feeds_path, class: "btn btn--light" %>
+  <%= f.submit class: "btn btn--secondary" %>
+<% end %>

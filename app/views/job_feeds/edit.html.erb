@@ -1,0 +1,11 @@
+<main class="container">
+  <%= link_to sanitize("&larr; Back to job feed"), job_feed_path(@job_feed) %>
+
+  <div class="header">
+    <h1>Edit Job Feed</h1>
+  </div>
+
+  <%= turbo_frame_tag @job_feed do %>
+    <%= render "form", job_feed: @job_feed %>
+  <% end %>  
+</main>

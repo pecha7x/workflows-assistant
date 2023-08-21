@@ -1,0 +1,20 @@
+<main class="container">
+  <%= link_to sanitize("&larr; Back to job feeds"), job_feeds_path %>
+
+  <div class="header">
+    <h1>
+      <%= @job_feed.name %>
+    </h1>
+
+    <%= link_to "New Job Lead",
+                new_job_feed_job_lead_path(@job_feed),
+                data: { turbo_frame: dom_id(JobLead.new) },
+                class: "btn btn--primary" %>
+  </div>
+
+  <%= turbo_frame_tag JobLead.new %>
+
+  <%= turbo_frame_tag "job_leads" do %>
+    <%= render @job_leads, job_feed: @job_feed %>
+  <% end %>
+</main>

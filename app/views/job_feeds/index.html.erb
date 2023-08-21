@@ -1,0 +1,18 @@
+<%= turbo_stream_from current_user, "job_feeds" %>
+
+<main class="container">
+  <div class="header">
+    <h1>Job Feeds</h1>
+    <%= link_to "New Job Feed",
+                new_job_feed_path,
+                class: "btn btn--primary",
+                data: { turbo_frame: dom_id(JobFeed.new) } %>
+  </div>
+
+  <%= turbo_frame_tag JobFeed.new %>
+
+  <%= turbo_frame_tag "job_feeds" do %>
+    <%= render "job_feeds/empty_state" %>
+    <%= render @job_feeds %>
+  <% end %>  
+</main>

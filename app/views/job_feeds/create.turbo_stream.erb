@@ -1,0 +1,3 @@
+<%= turbo_stream.prepend "job_feeds", @job_feed %>
+<%= turbo_stream.update JobFeed.new, "" %>
+<%= render_turbo_stream_flash_messages %>
