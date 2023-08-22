@@ -23,6 +23,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_21_113142) do
   end
 
   create_table "job_leads", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.text "link", null: false
+    t.integer "potential", default: 1
+    t.integer "status", default: 0
+    t.decimal "hourly_rate", precision: 10, scale: 2, null: false
     t.bigint "job_feed_id", null: false
     t.datetime "published_at"
     t.datetime "created_at", null: false

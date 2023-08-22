@@ -1,9 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 today:
+  title: Today
+  description: Today Description
+  link: https://example.com/1
+  hourly_rate: 50.0
   job_feed: first
   published_at: <%= Time.current %>
 
 last_week:
+  title: Last Week
+  description: Last Week Description
+  link: https://example.com/2
+  hourly_rate: 55.0
   job_feed: first
   published_at: <%= Time.current - 1.week %>

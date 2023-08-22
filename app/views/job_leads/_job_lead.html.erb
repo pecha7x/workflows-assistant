@@ -1,20 +1,16 @@
 <%= turbo_frame_tag job_lead do %>
   <div class="job-lead">
-    <div class="job-lead__header">
-      <h2 class="job-lead__title">
-        <%= l(job_lead.published_at, format: :long) %>
-      </h2>
-
-      <div class="job-lead__actions">
-        <%= button_to "Delete",
-                      [job_feed, job_lead],
-                      method: :delete,
-                      form: { data: { turbo_confirm: "Are you sure?" } },
-                      class: "btn btn--light" %>
-        <%= link_to "Edit",
-                    [:edit, job_feed, job_lead],
+    <%= render partial: 'job_leads/job_lead_body', locals: { job_lead: job_lead } %>
+    <div class="job-lead__actions">
+      <%= button_to "Delete",
+                    [job_feed, job_lead],
+                    method: :delete,
+                    form: { data: { turbo_confirm: "Are you sure?" } },
                     class: "btn btn--light" %>
-      </div>
+      <%= link_to "Edit",
+                  [:edit, job_feed, job_lead],
+                  class: "btn btn--light" %>
+                  
     </div>
   </div>
 <% end %>  

@@ -1,0 +1,21 @@
+<div class="job-lead__body" onclick="window.open('<%= job_lead.link %>', '_blank') || window.location.replace('<%= job_lead.link %>');">
+  <div class="job-lead__name">
+    <div class="job-lead__hourly-rate">
+      <%= number_to_currency job_lead.hourly_rate %>
+    </div>
+    <div class="job-lead__title">
+      <%= job_lead.title.truncate(70, separator: /\s/, ommission: "....") %>
+    </div>
+  </div>  
+  <div class="job-lead__description">
+    <%= strip_tags(job_lead.description).truncate(250, separator: /\s/, ommission: "....") %>
+  </div>
+  <div class="job-lead__info">
+    <div class="job-lead__feed-name">
+      <%= job_lead.job_feed.name %>
+    </div>
+    <div class="job-lead__published-at">
+      <%= time_ago_in_words job_lead.published_at %> ago
+    </div>
+  </div>
+</div>

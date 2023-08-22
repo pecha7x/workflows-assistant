@@ -1,5 +1,8 @@
 .navbar {
   display: flex;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   align-items: center;
   box-shadow: var(--shadow-large);
   padding: var(--space-xs) var(--space-m);

@@ -45,7 +45,7 @@ class JobLeadsController < ApplicationController
   private
 
   def job_lead_params
-    params.require(:job_lead).permit(:published_at)
+    params.require(:job_lead).permit(:title, :description, :link, :potential, :status, :hourly_rate, :published_at)
   end
 
   def set_job_feed
