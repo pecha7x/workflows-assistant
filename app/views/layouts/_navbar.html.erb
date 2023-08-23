@@ -11,9 +11,10 @@
 
   <div class="navbar__right">
     <% if user_signed_in? %>
-      <div class="navbar__user-settings">
-         <%= current_user.name %>
-      </div>
+      <%= link_to assistant_configurations_path, class: "navbar__user-settings btn btn--light" do %>
+        <i class="fas fa-solid fa-toolbox"></i>
+        <%= current_user.name %>
+      <% end %>
       <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn--dark" %>
     <% else %>
      <%= link_to "Sign in", new_user_session_path, class: "btn btn--dark" %>

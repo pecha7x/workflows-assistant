@@ -5,7 +5,16 @@
     <h1>Job Leads</h1>
   </div>
 
-  <%= turbo_frame_tag "job_leads" do %>
-    <%= render @job_leads %>
-  <% end %>  
+  <% if @job_leads.blank? && current_user.job_feeds.empty? %>
+    <div class="empty-state">
+      <p class="empty-state__text">
+        You don't have any job feeds yet!
+      </p>
+      <%= link_to "Go to Job Feeds", job_feeds_path, class: "btn btn--primary" %>
+    </div>
+  <% else %>
+    <%= turbo_frame_tag "job_leads" do %>
+      <%= render @job_leads %>
+    <% end %>
+  <% end %>
 </main>

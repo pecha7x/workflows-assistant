@@ -2,9 +2,7 @@
   <h1>My Daily Workflow Assistant</h1>
   <p>Keep my live and work under control</p>
 
-  <% if user_signed_in? %>
-    <%= link_to "View Job Feeds", job_feeds_path, class: "btn btn--dark" %>
-  <% else %>
+  <% unless user_signed_in? %>
     <%= link_to "Sign in", new_user_session_path, class: "btn btn--dark" %>
   <% end %>
 </main>
