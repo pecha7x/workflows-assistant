@@ -8,7 +8,7 @@
 
 <% else %>
 
-  <%= turbo_stream.prepend "job_leads" do %>
+  <%= turbo_stream.prepend "job_feed_leads" do %>
     <%= render @job_lead, job_feed: @job_feed %>
   <% end %>
 

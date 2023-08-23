@@ -1,18 +1,22 @@
 <header class="navbar">
-  <% if user_signed_in? %>
-    <div class="navbar__brand">
-      Daily Workflow Assistant
-    </div>
-    <div class="navbar__name">
-      <%= current_user.name %>
-    </div>
-    <%= button_to "Sign out",
-                  destroy_user_session_path,
-                  method: :delete,
-                  class: "btn btn--dark" %>
-  <% else %>
-    <%= link_to "Sign in",
-                new_user_session_path,
-                class: "btn btn--dark navbar__right" %>
-  <% end %>
+  <div class="navbar__brand">
+    Daily Workflow Assistant
+  </div>
+
+  <div class="navbar__links">
+    <% if user_signed_in? %>
+      <%= link_to "Job Leads", job_leads_path, class: "btn btn--light" %>
+    <% end %>  
+  </div>
+
+  <div class="navbar__right">
+    <% if user_signed_in? %>
+      <div class="navbar__user-settings">
+         <%= current_user.name %>
+      </div>
+      <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn--dark" %>
+    <% else %>
+     <%= link_to "Sign in", new_user_session_path, class: "btn btn--dark" %>
+    <% end %>
+  </div>
 </header>

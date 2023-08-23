@@ -1,11 +1,13 @@
 .navbar {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 1fr;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   align-items: center;
   box-shadow: var(--shadow-large);
-  padding: var(--space-xs) var(--space-m);
+  padding: var(--space-xs) var(--space-l);
   margin-bottom: var(--space-xxl);
   background-color: (var(--color-white));
 
@@ -15,14 +17,19 @@
     color: var(--color-text-header);
   }
 
-  &__name {
-    font-weight: bold;
-    margin-left: auto;
-    margin-right: var(--space-s);
-    color: var(--color-text-header);
+  &__links {
+    display: flex;
+    // justify-content: flex-end;
   }
 
   &__right {
-    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__user-settings {
+    font-weight: bold;
+    // margin-right: var(--space-s);
+    color: var(--color-text-header);
   }
 }

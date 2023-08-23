@@ -14,7 +14,7 @@
 
   <%= turbo_frame_tag JobLead.new %>
 
-  <%= turbo_frame_tag "job_leads" do %>
+  <%= turbo_frame_tag "job_feed_leads" do %>
     <%= render @job_leads, job_feed: @job_feed %>
   <% end %>
 </main>

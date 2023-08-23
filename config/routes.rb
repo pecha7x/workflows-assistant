@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :job_feeds do
     resources :job_leads, except: [:index, :show]
   end
+  resources :job_leads, only: [:index]
 end

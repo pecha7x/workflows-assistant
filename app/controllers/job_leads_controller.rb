@@ -1,6 +1,10 @@
 class JobLeadsController < ApplicationController
-  before_action :set_job_feed
+  before_action :set_job_feed, except: [:index]
   before_action :set_job_lead, only: [:edit, :update, :destroy]
+
+  def index
+    @job_leads = current_user.job_leads.ordered
+  end
 
   def new
     @job_lead = @job_feed.job_leads.build

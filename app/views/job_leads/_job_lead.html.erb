@@ -1,16 +1,8 @@
 <%= turbo_frame_tag job_lead do %>
   <div class="job-lead">
     <%= render partial: 'job_leads/job_lead_body', locals: { job_lead: job_lead } %>
-    <div class="job-lead__actions">
-      <%= button_to "Delete",
-                    [job_feed, job_lead],
-                    method: :delete,
-                    form: { data: { turbo_confirm: "Are you sure?" } },
-                    class: "btn btn--light" %>
-      <%= link_to "Edit",
-                  [:edit, job_feed, job_lead],
-                  class: "btn btn--light" %>
-                  
-    </div>
+    <% if defined? job_feed %>
+      <%= render partial: 'job_leads/job_lead_actions', locals: { job_feed: job_feed, job_lead: job_lead } %>
+    <% end %>  
   </div>
 <% end %>  

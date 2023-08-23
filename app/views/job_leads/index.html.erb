@@ -1,0 +1,11 @@
+<%= turbo_stream_from current_user, "job_leads" %>
+
+<main class="container">
+  <div class="header">
+    <h1>Job Leads</h1>
+  </div>
+
+  <%= turbo_frame_tag "job_leads" do %>
+    <%= render @job_leads %>
+  <% end %>  
+</main>
