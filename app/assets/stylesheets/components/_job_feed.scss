@@ -20,4 +20,33 @@
     align-self: flex-start;
     gap: var(--space-xs);
   }
+
+  &.form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__form-common-fields,
+  &__form-settings-fields,
+  &__form-actions {
+    display: flex;
+    width: 100%;
+    gap: var(--space-xxl);
+    justify-content: space-between;
+    padding-top: var(--space-s);
+  }
+
+  &__form-field {
+    display: flex;
+    gap: var(--space-s);
+    label {
+      margin: auto;
+      font-weight: bold;
+    }
+  }
+
+  &__form-settings-fields {
+    border-top: solid 1px var(--color-light);
+  }
 }
+

@@ -10,7 +10,7 @@ class JobFeedsController < ApplicationController
   end
 
   def new
-    @job_feed = JobFeed.new
+    @job_feed = JobFeed.new(job_feed_params)
   end
 
   def create
@@ -56,6 +56,11 @@ class JobFeedsController < ApplicationController
   end
 
   def job_feed_params
-    params.require(:job_feed).permit(:name)
+    params.fetch(:job_feed, {}).permit(
+      :name,
+      :kind, 
+      :refresh_rate,
+      settings: JobFeed.all_settings_fields
+    )
   end
 end

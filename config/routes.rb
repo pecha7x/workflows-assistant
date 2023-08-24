@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :assistant_configurations, only: [:index]
+  resource :assistant_configuration, only: [:settings] do
+    get :settings, on: :member
+  end   
   resources :job_feeds do
     resources :job_leads, except: [:index, :show]
   end

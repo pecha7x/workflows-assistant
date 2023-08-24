@@ -10,12 +10,10 @@ en:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Please review the problems below:"
-    placeholders:
-      job_feed:
-        name: Name of your Job Feed
     labels:
       job_feed:
         name: Name
+        kind: Kind
       job_lead:
         published_at: Published At  
   helpers:

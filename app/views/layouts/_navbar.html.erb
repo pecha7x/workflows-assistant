@@ -11,7 +11,7 @@
 
   <div class="navbar__right">
     <% if user_signed_in? %>
-      <%= link_to assistant_configurations_path, class: "navbar__user-settings btn btn--light" do %>
+      <%= link_to settings_assistant_configuration_path, class: "navbar__user-settings btn btn--light" do %>
         <i class="fas fa-solid fa-toolbox"></i>
         <%= current_user.name %>
       <% end %>

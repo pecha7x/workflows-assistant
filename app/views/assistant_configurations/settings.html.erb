@@ -1,12 +1,13 @@
 <h1>Assistant configuration:</h1>
 
-<div id="assistant_configurations">
+<div id="assistant_configuration">
   <%= link_to job_feeds_path, class: "btn btn--light" do %>
     <i class="fas fa-solid fa-rss"></i>
     Job Feeds
   <% end %>
 
-  <% @assistant_configurations.each do |assistant_configuration| %>
-    <%= render assistant_configuration %>
-  <% end %>
+  <p>
+    <strong>User:</strong>
+    <%= @assistant_configuration.user_id %>
+  </p>
 </div>

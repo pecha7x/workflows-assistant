@@ -1,0 +1,8 @@
+<%= form.simple_fields_for :settings do |s| %>
+  <% job_feed.settings_fields.each do |field_name| %>
+    <%= s.input field_name,
+        placeholder: settings_field_placeholder(field_name),
+        label: false,
+        input_html: { value: job_feed.send(field_name) } %>
+  <% end %>
+<% end %>

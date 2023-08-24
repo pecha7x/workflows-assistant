@@ -1,7 +1,39 @@
 <%= simple_form_for job_feed, html: { class: "job_feed form" } do |f| %>
   <%= form_error_notification(job_feed) %>
 
-  <%= f.input :name, input_html: { autofocus: true } %>
-  <%= link_to "Cancel", job_feeds_path, class: "btn btn--light" %>
-  <%= f.submit class: "btn btn--secondary" %>
+  <div class="job_feed__form-common-fields">
+    <div class="job_feed__form-field">
+      <%= f.label :name %>
+      <%= f.input :name, input_html: { autofocus: true } %>
+    </div>
+    
+    <div class="job_feed__form-field" data-controller="search-params element">
+      <%= f.label :kind %>
+      <%= f.input :kind,
+                  input_html: { disabled: job_feed.persisted?, 'data-action' => 'change->search-params#encode change->element#click' },
+                  collection: JobFeed.kinds.keys,
+                  selected: job_feed.kind %>
+      <a href="<%= new_job_feed_path %>"
+        data-search-params-target="anchor"
+        data-element-target="click"
+        data-turbo-frame="<%= f.field_id(:kind, :turbo_frame) %>"
+        hidden></a>
+    </div>
+
+    <div class="job_feed__form-field">
+      <%= f.label :refresh_rate %>            
+      <%= f.input :refresh_rate,
+                  collection: JobFeed::REFRESH_RATES.map{ |v| ["#{v} seconds", v] },
+                  selected: job_feed.refresh_rate %>
+    </div>
+  </div>  
+
+  <%= turbo_frame_tag f.field_id(:kind, :turbo_frame), class: "job_feed__form-settings-fields" do %>
+    <%= render partial: 'form_settings', locals: { form: f, job_feed: job_feed } %>
+  <% end %>  
+
+  <div class="job_feed__form-actions">
+    <%= link_to "Cancel", job_feeds_path, class: "btn btn--light" %>
+    <%= f.submit class: "btn btn--secondary" %>
+  </div>
 <% end %>
