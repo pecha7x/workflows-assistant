@@ -11,11 +11,13 @@ gem "puma", "~> 5.0"
 gem "jsbundling-rails"
 gem "turbo-rails"
 gem "sidekiq"
+gem "sidekiq-status"
 gem "simple_form", "~> 5.1.0"
 gem "stimulus-rails"
 gem "cssbundling-rails"
 gem "jbuilder"
 gem "redis", "~> 4.0"
+gem 'rss'
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
@@ -29,6 +31,7 @@ end
 
 group :test do
   gem "capybara"
+  gem "mocha"
   gem "selenium-webdriver"
   gem "webdrivers"
 end

@@ -5,6 +5,8 @@ today:
   description: Today Description
   link: https://example.com/1
   hourly_rate: 50.0
+  owner_country: 'Australia'
+  external_id: 1
   job_feed: first
   published_at: <%= Time.current %>
 
@@ -13,5 +15,7 @@ last_week:
   description: Last Week Description
   link: https://example.com/2
   hourly_rate: 55.0
+  owner_country: 'United States'
+  external_id: 2
   job_feed: first
   published_at: <%= Time.current - 1.week %>

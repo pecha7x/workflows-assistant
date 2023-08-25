@@ -21,12 +21,12 @@
     </div>
 
     <div class="job_feed__form-field">
-      <%= f.label :refresh_rate %>            
+      <%= f.label "Refresh Rate (seconds)" %>            
       <%= f.input :refresh_rate,
-                  collection: JobFeed::REFRESH_RATES.map{ |v| ["#{v} seconds", v] },
+                  collection: JobFeed::REFRESH_RATES,
                   selected: job_feed.refresh_rate %>
     </div>
-  </div>  
+  </div>
 
   <%= turbo_frame_tag f.field_id(:kind, :turbo_frame), class: "job_feed__form-settings-fields" do %>
     <%= render partial: 'form_settings', locals: { form: f, job_feed: job_feed } %>

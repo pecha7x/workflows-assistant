@@ -6,6 +6,7 @@ class JobLead < ApplicationRecord
 
   validates :published_at, :title, :link, :status, :potential, presence: true
   validates :hourly_rate, presence: true, numericality: { greater_than: 0 }
+  validates :external_id, presence: true, uniqueness: { scope: :job_feed_id }
 
   scope :ordered, -> { order(published_at: :desc) }
 

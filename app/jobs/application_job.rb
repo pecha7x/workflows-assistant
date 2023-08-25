@@ -1,4 +1,5 @@
 class ApplicationJob < ActiveJob::Base
+  # https://api.rubyonrails.org/classes/ActiveJob/Core/ClassMethods.html#method-i-set
   # Automatically retry jobs that encountered a deadlock
   # retry_on ActiveRecord::Deadlocked
 
