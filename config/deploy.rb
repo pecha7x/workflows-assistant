@@ -28,6 +28,29 @@ namespace :sidekiq do
   end
 end
 
+namespace :deploy do
+  namespace :nginx do
+    desc 'Reload nginx configuration'
+    task :reload do
+      on roles :nginx do
+        sudo 'service nginx reload'
+      end
+    end
+  
+    desc 'Symlink Nginx config'
+    task :symlink_config do
+      on roles :nginx do
+        within release_path do
+          sudo :cp, '-f', "config/nginx.#{fetch(:stage)}.conf", '/etc/nginx/nginx.conf'
+        end
+      end
+    end
+  end
+end
+
 # after 'deploy:starting', 'sidekiq:quiet'
 after 'deploy:reverted', 'sidekiq:restart'
 after 'deploy:published', 'sidekiq:restart'
+
+after 'deploy:updated', 'deploy:nginx:symlink_config'
+after 'deploy:updated', 'deploy:nginx:reload'
