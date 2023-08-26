@@ -16,6 +16,6 @@ class CollectJobLeadsJob < ApplicationJob
   private
 
   def reschedule_as_next
-    self.class.set(wait: refresh_rate.seconds).perform_later(job_feed.id)
+    job_feed.background_processing(refresh_rate.seconds)
   end
 end

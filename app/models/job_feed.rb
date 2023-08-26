@@ -27,7 +27,7 @@ class JobFeed < ApplicationRecord
   validate :kind_not_changed
 
   after_create :background_processing
-  after_update :background_processing, if: -> { saved_change_to_refresh_rate? || saved_change_to_settings? }
+  after_update :background_processing_in_later, if: -> { saved_change_to_refresh_rate? || saved_change_to_settings? }
   before_destroy :cancel_background_job
 
   belongs_to :user
@@ -41,6 +41,11 @@ class JobFeed < ApplicationRecord
     (COMMON_SETTINGS_FIELDS + SPECIFIC_SETTINGS_FIELDS[kind.to_sym]).uniq
   end
 
+  def background_processing(run_in_seconds=5)
+    bg_job = CollectJobLeadsJob.set(wait: run_in_seconds.seconds).perform_later(id)
+    bg_job && self.update_column(:background_job_id, bg_job.provider_job_id)
+  end
+
   private
 
   def kind_not_changed
@@ -49,11 +54,9 @@ class JobFeed < ApplicationRecord
     end
   end
 
-  def background_processing
+  def background_processing_in_later
     cancel_background_job
-
-    bg_job = CollectJobLeadsJob.set(wait: refresh_rate.seconds).perform_later(id)
-    bg_job && self.update_column(:background_job_id, bg_job.provider_job_id)
+    background_processing(refresh_rate.seconds)
   end
 
   def cancel_background_job
