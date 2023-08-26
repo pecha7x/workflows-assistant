@@ -11,3 +11,23 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 set :keep_releases, 5
 set :nvm_node, 'v18.7.0'
 set :nvm_map_bins, %w{node npm yarn rake}
+
+namespace :sidekiq do
+  task :quiet do
+    on roles(:app) do
+      # puts capture("pgrep -f 'sidekiq' | xargs kill -TSTP")
+      within release_path do
+        # execute :bundle, 'exec sidekiqctl quiet', 'tmp/pids/sidekiq.pid'
+      end
+    end
+  end
+  task :restart do
+    on roles(:app) do
+      execute :sudo, :systemctl, :restart, :sidekiq
+    end
+  end
+end
+
+# after 'deploy:starting', 'sidekiq:quiet'
+after 'deploy:reverted', 'sidekiq:restart'
+after 'deploy:published', 'sidekiq:restart'
