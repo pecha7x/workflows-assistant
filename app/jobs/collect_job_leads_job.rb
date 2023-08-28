@@ -9,9 +9,8 @@ class CollectJobLeadsJob < ApplicationJob
   delegate :kind, :refresh_rate, to: :job_feed
 
   def perform(job_feed_id)
-    p "PENDING"
-    # @job_feed = JobFeed.find(job_feed_id)
-    # "JobFeedProcessor::#{kind.capitalize}".constantize.new(job_feed_id).run
+    @job_feed = JobFeed.find(job_feed_id)
+    "JobFeedProcessor::#{kind.capitalize}".constantize.new(job_feed_id).run
   end
 
   private

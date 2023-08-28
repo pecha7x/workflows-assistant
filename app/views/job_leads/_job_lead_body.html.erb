@@ -4,7 +4,7 @@
       <%= number_to_currency job_lead.hourly_rate %>
     </div>
     <div class="job-lead__title">
-      <%= job_lead.title.truncate(70, separator: /\s/, ommission: "....") %>
+      <%= job_lead.formatted_title %>
     </div>
   </div>  
   <div class="job-lead__description">

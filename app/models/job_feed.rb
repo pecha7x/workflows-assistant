@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: job_feeds
+#
+#  id                :bigint           not null, primary key
+#  name              :string           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  user_id           :bigint           not null
+#  kind              :integer          default("upwork")
+#  refresh_rate      :integer          default(60)
+#  settings          :jsonb
+#  background_job_id :string
+#
 class JobFeed < ApplicationRecord
   REFRESH_RATES = [ 30, 60, 120, 360 ].freeze
 

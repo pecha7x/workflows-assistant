@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.1.2"
 
 gem "devise", "~> 4.8.1"
+gem "kramdown"
 gem "rails", "~> 7.0.7"
 gem "sprockets-rails"
 gem "pg", "~> 1.1"
@@ -13,6 +14,7 @@ gem "turbo-rails"
 gem "sidekiq"
 gem "sidekiq-status"
 gem "simple_form", "~> 5.1.0"
+gem "slack-notifier"
 gem "stimulus-rails"
 gem "cssbundling-rails"
 gem "jbuilder"
@@ -26,6 +28,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'annotate'
   gem 'capistrano'
   gem 'capistrano3-puma'
   gem 'capistrano-rails', require: false
