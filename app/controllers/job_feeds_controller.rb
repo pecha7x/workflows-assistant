@@ -18,7 +18,7 @@ class JobFeedsController < ApplicationController
 
     if @job_feed.save
       respond_to do |format|
-        format.html { redirect_to job_feeds_path, notice: "Job Feed was successfully created." }
+        format.html { redirect_to edit_job_feed_path(@job_feed), notice: "Job Feed was successfully created." }
         format.turbo_stream { flash.now[:notice] = "Job Feed was successfully created." }
       end
     else
@@ -27,6 +27,7 @@ class JobFeedsController < ApplicationController
   end
 
   def edit
+    @notifiers = @job_feed.notifiers
   end
 
   def update

@@ -21,32 +21,29 @@
     gap: var(--space-xs);
   }
 
-  &.form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__form-common-fields,
-  &__form-settings-fields,
-  &__form-actions {
+  &__form-notifiers {
     display: flex;
     width: 100%;
-    gap: var(--space-xxl);
-    justify-content: space-between;
-    padding-top: var(--space-s);
-  }
-
-  &__form-field {
-    display: flex;
     gap: var(--space-s);
-    label {
-      margin: auto;
-      font-weight: bold;
+    flex-direction: column;
+    border-top: var(--border-light);
+    padding: var(--space-s) 20% 0 20%;
+    &-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      b {
+        font-size: var(--font-size-xl);
+      }
+      a {
+        font-size: var(--font-size-l);
+        padding: 0 var(--space-xs);
+      }
     }
-  }
-
-  &__form-settings-fields {
-    border-top: solid 1px var(--color-light);
+    .notifier {
+      border: var(--border-light);
+    }
   }
 }
 

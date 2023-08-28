@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :job_leads, except: [:index, :show]
   end
   resources :job_leads, only: [:index]
+  resources :notifiers, except: [:index, :show]
   
   root to: "pages#home"
 end

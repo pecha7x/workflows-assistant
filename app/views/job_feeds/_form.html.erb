@@ -1,13 +1,13 @@
-<%= simple_form_for job_feed, html: { class: "job_feed form" } do |f| %>
+<%= simple_form_for job_feed, html: { class: "job_feed form form_settings" } do |f| %>
   <%= form_error_notification(job_feed) %>
 
-  <div class="job_feed__form-common-fields">
-    <div class="job_feed__form-field">
+  <div class="form-with-settings__common-fields">
+    <div class="form-with-settings__field">
       <%= f.label :name %>
-      <%= f.input :name, input_html: { autofocus: true } %>
+      <%= f.input :name %>
     </div>
     
-    <div class="job_feed__form-field" data-controller="search-params element">
+    <div class="form-with-settings__field" data-controller="search-params element">
       <%= f.label :kind %>
       <%= f.input :kind,
                   input_html: { disabled: job_feed.persisted?, 'data-action' => 'change->search-params#encode change->element#click' },
@@ -20,7 +20,7 @@
         hidden></a>
     </div>
 
-    <div class="job_feed__form-field">
+    <div class="form-with-settings__field">
       <%= f.label "Refresh Rate (seconds)" %>            
       <%= f.input :refresh_rate,
                   collection: JobFeed::REFRESH_RATES,
@@ -28,12 +28,29 @@
     </div>
   </div>
 
-  <%= turbo_frame_tag f.field_id(:kind, :turbo_frame), class: "job_feed__form-settings-fields" do %>
+  <%= turbo_frame_tag f.field_id(:kind, :turbo_frame), class: "form-with-settings__settings-fields" do %>
     <%= render partial: 'form_settings', locals: { form: f, job_feed: job_feed } %>
+  <% end %>
+
+  <% if job_feed.persisted? %>
+    <div class="job_feed__form-notifiers">
+      <div class="job_feed__form-notifiers-title">
+        <b>Notifiers</b>
+        <%= link_to new_notifier_path(notifier: { owner_type: 'JobFeed', owner_id: job_feed.id }),
+                    class: "btn btn--secondary",
+                    data: { turbo_frame: "_top" } do %>
+          <i class="fa-solid fa-plus"></i>
+        <% end %>            
+      </div>
+
+      <%= turbo_frame_tag "notifiers" do %>
+        <%= render @notifiers %>
+      <% end %>
+    </div>
   <% end %>  
 
-  <div class="job_feed__form-actions">
+  <div class="form-with-settings__actions">
     <%= link_to "Cancel", job_feeds_path, class: "btn btn--light" %>
-    <%= f.submit class: "btn btn--secondary" %>
+    <%= f.submit "Save", class: "btn btn--secondary" %>
   </div>
 <% end %>

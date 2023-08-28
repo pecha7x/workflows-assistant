@@ -32,10 +32,9 @@ class JobFeed < ApplicationRecord
 
   belongs_to :user
   has_many :job_leads, dependent: :destroy
+  has_many :notifiers, class_name: 'Notifier', as: :owner
 
   scope :ordered, -> { order(id: :desc) }
-
-  broadcasts_to ->(job_feed) { [job_feed.user, "job_feeds"] }, inserts_by: :prepend
 
   def settings_fields
     (COMMON_SETTINGS_FIELDS + SPECIFIC_SETTINGS_FIELDS[kind.to_sym]).uniq

@@ -1,0 +1,21 @@
+<%= turbo_frame_tag notifier do %>
+  <div class="notifier">
+    <b><%= notifier.name.truncate(45, separator: /\s/, ommission: "....") %></b>
+    <div class="notifier__actions">         
+      <%= link_to edit_notifier_path(notifier),
+                  data: { turbo_frame: "_top" },
+                  class: "btn btn--light" do %>
+        <i class="fa-solid fa-pen-to-square"></i>
+      <% end %>            
+      <%= link_to notifier_path(notifier),
+                  class: "btn btn--light",
+                  data: { 
+                    turbo_method: :delete,
+                    controller:   "confirmation",
+                    message:      "Are you sure?",
+                    action:       "click->confirmation#confirm" } do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>  
+    </div>
+  </div>
+<% end %> 

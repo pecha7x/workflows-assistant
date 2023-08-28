@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_25_083204) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_26_122111) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_25_083204) do
     t.index ["job_feed_id"], name: "index_job_leads_on_job_feed_id"
   end
 
+  create_table "notifiers", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "kind", default: 0
+    t.string "owner_type", null: false
+    t.bigint "owner_id", null: false
+    t.bigint "user_id", null: false
+    t.jsonb "settings"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_type", "owner_id"], name: "index_notifiers_on_owner"
+    t.index ["user_id"], name: "index_notifiers_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -66,4 +79,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_25_083204) do
   add_foreign_key "assistant_configurations", "users"
   add_foreign_key "job_feeds", "users"
   add_foreign_key "job_leads", "job_feeds"
+  add_foreign_key "notifiers", "users"
 end

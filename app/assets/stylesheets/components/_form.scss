@@ -26,3 +26,31 @@
     }
   }
 }
+
+.form-with-settings {
+  display: flex;
+  flex-direction: column;
+
+  &__common-fields,
+  &__settings-fields,
+  &__actions {
+    display: flex;
+    width: 100%;
+    gap: var(--space-xxl);
+    justify-content: space-between;
+    padding-top: var(--space-s);
+  }
+
+  &__field {
+    display: flex;
+    gap: var(--space-s);
+    label {
+      margin: auto;
+      font-weight: bold;
+    }
+  }
+
+  &__settings-fields {
+    border-top: var(--border-light);
+  }
+}

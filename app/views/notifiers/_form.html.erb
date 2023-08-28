@@ -1,0 +1,35 @@
+<%= simple_form_for notifier, html: { class: "form form-with-settings notifier" } do |f| %>
+  <%= form_error_notification(notifier) %>
+
+  <%= f.input :owner_type, as: :hidden, input_html: { value: owner.class.name } %>
+  <%= f.input :owner_id, as: :hidden, input_html: { value: owner.id } %>
+
+  <div class="form-with-settings__common-fields">
+    <div class="form-with-settings__field">
+      <%= f.label :name %>
+      <%= f.input :name %>
+    </div>
+    <div class="form-with-settings__field" data-controller="search-params element">
+      <%= f.label :kind %>
+      <%= f.input :kind,
+                  input_html: { "disabled" => notifier.persisted?, "data-action" => "change->search-params#encode change->element#click" },
+                  collection: Notifier.kinds.keys,
+                  selected: notifier.kind %>
+
+      <a href="<%= new_notifier_path(notifier: { owner_type: owner.class.name, owner_id: owner.id }) %>"
+        data-search-params-target="anchor"
+        data-element-target="click"
+        data-turbo-frame="<%= f.field_id(:kind, :turbo_frame) %>"
+        hidden></a>
+    </div>
+  </div>
+
+  <%= turbo_frame_tag f.field_id(:kind, :turbo_frame), class: "form-with-settings__settings-fields" do %>
+    <%= render partial: 'form_settings', locals: { form: f, notifier: notifier } %>
+  <% end %>
+
+  <div class="form-with-settings__actions">   
+    <%= link_to "Cancel", edit_polymorphic_path(owner), class: "btn btn--light", data: { turbo_frame: "_top" } %>
+    <%= f.submit class: "btn btn--secondary", data: { turbo_frame: "_top" } %>
+  </div>
+<% end %>
