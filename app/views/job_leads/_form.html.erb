@@ -1,13 +1,37 @@
-<%= simple_form_for [job_source, job_lead], html: { class: "form job-lead" } do |f| %>
+<%= simple_form_for [job_source, job_lead], html: { class: "form form-vertical job_lead" } do |f| %>
   <%= form_error_notification(job_lead) %>
 
-  <%= f.input :title, input_html: { autofocus: true } %>
-  <%= f.input :description %>
-  <%= f.input :hourly_rate %>
-  <%= f.input :link %>
-  <%= f.input :status, collection: JobLead.statuses.keys, selected: job_lead.status %>
-  <%= f.input :potential, collection: JobLead.potentials.keys, selected: job_lead.potential %>
-  <%= f.input :published_at, html5: true %>
-  <%= link_to "Cancel", job_source_path(job_source), class: "btn btn--light" %>
-  <%= f.submit class: "btn btn--secondary" %>
+  <div class="form-vertical__column">
+    <%= f.label :title %>
+    <%= f.input :title %>
+  </div>
+
+  <div class="form-vertical__column">
+    <%= f.label :description %>
+    <%= f.input :description, input_html: {rows: 5} %>
+  </div>
+
+  <div class="form-vertical__column">
+    <%= f.label :link %>
+    <%= f.input :link, as: :string %>
+  </div>
+
+  <div class="form-vertical__row">
+    <%= f.label :hourly_rate, label: 'Rate $/h' %>
+    <%= f.input :hourly_rate %>
+
+    <%= f.label :status %>
+    <%= f.input :status, collection: JobLead.statuses.keys, selected: job_lead.status %>
+
+    <%= f.label :potential %>
+    <%= f.input :potential, collection: JobLead.potentials.keys, selected: job_lead.potential %>
+
+     <%= f.label :published_at %>
+    <%= f.input :published_at, html5: true %>
+  </div>
+
+  <div class="form__actions">
+    <%= link_to "Cancel", job_source_path(job_source), class: "btn btn--light" %>
+    <%= f.submit class: "btn btn--secondary" %>
+  </div>  
 <% end %>

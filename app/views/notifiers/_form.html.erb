@@ -28,7 +28,7 @@
     <%= render partial: 'form_settings', locals: { form: f, notifier: notifier } %>
   <% end %>
 
-  <div class="form-with-settings__actions">   
+  <div class="form__actions">   
     <%= link_to "Cancel", edit_polymorphic_path(owner), class: "btn btn--light", data: { turbo_frame: "_top" } %>
     <%= f.submit class: "btn btn--secondary", data: { turbo_frame: "_top" } %>
   </div>

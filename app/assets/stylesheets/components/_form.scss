@@ -24,6 +24,20 @@
     &--invalid {
       border-color: var(--color-primary);
     }
+    &[type=number] {
+      max-width: var(--space-xxxxl);
+    }
+    &:is(select) {
+      width: auto;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    width: 100%;
+    gap: var(--space-xxl);
+    justify-content: space-between;
+    padding-top: var(--space-s);
   }
 }
 
@@ -32,8 +46,7 @@
   flex-direction: column;
 
   &__common-fields,
-  &__settings-fields,
-  &__actions {
+  &__settings-fields {
     display: flex;
     width: 100%;
     gap: var(--space-xxl);
@@ -52,5 +65,18 @@
 
   &__settings-fields {
     border-top: var(--border-light);
+  }
+}
+
+.form-vertical {
+  display: flex;
+  flex-direction: column;
+  label {
+    font-weight: bold;
+  }
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 }

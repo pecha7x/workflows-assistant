@@ -58,3 +58,19 @@
     padding: var(--space-s) var(--space-l);
   }
 }
+
+.job_lead {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-s);
+
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-small);
+  margin-bottom: var(--space-m);
+  padding: var(--space-xs);
+
+  @include media(tabletAndMore) {
+    padding: var(--space-xs) var(--space-m);
+  }
+}

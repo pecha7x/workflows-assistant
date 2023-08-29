@@ -1,21 +1,7 @@
-<%= simple_form_for job_source, html: { class: "form form_settings job_source" } do |f| %>
+<%= simple_form_for job_source, html: { class: "form form-with-settings job_source" } do |f| %>
   <%= form_error_notification(job_source) %>
 
   <div class="form-with-settings__common-fields">
-    <div class="form-with-settings__field job_source__form-field-name">
-      <%= f.label :name %>
-      <%= f.input :name %>
-    </div>
-
-    <% unless job_source.simple_kind? %>
-      <div class="form-with-settings__field">
-        <%= f.label "Refresh Rate (seconds)" %>            
-        <%= f.input :refresh_rate,
-                    collection: JobSource::REFRESH_RATES,
-                    selected: job_source.refresh_rate %>
-      </div>
-    <% end %>
-    
     <div class="form-with-settings__field" data-controller="search-params element">
       <%= f.label :kind %>
       <%= f.input :kind,
@@ -28,6 +14,19 @@
         data-turbo-frame="new_job_source"
         hidden></a>
     </div> 
+    <div class="form-with-settings__field job_source__form-field-name">
+      <%= f.label :name %>
+      <%= f.input :name %>
+    </div>
+
+    <% unless job_source.simple_kind? %>
+      <div class="form-with-settings__field">
+        <%= f.label :refresh_rate, label: 'Refresh Rate (seconds)' %>            
+        <%= f.input :refresh_rate,
+                    collection: JobSource::REFRESH_RATES,
+                    selected: job_source.refresh_rate %>
+      </div>
+    <% end %>
   </div>
 
   <div class="form-with-settings__settings-fields">
@@ -51,7 +50,7 @@
     </div>
   <% end %>  
 
-  <div class="form-with-settings__actions">
+  <div class="form__actions">
     <%= link_to "Cancel", job_sources_path, class: "btn btn--light" %>
     <%= f.submit "Save", class: "btn btn--secondary" %>
   </div>
