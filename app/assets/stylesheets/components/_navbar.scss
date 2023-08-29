@@ -19,7 +19,6 @@
 
   &__links {
     display: flex;
-    // justify-content: flex-end;
   }
 
   &__right {
@@ -30,7 +29,6 @@
 
   &__user-settings {
     font-weight: bold;
-    // margin-right: var(--space-s);
     color: var(--color-text-header);
   }
 }

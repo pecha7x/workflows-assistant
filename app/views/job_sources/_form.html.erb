@@ -1,11 +1,20 @@
-<%= simple_form_for job_source, html: { class: "job_source form form_settings" } do |f| %>
+<%= simple_form_for job_source, html: { class: "form form_settings job_source" } do |f| %>
   <%= form_error_notification(job_source) %>
 
   <div class="form-with-settings__common-fields">
-    <div class="form-with-settings__field">
+    <div class="form-with-settings__field job_source__form-field-name">
       <%= f.label :name %>
       <%= f.input :name %>
     </div>
+
+    <% unless job_source.simple_kind? %>
+      <div class="form-with-settings__field">
+        <%= f.label "Refresh Rate (seconds)" %>            
+        <%= f.input :refresh_rate,
+                    collection: JobSource::REFRESH_RATES,
+                    selected: job_source.refresh_rate %>
+      </div>
+    <% end %>
     
     <div class="form-with-settings__field" data-controller="search-params element">
       <%= f.label :kind %>
@@ -16,25 +25,14 @@
       <a href="<%= new_job_source_path %>"
         data-search-params-target="anchor"
         data-element-target="click"
-        data-turbo-frame="<%= f.field_id(:kind, :turbo_frame) %>"
+        data-turbo-frame="new_job_source"
         hidden></a>
-    </div>
-
-    <%= turbo_frame_tag f.field_id(:kind, :turbo_frame) do %>
-      <% unless job_source.simple_kind? %>
-        <div class="form-with-settings__field">
-          <%= f.label "Refresh Rate (seconds)" %>            
-          <%= f.input :refresh_rate,
-                      collection: JobSource::REFRESH_RATES,
-                      selected: job_source.refresh_rate %>
-        </div>
-      <% end %>  
-    <% end %>  
+    </div> 
   </div>
 
-  <%= turbo_frame_tag f.field_id(:kind, :turbo_frame), class: "form-with-settings__settings-fields" do %>
+  <div class="form-with-settings__settings-fields">
     <%= render partial: 'form_settings', locals: { form: f, job_source: job_source } %>
-  <% end %>
+  </div>
 
   <% if job_source.persisted? %>
     <div class="job_source__form-notifiers">

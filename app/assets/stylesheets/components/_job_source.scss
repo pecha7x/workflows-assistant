@@ -21,6 +21,10 @@
     gap: var(--space-xs);
   }
 
+  &__form-field-name {
+    width: 40%;
+  }
+
   &__form-notifiers {
     display: flex;
     width: 100%;
