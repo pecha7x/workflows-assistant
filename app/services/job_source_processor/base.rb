@@ -1,9 +1,9 @@
-module JobFeedProcessor
+module JobSourceProcessor
   class Base
-    attr_reader :job_feed, :notifiers
+    attr_reader :job_source, :notifiers
 
-    def initialize(job_feed_id)
-      @job_feed = JobFeed.find(job_feed_id)
+    def initialize(job_source_id)
+      @job_source = JobSource.find(job_source_id)
     end
 
     def run
@@ -17,14 +17,14 @@ module JobFeedProcessor
     end
     
     def notifiers
-      @notifiers ||= job_feed.notifiers
+      @notifiers ||= job_source.notifiers
     end
 
     def notice_about_lead(lead)
       notifiers.each do |notifier|
         "NotifierProcessor::#{notifier.kind.capitalize.camelize}".constantize.new(
           settings:  notifier.settings,
-          from:      lead.job_feed.name,
+          from:      lead.job_source.name,
           subject:   "#{lead.formatted_title} / $#{lead.hourly_rate} / at #{lead.published_at}",
           message:   sanitized_message(lead.description),
           potential: lead.potential

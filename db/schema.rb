@@ -21,7 +21,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_26_122111) do
     t.index ["user_id"], name: "index_assistant_configurations_on_user_id"
   end
 
-  create_table "job_feeds", force: :cascade do |t|
+  create_table "job_leads", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.text "link", null: false
+    t.integer "potential", default: 1
+    t.integer "status", default: 0
+    t.decimal "hourly_rate", precision: 10, scale: 2, null: false
+    t.bigint "job_source_id", null: false
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "owner_country", null: false
+    t.string "external_id", null: false
+    t.index ["external_id", "job_source_id"], name: "index_job_leads_on_external_id_and_job_source_id", unique: true
+    t.index ["job_source_id"], name: "index_job_leads_on_job_source_id"
+  end
+
+  create_table "job_sources", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -30,24 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_26_122111) do
     t.integer "refresh_rate", default: 60
     t.jsonb "settings"
     t.string "background_job_id"
-    t.index ["user_id"], name: "index_job_feeds_on_user_id"
-  end
-
-  create_table "job_leads", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "description"
-    t.text "link", null: false
-    t.integer "potential", default: 1
-    t.integer "status", default: 0
-    t.decimal "hourly_rate", precision: 10, scale: 2, null: false
-    t.bigint "job_feed_id", null: false
-    t.datetime "published_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "owner_country", null: false
-    t.string "external_id", null: false
-    t.index ["external_id", "job_feed_id"], name: "index_job_leads_on_external_id_and_job_feed_id", unique: true
-    t.index ["job_feed_id"], name: "index_job_leads_on_job_feed_id"
+    t.index ["user_id"], name: "index_job_sources_on_user_id"
   end
 
   create_table "notifiers", force: :cascade do |t|
@@ -77,7 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_26_122111) do
   end
 
   add_foreign_key "assistant_configurations", "users"
-  add_foreign_key "job_feeds", "users"
-  add_foreign_key "job_leads", "job_feeds"
+  add_foreign_key "job_leads", "job_sources"
+  add_foreign_key "job_sources", "users"
   add_foreign_key "notifiers", "users"
 end

@@ -11,8 +11,8 @@
     <%= strip_tags(job_lead.description).truncate(250, separator: /\s/, ommission: "....") %>
   </div>
   <div class="job-lead__info">
-    <div class="job-lead__feed-name">
-      <%= job_lead.job_feed.name %>
+    <div class="job-lead__source-name">
+      <%= job_lead.job_source.name %>
     </div>
     <div class="job-lead__published-at">
       <%= time_ago_in_words job_lead.published_at %> ago

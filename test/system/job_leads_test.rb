@@ -4,10 +4,10 @@ class JobLeadsTest < ApplicationSystemTestCase
   setup do
     login_as users(:user1)
 
-    @job_feed = job_feeds(:first)
+    @job_source = job_sources(:first)
     @job_lead = job_leads(:today)
 
-    visit job_feed_path(@job_feed)
+    visit job_source_path(@job_source)
   end
 
   def current_time
@@ -15,10 +15,10 @@ class JobLeadsTest < ApplicationSystemTestCase
   end
 
   test "Creating a new job lead" do
-    assert_selector "h1", text: "First job feed"
+    assert_selector "h1", text: "First job source"
 
     click_on "New Job Lead"
-    assert_selector "h1", text: "First job feed"
+    assert_selector "h1", text: "First job source"
     fill_in "Published At", with: current_time + 1.day
 
     click_on "Create Job Lead"
@@ -26,13 +26,13 @@ class JobLeadsTest < ApplicationSystemTestCase
   end
 
   test "Updating a new job" do
-    assert_selector "h1", text: "First job feed"
+    assert_selector "h1", text: "First job source"
 
     within id: dom_id(@job_lead) do
       click_on "Edit"
     end
 
-    assert_selector "h1", text: "First job feed"
+    assert_selector "h1", text: "First job source"
 
     fill_in "Published At", with: current_time + 1.day
     click_on "Update Job Lead"

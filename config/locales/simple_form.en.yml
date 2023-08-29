@@ -11,16 +11,16 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
     labels:
-      job_feed:
+      job_source:
         name: Name
         kind: Kind
       job_lead:
         published_at: Published At  
   helpers:
     submit:
-      job_feed:
-        create: Create Job Feed
-        update: Update Job Feed
+      job_source:
+        create: Create Job Source
+        update: Update Job Source
       job_lead:
         create: Create Job Lead
         update: Update Job Lead  

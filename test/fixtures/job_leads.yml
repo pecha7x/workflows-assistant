@@ -7,7 +7,7 @@ today:
   hourly_rate: 50.0
   owner_country: 'Australia'
   external_id: 1
-  job_feed: first
+  job_source: first
   published_at: <%= Time.current %>
 
 last_week:
@@ -17,5 +17,5 @@ last_week:
   hourly_rate: 55.0
   owner_country: 'United States'
   external_id: 2
-  job_feed: first
+  job_source: first
   published_at: <%= Time.current - 1.week %>

@@ -1,0 +1,60 @@
+<%= simple_form_for job_source, html: { class: "job_source form form_settings" } do |f| %>
+  <%= form_error_notification(job_source) %>
+
+  <div class="form-with-settings__common-fields">
+    <div class="form-with-settings__field">
+      <%= f.label :name %>
+      <%= f.input :name %>
+    </div>
+    
+    <div class="form-with-settings__field" data-controller="search-params element">
+      <%= f.label :kind %>
+      <%= f.input :kind,
+                  input_html: { disabled: job_source.persisted?, 'data-action' => 'change->search-params#encode change->element#click' },
+                  collection: JobSource.kinds.keys,
+                  selected: job_source.kind %>
+      <a href="<%= new_job_source_path %>"
+        data-search-params-target="anchor"
+        data-element-target="click"
+        data-turbo-frame="<%= f.field_id(:kind, :turbo_frame) %>"
+        hidden></a>
+    </div>
+
+    <%= turbo_frame_tag f.field_id(:kind, :turbo_frame) do %>
+      <% unless job_source.simple_kind? %>
+        <div class="form-with-settings__field">
+          <%= f.label "Refresh Rate (seconds)" %>            
+          <%= f.input :refresh_rate,
+                      collection: JobSource::REFRESH_RATES,
+                      selected: job_source.refresh_rate %>
+        </div>
+      <% end %>  
+    <% end %>  
+  </div>
+
+  <%= turbo_frame_tag f.field_id(:kind, :turbo_frame), class: "form-with-settings__settings-fields" do %>
+    <%= render partial: 'form_settings', locals: { form: f, job_source: job_source } %>
+  <% end %>
+
+  <% if job_source.persisted? %>
+    <div class="job_source__form-notifiers">
+      <div class="job_source__form-notifiers-title">
+        <b>Notifiers</b>
+        <%= link_to new_notifier_path(notifier: { owner_type: 'JobSource', owner_id: job_source.id }),
+                    class: "btn btn--secondary",
+                    data: { turbo_frame: "_top" } do %>
+          <i class="fa-solid fa-plus"></i>
+        <% end %>            
+      </div>
+
+      <%= turbo_frame_tag "notifiers" do %>
+        <%= render @notifiers %>
+      <% end %>
+    </div>
+  <% end %>  
+
+  <div class="form-with-settings__actions">
+    <%= link_to "Cancel", job_sources_path, class: "btn btn--light" %>
+    <%= f.submit "Save", class: "btn btn--secondary" %>
+  </div>
+<% end %>

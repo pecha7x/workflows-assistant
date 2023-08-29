@@ -1,0 +1,3 @@
+<%= turbo_stream.prepend "job_sources", @job_source %>
+<%= turbo_stream.update JobSource.new, "" %>
+<%= render_turbo_stream_flash_messages %>

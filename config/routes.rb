@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resource :assistant_configuration, only: [:settings] do
     get :settings, on: :member
   end   
-  resources :job_feeds do
+  resources :job_sources do
     resources :job_leads, except: [:index, :show]
   end
   resources :job_leads, only: [:index]

@@ -3,13 +3,13 @@
 <% if previous_lead = @job_lead.previous_lead %>
 
   <%= turbo_stream.after previous_lead do %>
-    <%= render @job_lead, job_feed: @job_feed %>
+    <%= render @job_lead, job_source: @job_source %>
   <% end %>
 
 <% else %>
 
   <%= turbo_stream.prepend "job_leads" do %>
-    <%= render @job_lead, job_feed: @job_feed %>
+    <%= render @job_lead, job_source: @job_source %>
   <% end %>
 
 <% end %>

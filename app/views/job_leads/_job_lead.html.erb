@@ -1,8 +1,8 @@
 <%= turbo_frame_tag job_lead do %>
   <div class="job-lead">
     <%= render partial: 'job_leads/job_lead_body', locals: { job_lead: job_lead } %>
-    <% if defined? job_feed %>
-      <%= render partial: 'job_leads/job_lead_actions', locals: { job_feed: job_feed, job_lead: job_lead } %>
+    <% if defined? job_source %>
+      <%= render partial: 'job_leads/job_lead_actions', locals: { job_source: job_source, job_lead: job_lead } %>
     <% end %>  
   </div>
 <% end %>  

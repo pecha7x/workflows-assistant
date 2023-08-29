@@ -1,0 +1,11 @@
+first:
+  name: First job source
+  user: user1
+
+second:
+  name: Second job source
+  user: user1
+
+third:
+  name: Third job source
+  user: user2

@@ -1,5 +1,5 @@
 class JobLeadsController < ApplicationController
-  before_action :set_job_feed, except: [:index]
+  before_action :set_job_source, except: [:index]
   before_action :set_job_lead, only: [:edit, :update, :destroy]
 
   def index
@@ -7,15 +7,15 @@ class JobLeadsController < ApplicationController
   end
 
   def new
-    @job_lead = @job_feed.job_leads.build
+    @job_lead = @job_source.job_leads.build
   end
 
   def create
-    @job_lead = @job_feed.job_leads.build(job_lead_params)
+    @job_lead = @job_source.job_leads.build(job_lead_params)
 
     if @job_lead.save
       respond_to do |format|
-        format.html { redirect_to job_feed_path(@job_feed), notice: "Job Lead was successfully created." }
+        format.html { redirect_to job_source_path(@job_source), notice: "Job Lead was successfully created." }
         format.turbo_stream { flash.now[:notice] = "Job Lead was successfully created." }
       end
     else
@@ -29,7 +29,7 @@ class JobLeadsController < ApplicationController
   def update
     if @job_lead.update(job_lead_params)
       respond_to do |format|
-        format.html { redirect_to job_feed_path(@job_feed), notice: "Job Lead was successfully updated." }
+        format.html { redirect_to job_source_path(@job_source), notice: "Job Lead was successfully updated." }
         format.turbo_stream { flash.now[:notice] = "Job Lead was successfully updated." }
       end
     else
@@ -41,7 +41,7 @@ class JobLeadsController < ApplicationController
     @job_lead.destroy
 
     respond_to do |format|
-      format.html { redirect_to job_feed_path(@job_feed), notice: "Job Lead was successfully destroyed." }
+      format.html { redirect_to job_source_path(@job_source), notice: "Job Lead was successfully destroyed." }
       format.turbo_stream { flash.now[:notice] = "Job Lead was successfully destroyed." }
     end
   end
@@ -52,11 +52,11 @@ class JobLeadsController < ApplicationController
     params.require(:job_lead).permit(:title, :description, :link, :potential, :status, :hourly_rate, :published_at)
   end
 
-  def set_job_feed
-    @job_feed = current_user.job_feeds.find(params[:job_feed_id])
+  def set_job_source
+    @job_source = current_user.job_sources.find(params[:job_source_id])
   end
 
   def set_job_lead
-    @job_lead = @job_feed.job_leads.find(params[:id])
+    @job_lead = @job_source.job_leads.find(params[:id])
   end
 end

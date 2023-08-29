@@ -9,7 +9,7 @@
 #  potential     :integer          default("medium")
 #  status        :integer          default("entry")
 #  hourly_rate   :decimal(10, 2)   not null
-#  job_feed_id   :bigint           not null
+#  job_source_id :bigint           not null
 #  published_at  :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -20,13 +20,13 @@ class JobLead < ApplicationRecord
   enum :status, [ :entry, :in_progress, :not_interested ], suffix: true, default: :entry
   enum :potential, [ :low, :medium, :high ], suffix: true, default: :medium
 
-  belongs_to :job_feed
+  belongs_to :job_source
 
   validates :published_at, :description, :title, :link, :status, :potential, presence: true
   validates :hourly_rate, presence: true, numericality: { greater_than: 0 }
-  validates :external_id, presence: true, uniqueness: { scope: :job_feed_id }
+  validates :external_id, presence: true, uniqueness: { scope: :job_source_id }
 
-  delegate :user, to: :job_feed
+  delegate :user, to: :job_source
 
   scope :ordered, -> { order(published_at: :desc) }
 
@@ -37,6 +37,6 @@ class JobLead < ApplicationRecord
   end
 
   def previous_lead
-    job_feed.job_leads.ordered.where("published_at < ?", published_at).last
+    job_source.job_leads.ordered.where("published_at < ?", published_at).last
   end
 end

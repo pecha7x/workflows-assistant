@@ -1,0 +1,11 @@
+<main class="container">
+  <%= link_to sanitize("&larr; Back to job sources"), job_sources_path %>
+
+  <div class="header">
+    <h1>Edit Job Source</h1>
+  </div>
+
+  <%= turbo_frame_tag @job_source do %>
+    <%= render "form", job_source: @job_source %>
+  <% end %>  
+</main>

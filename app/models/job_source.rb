@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: job_feeds
+# Table name: job_sources
 #
 #  id                :bigint           not null, primary key
 #  name              :string           not null
@@ -12,37 +12,39 @@
 #  settings          :jsonb
 #  background_job_id :string
 #
-class JobFeed < ApplicationRecord
+class JobSource < ApplicationRecord
   REFRESH_RATES = [ 30, 60, 120, 360 ].freeze
 
   KINDS = %i(
+    simple
+    website
     upwork
     linkedin
-    hhru
   ).freeze
 
   SPECIFIC_SETTINGS_FIELDS = {
+    simple:   %i( web_url messenger_id ),
+    website:  %i( web_url username password ),
     upwork:   %i( rss_url ),
-    linkedin: %i( api_key api_secret ),
-    hhru:     %i( web_url username password )
+    linkedin: %i( api_key api_secret )
   }.freeze
 
-  COMMON_SETTINGS_FIELDS = %i( search_keys ).freeze
-
   def self.all_settings_fields
-    (COMMON_SETTINGS_FIELDS + SPECIFIC_SETTINGS_FIELDS.values.flatten).uniq
+    SPECIFIC_SETTINGS_FIELDS.values.flatten.uniq
   end
 
-  enum :kind, KINDS, suffix: true, default: :upwork
+  enum :kind, KINDS, suffix: true, default: :simple
   store_accessor :settings, all_settings_fields
 
   validates :name, :kind, presence: true
   validates :refresh_rate, presence: true, numericality: { greater_than: 20 }
   validate :kind_not_changed
 
-  after_create :background_processing
-  after_update :background_processing_in_later, if: -> { saved_change_to_refresh_rate? || saved_change_to_settings? }
-  before_destroy :cancel_background_job
+  after_create :background_processing, if: -> { !simple_kind? }
+  after_update :background_processing_in_later, if: -> { 
+    !simple_kind? && (saved_change_to_refresh_rate? || saved_change_to_settings?)
+  }
+  before_destroy :cancel_background_job, if: -> { !simple_kind? }
 
   belongs_to :user
   has_many :job_leads, dependent: :destroy
@@ -51,7 +53,7 @@ class JobFeed < ApplicationRecord
   scope :ordered, -> { order(id: :desc) }
 
   def settings_fields
-    (COMMON_SETTINGS_FIELDS + SPECIFIC_SETTINGS_FIELDS[kind.to_sym]).uniq
+    SPECIFIC_SETTINGS_FIELDS[kind.to_sym]
   end
 
   def background_processing(run_in_seconds=5)

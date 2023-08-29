@@ -1,16 +1,16 @@
-<%= turbo_frame_tag job_feed do %>
-  <div class="job_feed">
-    <%= link_to job_feed.name,
-                job_feed_path(job_feed),
+<%= turbo_frame_tag job_source do %>
+  <div class="job_source">
+    <%= link_to job_source.name,
+                job_source_path(job_source),
                 data: { turbo_frame: "_top" } %>
-    <div class="job_feed__actions">
+    <div class="job_source__actions">
       <%= button_to "Delete",
-                    job_feed_path(job_feed),
+                    job_source_path(job_source),
                     method: :delete,
                     form: { data: { turbo_confirm: "Are you sure?" } },
                     class: "btn btn--light" %>
       <%= link_to "Edit",
-                  edit_job_feed_path(job_feed),
+                  edit_job_source_path(job_source),
                   class: "btn btn--light" %>
     </div>
   </div>

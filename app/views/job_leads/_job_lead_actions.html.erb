@@ -1,11 +1,11 @@
 <div class="job-lead__actions">
   <%= button_to "Delete",
-                [job_feed, job_lead],
+                [job_source, job_lead],
                 method: :delete,
                 form: { data: { turbo_confirm: "Are you sure?" } },
                 class: "btn btn--light" %>
   <%= link_to "Edit",
-              [:edit, job_feed, job_lead],
+              [:edit, job_source, job_lead],
               class: "btn btn--light" %>
               
 </div>
