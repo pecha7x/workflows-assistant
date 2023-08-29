@@ -1,5 +1,7 @@
 module JobSourceProcessor
   class Base
+    include ActionView::Helpers::DateHelper
+
     attr_reader :job_source, :notifiers
 
     def initialize(job_source_id)
@@ -25,7 +27,7 @@ module JobSourceProcessor
         "NotifierProcessor::#{notifier.kind.capitalize.camelize}".constantize.new(
           settings:  notifier.settings,
           from:      lead.job_source.name,
-          subject:   "#{lead.formatted_title} / $#{lead.hourly_rate} / at #{lead.published_at}",
+          subject:   "#{lead.formatted_title} / $#{lead.hourly_rate} / #{time_ago_in_words(lead.published_at)} ago",
           message:   sanitized_message(lead.description),
           potential: lead.potential
         ).run
