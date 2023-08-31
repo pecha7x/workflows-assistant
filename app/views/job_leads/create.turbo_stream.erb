@@ -1,6 +1,6 @@
 <%= turbo_stream.update JobLead.new, "" %>
 
-<% if next_lead = @job_lead.next_lead %>
+<% if next_lead = @job_lead.next_lead_by_status %>
   <%= turbo_stream.after next_lead do %>
     <%= render @job_lead, job_source: @job_source %>
   <% end %>

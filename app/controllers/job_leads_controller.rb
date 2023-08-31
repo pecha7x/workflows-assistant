@@ -1,9 +1,13 @@
 class JobLeadsController < ApplicationController
   before_action :set_job_source, except: [:index]
   before_action :set_job_lead, only: [:edit, :update, :destroy]
+  before_action :set_status_filter
 
   def index
-    @job_leads = current_user.job_leads.ordered
+    @job_leads = current_user.job_leads.includes(:job_source).ordered
+    if @status_filter.present?
+      @job_leads = @job_leads.where(status: params[:status_filter])
+    end
   end
 
   def new
@@ -58,5 +62,12 @@ class JobLeadsController < ApplicationController
 
   def set_job_lead
     @job_lead = @job_source.job_leads.find(params[:id])
+  end
+
+  def set_status_filter
+    @status_filter = params['status_filter'] || params.dig('job_lead', 'status_filter')
+    if @status_filter.present? && JobLead.statuses.keys.exclude?(@status_filter)
+      raise ActionController::ActionControllerError, 'invalid value for :status_filter parameter'
+    end
   end
 end

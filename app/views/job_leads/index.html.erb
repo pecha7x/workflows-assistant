@@ -13,7 +13,19 @@
       <%= link_to "Go to Job Sources", job_sources_path, class: "btn btn--primary" %>
     </div>
   <% else %>
-    <%= turbo_frame_tag "job_leads" do %>
+    <div class="horizontal-filter">
+      <%= link_to "All",
+                  job_leads_path,
+                  class: "horizontal-filter__item#{ @status_filter ? '' : ' active' }" %>
+      <% JobLead.statuses.keys.each do |status| %>
+        <%= link_to status.capitalize,
+                    job_leads_path(status_filter: status),
+                    class: "horizontal-filter__item#{ @status_filter == status ? ' active' : '' }" %>
+      <% end %>
+    </div>
+    
+    <% turbo_stream_name = @status_filter ? "job_leads-status-#{@status_filter}" : "job_leads" %>
+    <%= turbo_frame_tag turbo_stream_name do %>
       <%= render @job_leads %>
     <% end %>
   <% end %>

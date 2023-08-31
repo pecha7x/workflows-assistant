@@ -21,19 +21,19 @@
         <% if job_lead.active_status? || job_lead.entry_status? %>
           <li>
             <%= confirmation_link_to "Detach",
-                                     job_source_job_lead_path(job_lead.job_source, job_lead, job_lead: { status: 'detached' }),
+                                     job_source_job_lead_path(job_lead.job_source, job_lead, status_filter: @status_filter, job_lead: { status: 'detached' }),
                                      data: { turbo_method: :patch, message: "Not interested? Are you sure?" } %>
           </li>
         <% end %>
         <% if job_lead.detached_status? || job_lead.entry_status? %>
           <li>
             <%= confirmation_link_to "Go Ahead",
-                                     job_source_job_lead_path(job_lead.job_source, job_lead, job_lead: { status: 'active' }),
+                                     job_source_job_lead_path(job_lead.job_source, job_lead, status_filter: @status_filter, job_lead: { status: 'active' }),
                                      data: { turbo_method: :patch, message: "Do you want to begin to consider?" } %>
           </li>
         <% end %>  
         <li>
-          <%= link_to "Edit", edit_job_source_job_lead_path(job_lead.job_source, job_lead) %>    
+          <%= link_to "Edit", edit_job_source_job_lead_path(job_lead.job_source, job_lead, status_filter: @status_filter) %>    
         </li>
         <li>
           <%= confirmation_link_to "Delete",

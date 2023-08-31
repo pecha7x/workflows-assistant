@@ -36,7 +36,9 @@ class JobLead < ApplicationRecord
     title.truncate(70, separator: /\s/, ommission: "....")
   end
 
-  def next_lead
-    job_source.job_leads.where("published_at > ?", published_at).ordered.last
+  def next_lead_by_status(status_value=nil)
+    leads_list = job_source.job_leads.where("published_at > ?", published_at)    
+    leads_list = leads_list.where(status: status_value) if status_value.present?
+    leads_list.ordered.last
   end
 end

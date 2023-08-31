@@ -1,12 +1,11 @@
 <%= turbo_stream.remove @job_lead %>
 
-<% if next_lead = @job_lead.next_lead %>
+<% next_lead = @job_lead.next_lead_by_status(@status_filter) %>
+<% if next_lead && (@status_filter.blank? || @job_lead.status == @status_filter) %>
   <%= turbo_stream.after next_lead do %>
     <%= render @job_lead, job_source: @job_source %>
   <% end %>
-
 <% else %>
-
   <%= turbo_stream.prepend "job_source_leads" do %>
     <%= render @job_lead, job_source: @job_source %>
   <% end %>
@@ -15,6 +14,9 @@
     <%= render @job_lead %>
   <% end %>
 
+  <%= turbo_stream.prepend "job_leads-status-#{@job_lead.status}" do %>
+    <%= render @job_lead %>
+  <% end %>
 <% end %>
 
 <%= render_turbo_stream_flash_messages %>
