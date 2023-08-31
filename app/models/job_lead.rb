@@ -17,7 +17,7 @@
 #  external_id   :string           not null
 #
 class JobLead < ApplicationRecord
-  enum :status, [ :entry, :in_progress, :not_interested ], suffix: true, default: :entry
+  enum :status, [ :entry, :active, :detached ], suffix: true, default: :entry
   enum :potential, [ :low, :medium, :high ], suffix: true, default: :medium
 
   belongs_to :job_source
@@ -36,7 +36,7 @@ class JobLead < ApplicationRecord
     title.truncate(70, separator: /\s/, ommission: "....")
   end
 
-  def previous_lead
-    job_source.job_leads.ordered.where("published_at < ?", published_at).last
+  def next_lead
+    job_source.job_leads.where("published_at > ?", published_at).ordered.last
   end
 end

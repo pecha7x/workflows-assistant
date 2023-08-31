@@ -1,9 +1,8 @@
 <div class="job-lead__actions">
-  <%= button_to "Delete",
-                [job_source, job_lead],
-                method: :delete,
-                form: { data: { turbo_confirm: "Are you sure?" } },
-                class: "btn btn--light" %>
+  <%= confirmation_link_to "Delete",
+                           job_source_job_lead_path(job_source, job_lead),
+                           class: "btn btn--light",
+                           data: { turbo_method: :delete } %>
   <%= link_to "Edit",
               [:edit, job_source, job_lead],
               class: "btn btn--light" %>

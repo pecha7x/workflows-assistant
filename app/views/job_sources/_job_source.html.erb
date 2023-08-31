@@ -4,11 +4,10 @@
                 job_source_path(job_source),
                 data: { turbo_frame: "_top" } %>
     <div class="job_source__actions">
-      <%= button_to "Delete",
-                    job_source_path(job_source),
-                    method: :delete,
-                    form: { data: { turbo_confirm: "Are you sure?" } },
-                    class: "btn btn--light" %>
+      <%= confirmation_link_to "Delete",
+                               job_source_path(job_source),
+                               class: "btn btn--light",
+                               data: { turbo_method: :delete } %>
       <%= link_to "Edit",
                   edit_job_source_path(job_source),
                   class: "btn btn--light" %>

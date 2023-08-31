@@ -1,15 +1,18 @@
 <%= turbo_stream.update JobLead.new, "" %>
 
-<% if previous_lead = @job_lead.previous_lead %>
-
-  <%= turbo_stream.after previous_lead do %>
+<% if next_lead = @job_lead.next_lead %>
+  <%= turbo_stream.after next_lead do %>
     <%= render @job_lead, job_source: @job_source %>
   <% end %>
 
 <% else %>
 
-  <%= turbo_stream.prepend "job_leads" do %>
+  <%= turbo_stream.prepend "job_source_leads" do %>
     <%= render @job_lead, job_source: @job_source %>
+  <% end %>
+
+  <%= turbo_stream.prepend "job_leads" do %>
+    <%= render @job_lead %>
   <% end %>
 
 <% end %>

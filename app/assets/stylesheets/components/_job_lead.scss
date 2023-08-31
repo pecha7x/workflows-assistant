@@ -1,4 +1,5 @@
 .job-lead {
+  position: relative;
   margin-top: var(--space-l);
   margin-bottom: var(--space-xxs);
   box-shadow: var(--shadow-small);
@@ -10,19 +11,12 @@
     flex-direction: column;
     gap: var(--space-m);
     padding: var(--space-l);
-    cursor: pointer;
-    &:hover,
-    &:focus,
-    &:active {
-      background-color: var(--color-light);
-      box-shadow: var(--shadow-large);
-    }
   }
 
   &__name {
     display: flex;
-    gap: var(--space-s);
-    align-items: baseline;    
+    align-items: flex-end;
+    justify-content: space-between;
   }
 
   &__title {
@@ -33,6 +27,8 @@
   }
 
   &__hourly-rate {
+    margin-left: var(--font-size-m);
+    font-size: var(--font-size-xl);
     font-weight: bold;
   }
 

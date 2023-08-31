@@ -1,5 +1,9 @@
 <%= turbo_frame_tag job_lead do %>
   <div class="job-lead">
+    <div class="ribbon">
+      <span class="ribbon__title" data-status="<%= job_lead.status %>">
+        <%= job_lead.status %>
+    </div>
     <%= render partial: 'job_leads/job_lead_body', locals: { job_lead: job_lead } %>
     <% if defined? job_source %>
       <%= render partial: 'job_leads/job_lead_actions', locals: { job_source: job_source, job_lead: job_lead } %>

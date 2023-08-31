@@ -25,7 +25,7 @@
       border-color: var(--color-primary);
     }
     &[type=number] {
-      max-width: var(--space-xxxxl);
+      max-width: 5rem;
     }
     &:is(select) {
       width: auto;

@@ -1,10 +1,46 @@
-<div class="job-lead__body" onclick="window.open('<%= job_lead.link %>', '_blank') || window.location.replace('<%= job_lead.link %>');">
+<div class="job-lead__body">
   <div class="job-lead__name">
     <div class="job-lead__hourly-rate">
       <%= number_to_currency job_lead.hourly_rate %>
     </div>
     <div class="job-lead__title">
       <%= job_lead.formatted_title %>
+    </div>
+    <div class="dropdown">
+      <div class="dropdown__button">
+        <i class="fas fa-solid fa-bars fa-xl"></i>
+      </div>
+
+      <ul class="dropdown__options">
+        <li>
+          <%= confirmation_link_to "Open Link",
+                                   job_lead.link,
+                                   target: '_blank',
+                                   data: { turbo_method: :patch, message: "Open #{job_lead.link} ?" } %>
+        </li>
+        <% if job_lead.active_status? || job_lead.entry_status? %>
+          <li>
+            <%= confirmation_link_to "Detach",
+                                     job_source_job_lead_path(job_lead.job_source, job_lead, job_lead: { status: 'detached' }),
+                                     data: { turbo_method: :patch, message: "Not interested? Are you sure?" } %>
+          </li>
+        <% end %>
+        <% if job_lead.detached_status? || job_lead.entry_status? %>
+          <li>
+            <%= confirmation_link_to "Go Ahead",
+                                     job_source_job_lead_path(job_lead.job_source, job_lead, job_lead: { status: 'active' }),
+                                     data: { turbo_method: :patch, message: "Do you want to begin to consider?" } %>
+          </li>
+        <% end %>  
+        <li>
+          <%= link_to "Edit", edit_job_source_job_lead_path(job_lead.job_source, job_lead) %>    
+        </li>
+        <li>
+          <%= confirmation_link_to "Delete",
+                                   job_source_job_lead_path(job_lead.job_source, job_lead),
+                                   data: { turbo_method: :delete, message: "DELETE? Are you sure?" } %>
+        </li>
+      </ul>
     </div>
   </div>  
   <div class="job-lead__description">
