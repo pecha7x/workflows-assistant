@@ -139,6 +139,10 @@ GEM
       railties (>= 6.0.0)
     kramdown (2.4.0)
       rexml
+    lograge (0.3.6)
+      actionpack (>= 3)
+      activesupport (>= 3)
+      railties (>= 3)
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -258,6 +262,7 @@ GEM
       net-ssh (>= 2.8.0)
     stimulus-rails (1.2.2)
       railties (>= 6.0.0)
+    syslogger (1.6.6)
     thor (1.2.2)
     timeout (0.4.0)
     turbo-rails (1.4.0)
@@ -305,6 +310,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   kramdown
+  lograge (~> 0.3.1)
   mocha
   pg (~> 1.1)
   puma (~> 5.0)
@@ -319,6 +325,7 @@ DEPENDENCIES
   slack-notifier
   sprockets-rails
   stimulus-rails
+  syslogger (~> 1.6.0)
   turbo-rails
   tzinfo-data
   web-console

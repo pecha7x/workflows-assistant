@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require "syslogger"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -54,6 +55,10 @@ Rails.application.configure do
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
+
+  config.logger = Syslogger.new("workflow-assistant", Syslog::LOG_PID, Syslog::LOG_LOCAL7)
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Json.new
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
