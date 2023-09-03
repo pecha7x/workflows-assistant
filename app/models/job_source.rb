@@ -36,7 +36,7 @@ class JobSource < ApplicationRecord
   enum :kind, KINDS, suffix: true, default: :simple
   store_accessor :settings, all_settings_fields
 
-  validates :name, :kind, :owner_country, presence: true
+  validates :name, :kind, :user_id, presence: true
   validates :refresh_rate, presence: true, numericality: { greater_than: 20 }
   validate :kind_not_changed
 

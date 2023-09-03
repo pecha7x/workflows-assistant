@@ -1,8 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-today:
+today_active:
   title: Today
   description: Today Description
+  status: 'active'
   link: https://example.com/1
   hourly_rate: 50.0
   owner_country: 'Australia'
@@ -10,12 +11,22 @@ today:
   job_source: first
   published_at: <%= Time.current %>
 
+today:
+  title: Today
+  description: Today Description
+  link: https://example.com/1
+  hourly_rate: 50.0
+  owner_country: 'Australia'
+  external_id: 2
+  job_source: first
+  published_at: <%= Time.current - 5.minutes %>
+
 last_week:
   title: Last Week
   description: Last Week Description
   link: https://example.com/2
   hourly_rate: 55.0
   owner_country: 'United States'
-  external_id: 2
+  external_id: 3
   job_source: first
   published_at: <%= Time.current - 1.week %>
