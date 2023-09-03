@@ -91,5 +91,14 @@ class JobSourceTest < ActiveSupport::TestCase
         assert_has_errors_on job_source, :refresh_rate
       end
     end
+
+    class KindNotChanged < Validations
+      test "change of kind not allowed" do
+        job_source = job_sources(:first)
+        job_source.kind = 'upwork'
+        assert job_source.invalid?
+        assert_has_errors_on job_source, :kind
+      end
+    end
   end
 end

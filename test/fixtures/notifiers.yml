@@ -1,0 +1,9 @@
+first:
+  name: First notifier
+  owner: first (JobSource)
+  user: user1
+
+second:
+  name: Second notifier
+  owner: first (JobSource)
+  user: user1

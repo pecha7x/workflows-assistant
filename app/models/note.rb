@@ -3,7 +3,7 @@
 # Table name: notes
 #
 #  id          :bigint           not null, primary key
-#  description :text             not null
+#  description :text             default(""), not null
 #  owner_type  :string           not null
 #  owner_id    :bigint           not null
 #  user_id     :bigint           not null
@@ -18,7 +18,7 @@ class Note < ApplicationRecord
 
   scope :ordered, -> { order(created_at: :desc) }
 
-  validates :description, :owner, presence: true
+  validates :description, :owner, :user, presence: true
 
   def next_note
     owner.notes.where("created_at > ?", created_at).ordered.last  

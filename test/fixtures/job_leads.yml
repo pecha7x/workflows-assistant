@@ -1,8 +1,8 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 today_active:
-  title: Today
-  description: Today Description
+  title: Today Active
+  description: Today Active Description
   status: 'active'
   link: https://example.com/1
   hourly_rate: 50.0

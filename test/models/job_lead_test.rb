@@ -9,7 +9,6 @@ class JobLeadTest < ActiveSupport::TestCase
         link:          "http://link.com",
         status:        "entry",
         potential:     "low",
-        owner_country: "USA",
         hourly_rate:   50.0,
         published_at:  Time.current,
         job_source:    job_sources(:first)
@@ -50,12 +49,6 @@ class JobLeadTest < ActiveSupport::TestCase
         job_lead = JobLead.new(job_lead_valid_attributes.merge(potential: nil))
         assert job_lead.invalid?
         assert_has_errors_on job_lead, :potential
-      end
-
-      test "owner_country should be present" do
-        job_lead = JobLead.new(job_lead_valid_attributes.merge(owner_country: nil))
-        assert job_lead.invalid?
-        assert_has_errors_on job_lead, :owner_country
       end
 
       test "published_at should be present" do

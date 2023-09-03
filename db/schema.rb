@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_31_173839) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_03_190140) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_173839) do
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "owner_country", null: false
+    t.string "owner_country", default: "United States", null: false
     t.string "external_id", null: false
     t.index ["external_id", "job_source_id"], name: "index_job_leads_on_external_id_and_job_source_id", unique: true
     t.index ["job_source_id"], name: "index_job_leads_on_job_source_id"

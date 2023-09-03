@@ -4,12 +4,20 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-first:
+today_first:
   description: First note
   owner: today (JobLead)
   user: user1
-#
-second:
-  description: Second note
-  owner: today (JobLead)
+  created_at: <%= Time.current %>
+
+today_second:
+  description: First note
+  owner: last_week (JobLead)
   user: user1
+  created_at: <%= Time.current %>
+
+yesterday:
+  description: Second note
+  owner: last_week (JobLead)
+  user: user1
+  created_at: <%= Time.current.yesterday %>

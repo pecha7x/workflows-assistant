@@ -35,7 +35,7 @@ class Notifier < ApplicationRecord
   belongs_to :owner, polymorphic: true
   belongs_to :user
 
-  validates :kind, :name, :owner_id, :owner_type, :user_id, presence: true
+  validates :kind, :name, :owner, :user, presence: true
   validate :kind_not_changed
 
   def settings_fields

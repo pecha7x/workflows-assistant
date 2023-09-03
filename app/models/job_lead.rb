@@ -13,7 +13,7 @@
 #  published_at  :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  owner_country :string           not null
+#  owner_country :string           default("United States"), not null
 #  external_id   :string           not null
 #
 class JobLead < ApplicationRecord
@@ -27,7 +27,7 @@ class JobLead < ApplicationRecord
 
   before_validation :generate_external_id, if: -> { !external_id? }
 
-  validates :published_at, :description, :title, :link, :status, :potential, :job_source_id, :owner_country, presence: true
+  validates :published_at, :description, :title, :link, :status, :potential, :job_source_id, presence: true
   validates :hourly_rate, presence: true, numericality: { greater_than: 0 }
   validates_uniqueness_of :external_id, scope: :job_source_id
 
