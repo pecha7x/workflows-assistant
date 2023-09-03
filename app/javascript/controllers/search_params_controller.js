@@ -6,7 +6,7 @@ export default class extends Controller {
   encode({ target }) {
     for (const anchor of this.anchorTargets) {
       const currentSearchParams = anchor.search
-      const targetAttrValue =  new URLSearchParams({ [target.name]: target.value })
+      const targetAttrValue = new URLSearchParams({ [target.name]: target.value })
 
       let searchString;
       if (currentSearchParams) {

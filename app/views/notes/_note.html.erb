@@ -1,0 +1,12 @@
+<%= turbo_frame_tag note do %>
+  <div class="note">
+    <%= collapsible(visible_height_rem: 4, class_name: 'note__description') do %>
+      <%= note.sanitized_description %>
+    <% end %>
+    <div class="note__actions">         
+      <%= confirmation_link_to note_path(note), class: "btn btn--light", data: { turbo_method: :delete } do %>
+        <i class="fa-solid fa-trash-can"></i>             
+      <% end %>
+    </div>
+  </div>
+<% end %> 

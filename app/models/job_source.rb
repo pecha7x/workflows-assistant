@@ -7,7 +7,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  user_id           :bigint           not null
-#  kind              :integer          default("upwork")
+#  kind              :integer          default("simple")
 #  refresh_rate      :integer          default(60)
 #  settings          :jsonb
 #  background_job_id :string
@@ -36,7 +36,7 @@ class JobSource < ApplicationRecord
   enum :kind, KINDS, suffix: true, default: :simple
   store_accessor :settings, all_settings_fields
 
-  validates :name, :kind, presence: true
+  validates :name, :kind, :owner_country, presence: true
   validates :refresh_rate, presence: true, numericality: { greater_than: 20 }
   validate :kind_not_changed
 
@@ -48,7 +48,7 @@ class JobSource < ApplicationRecord
 
   belongs_to :user
   has_many :job_leads, dependent: :destroy
-  has_many :notifiers, class_name: 'Notifier', as: :owner
+  has_many :notifiers, as: :owner, dependent: :destroy
 
   scope :ordered, -> { order(id: :desc) }
 

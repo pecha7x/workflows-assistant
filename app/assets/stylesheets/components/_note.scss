@@ -1,0 +1,18 @@
+.note {
+  display: flex;
+  justify-content: space-between;
+
+  border-top: var(--border-light);
+  padding-top: 12px;
+  margin-top: 12px;
+
+  &__description {
+    width: 95%;
+  }
+
+  &__actions {
+    .btn {
+      padding: 0 var(--space-xs);
+    }
+  }
+}

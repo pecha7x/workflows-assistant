@@ -1,0 +1,5 @@
+<main class="container">
+  <%= turbo_frame_tag @note do %>
+    <%= render "form", note: @note %>
+  <% end %>
+</main>

@@ -15,10 +15,11 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :validatable
 
+  has_one :assistant_configuration, dependent: :destroy
   has_many :job_sources, dependent: :destroy
   has_many :job_leads, through: :job_sources
   has_many :notifiers, dependent: :destroy
-  has_one :assistant_configuration, dependent: :destroy
+  has_many :notes, dependent: :destroy
 
   def name
     email.split("@").first.capitalize

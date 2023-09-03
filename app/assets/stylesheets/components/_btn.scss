@@ -70,3 +70,8 @@
     }
   }
 }
+
+.btn-group {
+  display: flex;
+  gap: var(--space-s);
+}

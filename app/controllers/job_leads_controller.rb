@@ -1,5 +1,5 @@
 class JobLeadsController < ApplicationController
-  before_action :set_job_source, except: [:index]
+  before_action :set_job_source, except: [:index, :show]
   before_action :set_job_lead, only: [:edit, :update, :destroy]
   before_action :set_status_filter
 
@@ -8,6 +8,11 @@ class JobLeadsController < ApplicationController
     if @status_filter.present?
       @job_leads = @job_leads.where(status: params[:status_filter])
     end
+  end
+
+  def show
+    @job_lead = current_user.job_leads.find(params[:id])
+    @note = Note.new(owner: @job_lead)
   end
 
   def new

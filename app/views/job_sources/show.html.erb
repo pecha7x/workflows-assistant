@@ -6,10 +6,16 @@
       <%= @job_source.name %>
     </h1>
 
-    <%= link_to "New Job Lead",
-                new_job_source_job_lead_path(@job_source),
-                data: { turbo_frame: dom_id(JobLead.new) },
-                class: "btn btn--primary" %>
+    <div class="btn-group">
+      <%= link_to "Edit",
+                  edit_job_source_path(@job_source),
+                  data: { turbo_frame: "_top" },
+                  class: "btn btn--light" %>
+      <%= link_to "New Job Lead",
+                  new_job_source_job_lead_path(@job_source),
+                  data: { turbo_frame: dom_id(JobLead.new) },
+                  class: "btn btn--primary" %>
+    </div>
   </div>
 
   <%= turbo_frame_tag JobLead.new %>

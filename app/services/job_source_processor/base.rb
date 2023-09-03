@@ -28,14 +28,10 @@ module JobSourceProcessor
           settings:  notifier.settings,
           from:      lead.job_source.name,
           subject:   "#{lead.formatted_title} / $#{lead.hourly_rate} / #{time_ago_in_words(lead.published_at)} ago",
-          message:   sanitized_message(lead.description),
+          message:   lead.sanitized_description,
           potential: lead.potential
         ).run
       end
-    end
-
-    def sanitized_message(value)
-      Kramdown::Document.new(value, input: 'html').to_kramdown
     end
   end
 end

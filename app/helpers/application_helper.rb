@@ -44,4 +44,24 @@ module ApplicationHelper
       link_to(name, options, html_options)
     end
   end
+
+  def collapsible(visible_height_rem: 2.0, class_name: "", &block)
+    html = <<-HTML
+      <div class="collapsible #{class_name}" data-controller="collapsible">
+        <div class="collapsible-visible"
+             style="--visible-height: #{visible_height_rem}rem;"
+             data-visible-height-rem="#{visible_height_rem}"
+             data-collapsible-target="element">
+          #{capture(&block)}
+        </div>
+        <div class="collapsible-button collapsible-button-hidden"
+             data-collapsible-target="button"
+             data-action="click->collapsible#toggle_visibility">
+          <i class="fas fa-angles-down fa-xl" data-collapsible-target="buttonIcon"></i>
+        </div>
+      </div>
+    HTML
+
+    html.html_safe
+  end
 end

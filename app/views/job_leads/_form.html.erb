@@ -1,4 +1,4 @@
-<%= simple_form_for [job_source, job_lead], html: { class: "form form-vertical job_lead" } do |f| %>
+<%= simple_form_for [job_source, job_lead], html: { class: "form form-vertical" } do |f| %>
   <%= form_error_notification(job_lead) %>
 
   <%= f.input :status_filter, as: :hidden, input_html: { value: @status_filter } %>
@@ -10,7 +10,7 @@
 
   <div class="form-vertical__column">
     <%= f.label :description %>
-    <%= f.input :description, input_html: {rows: 5} %>
+    <%= f.input :description, input_html: { rows: 5 } %>
   </div>
 
   <div class="form-vertical__column">

@@ -1,0 +1,13 @@
+<%= simple_form_for @note, html: { id: 'note-form', class: "form" } do |f| %>
+  <%= form_error_notification(@note) %>
+
+  <%= f.input :owner_type, as: :hidden, wrapper: false, input_html: { value: @owner.class.name } %>
+  <%= f.input :owner_id, as: :hidden, wrapper: false, input_html: { value: @owner.id } %>
+
+  <%= f.input :description, input_html: { rows: 3 } %>
+
+  <div style="display: flex; flex-direction: column; gap: 8px;">
+    <%= link_to "Cancel", polymorphic_path(@owner), class: "btn btn--light" %>
+    <%= f.submit 'Save', class: "btn btn--secondary" %>
+  </div>  
+<% end %>

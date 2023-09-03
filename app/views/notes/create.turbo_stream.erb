@@ -1,0 +1,16 @@
+<%= turbo_stream.update Note.new, "" %>
+
+<% if next_note = @note.next_note %>
+  <%= turbo_stream.after next_note do %>
+    <%= render @next_note %>
+  <% end %>
+
+<% else %>
+
+  <%= turbo_stream.prepend "notes" do %>
+    <%= render @note %>
+  <% end %>
+
+<% end %>
+
+<%= render_turbo_stream_flash_messages %>

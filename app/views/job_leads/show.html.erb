@@ -1,0 +1,110 @@
+<main class="container">
+  <%= link_to sanitize("&larr; Back to job leads"), job_leads_path(status_filter: @status_filter) %>
+
+  <div class="header">
+    <h1>
+      Job Lead from <%= link_to @job_lead.job_source.name,
+                                job_source_path(@job_lead.job_source),
+                                data: { turbo_frame: "_top" } %>
+    </h1>
+  </div>
+
+  <div class="job-lead-container">
+    <div class="job-lead-container__body">
+      <div class="job-lead-container__body-title-and-description">
+        <div class="job-lead-container__body-title">
+          <%= @job_lead.formatted_title %>
+          <%= confirmation_link_to @job_lead.link,
+                                   target: '_blank',
+                                   data: { turbo_method: :patch, message: "Open #{@job_lead.link} ?" } do %>
+            <i class="fas fa-solid fa-arrow-up-right-from-square"></i>
+          <% end %>  
+        </div>
+        <div class="job-lead-container__body-description">
+          <%= collapsible(visible_height_rem: 10.5) do %>
+            <%= @job_lead.sanitized_description %>
+          <% end %>
+        </div>
+      </div>
+      <div class="job-lead-container__body-attributes">
+        <div class="job-lead-container__body-attribute">
+          <div class="job-lead-container__body-attribute-value">
+            $<%= @job_lead.hourly_rate %>/h
+          </div>
+          <div class="job-lead-container__body-attribute-label">
+            Rate
+          </div>
+        </div>
+        <div class="job-lead-container__body-attribute">
+          <div class="job-lead-container__body-attribute-value">
+            <%= @job_lead.status.capitalize %>
+          </div>
+          <div class="job-lead-container__body-attribute-label">
+            Status
+          </div>
+        </div>
+        <div class="job-lead-container__body-attribute">
+          <div class="job-lead-container__body-attribute-value">
+            <%= @job_lead.potential.capitalize %>
+          </div>
+          <div class="job-lead-container__body-attribute-label">
+            Potential
+          </div>
+        </div>
+
+        <div class="job-lead-container__body-attribute">
+          <div class="job-lead-container__body-attribute-value">
+            <%= time_ago_in_words(@job_lead.published_at) %> ago
+          </div>
+          <div class="job-lead-container__body-attribute-label">
+            <%= l(@job_lead.published_at, format: :specific_format) %>
+          </div>
+         </div>
+      </div>
+    </div>
+
+    <div class="job-lead-container__actions">
+      <%# <h3>Actions</h3> %>
+      <%= link_to "New Note",
+                  new_note_path(note: { owner_type: 'JobLead', owner_id: @job_lead.id }),
+                  data: { turbo_frame: dom_id(Note.new) },
+                  class: "btn btn--secondary" %>
+
+      <% if @job_lead.detached_status? || @job_lead.entry_status? %>
+        <%= confirmation_link_to "Go Ahead",
+                                 job_source_job_lead_path(@job_lead.job_source, @job_lead, job_lead: { status: 'active' }),
+                                 class: "btn btn--secondary",
+                                 data: { turbo_method: :patch, message: "Do you want to begin to consider?" } %>
+      <% end %>
+      
+      <%= link_to "Open Job Source",
+                  job_source_path(@job_lead.job_source),
+                  class: "btn btn--light",
+                  data: { turbo_frame: "_top" } %>
+
+      <%= link_to "Edit",
+                  [:edit, @job_lead.job_source, @job_lead],
+                  class: "btn btn--light" %>
+
+      <% if @job_lead.active_status? || @job_lead.entry_status? %>
+        <%= confirmation_link_to "Detach",
+                                 job_source_job_lead_path(@job_lead.job_source, @job_lead, job_lead: { status: 'detached' }),
+                                 class: "btn btn--primary",
+                                 data: { turbo_method: :patch, message: "Not interested? Are you sure?" } %>
+      <% end %>
+
+      <%= confirmation_link_to "Delete",
+                               job_source_job_lead_path(@job_lead.job_source, @job_lead),
+                               class: "btn btn--primary",
+                               data: { turbo_method: :delete, message: "DELETE? Are you sure?" } %>
+    </div>
+
+    <div class="job-lead-container__notes">
+      <%= turbo_frame_tag Note.new %>
+
+      <%= turbo_frame_tag "notes" do %>
+        <%= render @job_lead.notes.ordered %>
+      <% end %>
+    </div>
+  </div>  
+</main>

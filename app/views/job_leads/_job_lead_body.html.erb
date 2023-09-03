@@ -1,9 +1,9 @@
-<div class="job-lead__body">
-  <div class="job-lead__name">
-    <div class="job-lead__hourly-rate">
+<div class="job-lead-list-item__body">
+  <div class="job-lead-list-item__name">
+    <div class="job-lead-list-item__hourly-rate">
       <%= number_to_currency job_lead.hourly_rate %>
     </div>
-    <div class="job-lead__title">
+    <div class="job-lead-list-item__title">
       <%= job_lead.formatted_title %>
     </div>
     <div class="dropdown">
@@ -18,6 +18,9 @@
                                    target: '_blank',
                                    data: { turbo_method: :patch, message: "Open #{job_lead.link} ?" } %>
         </li>
+        <li>
+          <%= link_to "Job Source", job_source_path(job_lead.job_source), data: { turbo_frame: "_top" } %>
+        </li>
         <% if job_lead.active_status? || job_lead.entry_status? %>
           <li>
             <%= confirmation_link_to "Detach",
@@ -31,7 +34,10 @@
                                      job_source_job_lead_path(job_lead.job_source, job_lead, status_filter: @status_filter, job_lead: { status: 'active' }),
                                      data: { turbo_method: :patch, message: "Do you want to begin to consider?" } %>
           </li>
-        <% end %>  
+        <% end %>
+        <li>
+          <%= link_to "Show", job_lead_path(job_lead, status_filter: @status_filter), data: { turbo_frame: "_top" } %>    
+        </li>
         <li>
           <%= link_to "Edit", edit_job_source_job_lead_path(job_lead.job_source, job_lead, status_filter: @status_filter) %>    
         </li>
@@ -43,14 +49,14 @@
       </ul>
     </div>
   </div>  
-  <div class="job-lead__description">
+  <div class="job-lead-list-item__description">
     <%= strip_tags(job_lead.description).truncate(250, separator: /\s/, ommission: "....") %>
   </div>
-  <div class="job-lead__info">
-    <div class="job-lead__source-name">
+  <div class="job-lead-list-item__info">
+    <div class="job-lead-list-item__source-name">
       <%= job_lead.job_source.name %>
     </div>
-    <div class="job-lead__published-at">
+    <div class="job-lead-list-item__published-at">
       <%= time_ago_in_words job_lead.published_at %> ago
     </div>
   </div>
