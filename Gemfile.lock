@@ -73,6 +73,7 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
+    ast (2.4.2)
     bcrypt (3.1.19)
     bindex (0.8.1)
     bootsnap (1.16.0)
@@ -173,6 +174,9 @@ GEM
       racc (~> 1.4)
     numerizer (0.1.1)
     orm_adapter (0.5.0)
+    parser (3.2.2.3)
+      ast (~> 2.4.1)
+      racc
     pg (1.5.3)
     public_suffix (5.0.3)
     puma (5.6.7)
@@ -224,6 +228,8 @@ GEM
       rexml
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    scout_apm (5.3.5)
+      parser
     selenium-webdriver (4.10.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -305,6 +311,7 @@ DEPENDENCIES
   rails (~> 7.0.7)
   redis (~> 4.0)
   rss
+  scout_apm
   selenium-webdriver
   sidekiq
   sidekiq-status
