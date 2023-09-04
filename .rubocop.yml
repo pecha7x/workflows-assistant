@@ -20,6 +20,7 @@ AllCops:
     - config/environments/*
     - config/importmap.rb
     - config/puma.rb
+    - db/schema.rb
     - vendor/**/*
     - tmp/**/*
     - node_modules/**/*
