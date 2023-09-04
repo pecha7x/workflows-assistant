@@ -30,6 +30,7 @@ class JobLead < ApplicationRecord
 
   validates :published_at, :description, :title, :link, :status, :potential, presence: true
   validates :hourly_rate, presence: true, numericality: { greater_than: 0 }
+  validates :owner_country, presence: true, inclusion: { in: ISO3166::Country.codes }
   validates_uniqueness_of_without_deleted :external_id, scope: :job_source_id
 
   delegate :user, to: :job_source

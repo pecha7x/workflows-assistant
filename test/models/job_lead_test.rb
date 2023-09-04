@@ -9,6 +9,7 @@ class JobLeadTest < ActiveSupport::TestCase
         link: 'http://link.com',
         status: 'entry',
         potential: 'low',
+        owner_country: 'US',
         hourly_rate: 50.0,
         published_at: Time.current,
         job_source: job_sources(:first)
@@ -85,6 +86,22 @@ class JobLeadTest < ActiveSupport::TestCase
 
         assert_predicate job_lead, :invalid?
         assert_has_errors_on job_lead, :hourly_rate
+      end
+    end
+
+    class OwnerCountry < Validations
+      test 'owner_country can be null' do
+        job_lead = JobLead.new(job_lead_valid_attributes.merge(owner_country: nil))
+
+        assert_predicate job_lead, :invalid?
+        assert_has_errors_on job_lead, :owner_country
+      end
+
+      test 'owner_country should be in ISO3166::Country.codes' do
+        job_lead = JobLead.new(job_lead_valid_attributes.merge(owner_country: 'Wakanda'))
+
+        assert_predicate job_lead, :invalid?
+        assert_has_errors_on job_lead, :owner_country
       end
     end
 

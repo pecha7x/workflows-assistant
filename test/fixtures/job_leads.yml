@@ -6,7 +6,7 @@ today_active:
   status: 'active'
   link: https://example.com/1
   hourly_rate: 50.0
-  owner_country: 'Australia'
+  owner_country: 'AU'
   external_id: 1
   job_source: first
   published_at: <%= Time.current %>
@@ -16,7 +16,7 @@ today:
   description: Today Description
   link: https://example.com/1
   hourly_rate: 50.0
-  owner_country: 'Australia'
+  owner_country: 'AU'
   external_id: 2
   job_source: first
   published_at: <%= Time.current - 5.minutes %>
@@ -26,7 +26,7 @@ last_week:
   description: Last Week Description
   link: https://example.com/2
   hourly_rate: 55.0
-  owner_country: 'United States'
+  owner_country: 'US'
   external_id: 3
   job_source: first
   published_at: <%= Time.current - 1.week %>

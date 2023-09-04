@@ -5,7 +5,9 @@ ruby '3.1.2'
 
 gem 'acts_as_paranoid'
 gem 'bootsnap', require: false
+gem 'countries', require: 'countries/global'
 gem 'cssbundling-rails'
+gem 'data_migrate'
 gem 'devise', '~> 4.8.1'
 gem 'jbuilder'
 gem 'jsbundling-rails'

@@ -24,9 +24,11 @@
     &--invalid {
       border-color: var(--color-primary);
     }
+
     &[type=number] {
       max-width: 5rem;
     }
+
     &:is(select) {
       width: auto;
     }

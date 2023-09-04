@@ -13,9 +13,12 @@
     <%= f.input :description, input_html: { rows: 5 } %>
   </div>
 
-  <div class="form-vertical__column">
+  <div class="form-vertical__row">
     <%= f.label :link %>
     <%= f.input :link, as: :string %>
+
+    <%= f.label :owner_country, label: 'Country' %>
+    <%= f.input :owner_country, collection: ISO3166::Country.all_names_with_codes, selected: job_lead.owner_country %>
   </div>
 
   <div class="form-vertical__row">

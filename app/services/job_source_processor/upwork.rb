@@ -66,9 +66,9 @@ module JobSourceProcessor
 
     def their_owner_country(their_description)
       match_country_data = their_description.match(COUNTRY_FROM_DESC_REGEX)
-      return nil if match_country_data.blank?
+      return 'US' if match_country_data.blank?
 
-      match_country_data[:country].lstrip
+      CountriesService.alpha2_name_by_any_name(match_country_data[:country].lstrip)
     end
   end
 end

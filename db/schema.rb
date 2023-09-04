@@ -25,6 +25,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_103443) do
     t.index ["user_id"], name: "index_assistant_configurations_on_user_id"
   end
 
+  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
+  end
+
   create_table "job_leads", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
@@ -36,7 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_103443) do
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "owner_country", default: "United States", null: false
+    t.string "owner_country", default: "'US'::character varying", null: false
     t.string "external_id", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_job_leads_on_deleted_at"
