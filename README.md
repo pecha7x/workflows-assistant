@@ -1,4 +1,13 @@
 ## Workflow Assistant
 The service that help to manage daily workflow for IT specialists especially for developers. This is the kit of useful tools which will be gradually added.
 
-![enter image description here](https://my-stocks.s3.eu-west-1.amazonaws.com/Screenshot%202023-09-03%20at%2022.23.36.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFsaCmV1LW5vcnRoLTEiSDBGAiEA/w4EvA2xhihqhO5gPzqVAvyPNpsPfN3S3/eIAd5XflACIQCSigKA7FMLVch5ACXINX4m4aKmEqbX7P21oYfP3bbeCSroAgg1EAQaDDMzNDIzMzMzMDkwMiIMeGrsCvGM%2bO8w1%2bijKsUCn08YWwSqhCEt/DrsOB4yuk0YtiK38mGJGUw76dnqUF/jL231uHhX4Jz07TebvzsmVROR/xORXk%2bABhTsGLYT3akMRL1S1/G0zG1vx3hwL8xL3YPVOJDnyO2qLTzDp3msh3c2nGOIXx%2bScBpdfUJrLqWANA2q0tloro7KEgA9kh0Ee7wA2B0M7rX1HDz/jmOONZAMdUM2U9WpkhIH3oeXAIn1JDFaN/Zv01tyCnBxY2Qy66vDIcXXjBgeB5C6Di%2b8LgfJxpLTUDQvEv3UklZgjbvBPEJ%2b0TfEjl0X8EzSvDW8wn1rkvEjIb0xcONkA%2bCB%2bbLl8J8C5mFvor8Z6II%2bG3nx0RxwEzbTxInDSCMpKobbX3EgNd8IvUk8JP1ps7nfoJLZwlwQse1uRnZMo22cFZVHYSU9/DVSfgF6e6vY5OOoN/UmgjCfu9OnBjqyArW2KzTb3S2KNhH3hbAQFvhis7f2NGYWQvzViRNPGwZ9chSjj4%2b3N1HNqRVkrO3BvmOseIzk6IGycBpGjcSTvrcLn0MChNe4SQGjXE6rcEY/9wmiVe7UbJSEV7QjWdYxCCWqMv7/Jm/sv9DIasyy0qb7XfIFIV/uomeQcgeRAtS3iDVk6qzPrnd6pKJBnYNfkSzKT2FNCoFooFIy/gA8TRfEzKGF/ljCmlbaBdt9RjMiUYU6s%2bv5Goo2pIqVeD17E3n7YWdmMbchf2m6aAnHKV60ftCmmMOjGqDklwOk9Un8Txivo/Np3Vd4DSlU3iTLdH9nUJY1FOIe6rdyQ4DSWe22rJmB0oxDiOa0w0I5hncvUILoFuvdJeUchCPH9s6tvzT5r95ceptEnJRVoWHqVGFaJg==&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230903T192721Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAU3UO34TLBH63VZH3/20230903/eu-west-1/s3/aws4_request&X-Amz-Signature=acef50e8c58fc8644f357605d76cedc048b64f3ce6879a3a4d7d165555fa522e)
+![the main page](https://github.com/pecha7x/workflows-assistant/blob/main/the-main-page-screenshot.png?raw=true)
+
+## Stack
+* Ruby **3.1.2** and Rails **7.0.7**
+* [Hotwire (Stimulus & Turbo)](https://hotwired.dev/) as front-end framework
+* No any CSS frameworks - only strong CSS follows on [BEM](https://en.bem.info/) 
+* Background processing via [Sidekiq](https://github.com/sidekiq/sidekiq)
+* [PostgreSQL](https://www.postgresql.org/) as database
+* [Minitest](https://github.com/minitest/minitest) for keep the testing
+* Automation deploying process to Ubuntu server via [Capistrano](https://github.com/capistrano/capistrano)
