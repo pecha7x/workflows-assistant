@@ -1,13 +1,13 @@
 class JobLeadsController < ApplicationController
-  before_action :set_job_source, except: [:index, :show]
-  before_action :set_job_lead, only: [:edit, :update, :destroy]
+  before_action :set_job_source, except: %i[index show]
+  before_action :set_job_lead, only: %i[edit update destroy]
   before_action :set_status_filter
 
   def index
     @job_leads = current_user.job_leads.includes(:job_source).ordered
-    if @status_filter.present?
-      @job_leads = @job_leads.where(status: params[:status_filter])
-    end
+    return if @status_filter.blank?
+
+    @job_leads = @job_leads.where(status: params[:status_filter])
   end
 
   def show
@@ -19,27 +19,26 @@ class JobLeadsController < ApplicationController
     @job_lead = @job_source.job_leads.build
   end
 
+  def edit; end
+
   def create
     @job_lead = @job_source.job_leads.build(job_lead_params)
 
     if @job_lead.save
       respond_to do |format|
-        format.html { redirect_to job_source_path(@job_source), notice: "Job Lead was successfully created." }
-        format.turbo_stream { flash.now[:notice] = "Job Lead was successfully created." }
+        format.html { redirect_to job_source_path(@job_source), notice: t('.notice') }
+        format.turbo_stream { flash.now[:notice] = t('.notice') }
       end
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-  end
-
   def update
     if @job_lead.update(job_lead_params)
       respond_to do |format|
-        format.html { redirect_to job_source_path(@job_source), notice: "Job Lead was successfully updated." }
-        format.turbo_stream { flash.now[:notice] = "Job Lead was successfully updated." }
+        format.html { redirect_to job_source_path(@job_source), notice: t('.notice') }
+        format.turbo_stream { flash.now[:notice] = t('.notice') }
       end
     else
       render :edit, status: :unprocessable_entity
@@ -50,8 +49,8 @@ class JobLeadsController < ApplicationController
     @job_lead.destroy
 
     respond_to do |format|
-      format.html { redirect_to job_source_path(@job_source), notice: "Job Lead was successfully destroyed." }
-      format.turbo_stream { flash.now[:notice] = "Job Lead was successfully destroyed." }
+      format.html { redirect_to job_source_path(@job_source), notice: t('.notice') }
+      format.turbo_stream { flash.now[:notice] = t('.notice') }
     end
   end
 
@@ -71,8 +70,8 @@ class JobLeadsController < ApplicationController
 
   def set_status_filter
     @status_filter = params['status_filter'] || params.dig('job_lead', 'status_filter')
-    if @status_filter.present? && JobLead.statuses.keys.exclude?(@status_filter)
-      raise ActionController::ActionControllerError, 'invalid value for :status_filter parameter'
-    end
+    return unless @status_filter.present? && JobLead.statuses.keys.exclude?(@status_filter)
+
+    raise ActionController::ActionControllerError, 'invalid value for :status_filter parameter'
   end
 end

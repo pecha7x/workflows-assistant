@@ -18,9 +18,9 @@ class Note < ApplicationRecord
 
   scope :ordered, -> { order(created_at: :desc) }
 
-  validates :description, :owner, :user, presence: true
+  validates :description, presence: true
 
   def next_note
-    owner.notes.where("created_at > ?", created_at).ordered.last  
+    owner.notes.where('created_at > ?', created_at).ordered.last
   end
 end

@@ -1,20 +1,20 @@
 module NotifierProcessor
   class SlackWebhook < Base
     POTENTIAL_TO_COLOR_MAPPING = {
-      "high"   => "#f71a1a",
-      "medium" => "#08d51c",
-      "low"    => "#2e2cff"
+      'high' => '#f71a1a',
+      'medium' => '#08d51c',
+      'low' => '#2e2cff'
     }.freeze
 
-    alias_method :note_text, :message
+    alias note_text message
 
     def run
       SlackPublisher.new(
-        message:     subject,
-        note_text:   note_text,
-        note_color:  note_color,
+        message: subject,
+        note_text: note_text,
+        note_color: note_color,
         channel_url: channel_url,
-        username:    from
+        username: from
       ).publish
     end
 
@@ -25,7 +25,7 @@ module NotifierProcessor
     end
 
     def channel_url
-      settings["url"]
+      settings['url']
     end
   end
 end

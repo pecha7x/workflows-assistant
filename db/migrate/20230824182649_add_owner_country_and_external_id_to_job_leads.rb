@@ -1,8 +1,10 @@
 class AddOwnerCountryAndExternalIdToJobLeads < ActiveRecord::Migration[7.0]
   def change
-    add_column :job_leads, :owner_country, :string, null: false
-    add_column :job_leads, :external_id, :string, null: false
+    change_table :job_leads, bulk: true do |t|
+      t.string :owner_country, null: false
+      t.string :external_id, null: false
+    end
 
-    add_index :job_leads, [:external_id, :job_source_id], unique: true
+    add_index :job_leads, %i[external_id job_source_id], unique: true
   end
 end

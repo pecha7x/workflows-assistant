@@ -1,6 +1,6 @@
-redis_config = { 
-  url:                 Rails.application.credentials.redis_url,
-  reconnect_attempts:  15
+redis_config = {
+  url: Rails.application.credentials.redis_url,
+  reconnect_attempts: 15
 }
 
 Sidekiq.configure_server do |config|

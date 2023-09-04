@@ -1,5 +1,5 @@
 class JobSourcesController < ApplicationController
-  before_action :set_job_source, only: [:show, :edit, :update, :destroy]
+  before_action :set_job_source, only: %i[show edit update destroy]
 
   def index
     @job_sources = current_user.job_sources.ordered
@@ -13,28 +13,28 @@ class JobSourcesController < ApplicationController
     @job_source = JobSource.new(job_source_params)
   end
 
+  def edit
+    @notifiers = @job_source.notifiers
+  end
+
   def create
     @job_source = current_user.job_sources.build(job_source_params)
 
     if @job_source.save
       respond_to do |format|
-        format.html { redirect_to edit_job_source_path(@job_source), notice: "Job Source was successfully created." }
-        format.turbo_stream { flash.now[:notice] = "Job Source was successfully created." }
+        format.html { redirect_to edit_job_source_path(@job_source), notice: t('.notice') }
+        format.turbo_stream { flash.now[:notice] = t('.notice') }
       end
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-    @notifiers = @job_source.notifiers
-  end
-
   def update
     if @job_source.update(job_source_params)
       respond_to do |format|
-        format.html { redirect_to job_sources_path, notice: "Job Source was successfully updated." }
-        format.turbo_stream { flash.now[:notice] = "Job Source was successfully updated." }
+        format.html { redirect_to job_sources_path, notice: t('.notice') }
+        format.turbo_stream { flash.now[:notice] = t('.notice') }
       end
     else
       render :edit, status: :unprocessable_entity
@@ -43,10 +43,10 @@ class JobSourcesController < ApplicationController
 
   def destroy
     @job_source.destroy
-    
+
     respond_to do |format|
-      format.html { redirect_to job_sources_path, notice: "Job Source was successfully destroyed." }
-      format.turbo_stream { flash.now[:notice] = "Job Source was successfully destroyed." }
+      format.html { redirect_to job_sources_path, notice: t('.notice') }
+      format.turbo_stream { flash.now[:notice] = t('.notice') }
     end
   end
 
@@ -59,7 +59,7 @@ class JobSourcesController < ApplicationController
   def job_source_params
     params.fetch(:job_source, {}).permit(
       :name,
-      :kind, 
+      :kind,
       :refresh_rate,
       settings: JobSource.all_settings_fields
     )

@@ -1,6 +1,6 @@
 class NotifiersController < ApplicationController
-  before_action :set_owner_from_params, only: %i[ new create update ]
-  before_action :set_notifier, only: %i[ edit update destroy ]
+  before_action :set_owner_from_params, only: %i[new create update]
+  before_action :set_notifier, only: %i[edit update destroy]
 
   def new
     @notifier = current_user.notifiers.build(notifier_params)
@@ -14,8 +14,8 @@ class NotifiersController < ApplicationController
     @notifier = current_user.notifiers.build(notifier_params)
     if @notifier.save
       respond_to do |format|
-        format.html { redirect_to edit_polymorphic_path(@owner), notice: "Notifier was successfully created." }
-      end  
+        format.html { redirect_to edit_polymorphic_path(@owner), notice: t('.notice') }
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,8 +24,8 @@ class NotifiersController < ApplicationController
   def update
     if @notifier.update(notifier_params)
       respond_to do |format|
-        format.html { redirect_to edit_polymorphic_path(@owner), notice: "Notifier was successfully updated." }
-      end  
+        format.html { redirect_to edit_polymorphic_path(@owner), notice: t('.notice') }
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class NotifiersController < ApplicationController
     @notifier.destroy
 
     respond_to do |format|
-      format.turbo_stream { flash.now[:notice] = "Notifier was successfully destroyed." }
+      format.turbo_stream { flash.now[:notice] = t('.notice') }
     end
   end
 
@@ -54,7 +54,7 @@ class NotifiersController < ApplicationController
       :owner_id,
       :owner_type,
       :name,
-      :kind, 
+      :kind,
       settings: Notifier.all_settings_fields
     )
   end

@@ -5,7 +5,7 @@ class ApplicationJob < ActiveJob::Base
 
   # Most jobs are safe to ignore if the underlying records are no longer available
   # discard_on ActiveJob::DeserializationError
-  def log(message, severity = :info)
+  def log(_message, severity = :info)
     BGProcessing.logger.send(severity, "#{self.class.name}.")
   end
 end

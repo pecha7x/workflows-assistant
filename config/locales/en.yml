@@ -33,3 +33,29 @@ en:
   time:
     formats:
       specific_format: '%F %T'
+  job_sources:
+    create:
+      notice: 'Job Source was successfully created.'
+    update:
+      notice: 'Job Source was successfully updated.'
+    destroy:
+      notice: 'Job Source was successfully destroyed.'
+  job_leads:
+    create:
+      notice: 'Job Lead was successfully created.'
+    update:
+      notice: 'Job Lead was successfully updated.'
+    destroy:
+      notice: 'Job Lead was successfully destroyed.'
+  notes:
+    create:
+      notice: 'Note was successfully created.'
+    destroy:
+      notice: 'Note was successfully destroyed.'
+  notifiers:
+    create:
+      notice: 'Notifier was successfully created.'
+    update:
+      notice: 'Notifier was successfully updated.'
+    destroy:
+      notice: 'Notifier was successfully destroyed.'

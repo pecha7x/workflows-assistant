@@ -1,0 +1,30 @@
+Metrics/AbcSize:
+  Max: 30
+
+Metrics/BlockLength:
+  Exclude:
+    - 'db/schema.rb'
+    - 'lib/tasks/auto_annotate_models.rake'
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/PerceivedComplexity:
+  Max: 9
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 198
+
+Rails/RakeEnvironment:
+  Exclude:
+    - 'lib/tasks/auto_annotate_models.rake'
+
+Rails/NotNullColumn:
+  Exclude:
+    - 'db/**/*' # till the issue will be resolved https://github.com/rubocop/rubocop-rails/issues/237

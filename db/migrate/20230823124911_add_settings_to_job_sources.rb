@@ -1,7 +1,9 @@
 class AddSettingsToJobSources < ActiveRecord::Migration[7.0]
   def change
-    add_column :job_sources, :kind, :integer, default: 0
-    add_column :job_sources, :refresh_rate, :integer, default: 60
-    add_column :job_sources, :settings, :jsonb
+    change_table :job_sources, bulk: true do |t|
+      t.integer :kind, default: 0
+      t.integer :refresh_rate, default: 60
+      t.jsonb :settings
+    end
   end
 end

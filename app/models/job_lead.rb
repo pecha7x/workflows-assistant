@@ -19,30 +19,30 @@
 class JobLead < ApplicationRecord
   include TextFieldsSanitization
 
-  enum :status, [ :entry, :active, :detached ], suffix: true, default: :entry
-  enum :potential, [ :low, :medium, :high ], suffix: true, default: :medium
+  enum :status, %i[entry active detached], suffix: true, default: :entry
+  enum :potential, %i[low medium high], suffix: true, default: :medium
 
   belongs_to :job_source
   has_many :notes, as: :owner, dependent: :destroy
 
   before_validation :generate_external_id, if: -> { !external_id? }
 
-  validates :published_at, :description, :title, :link, :status, :potential, :job_source_id, presence: true
+  validates :published_at, :description, :title, :link, :status, :potential, presence: true
   validates :hourly_rate, presence: true, numericality: { greater_than: 0 }
-  validates_uniqueness_of :external_id, scope: :job_source_id
+  validates :external_id, uniqueness: { scope: :job_source_id }
 
   delegate :user, to: :job_source
 
   scope :ordered, -> { order(published_at: :desc) }
 
-  broadcasts_to ->(job_lead) { [job_lead.user, "job_leads"] }, inserts_by: :prepend
+  broadcasts_to ->(job_lead) { [job_lead.user, 'job_leads'] }, inserts_by: :prepend
 
   def formatted_title
-    title.truncate(70, separator: /\s/, ommission: "....")
+    title.truncate(70, separator: /\s/, ommission: '....')
   end
 
-  def next_lead_by_status(status_value=nil)
-    leads_list = job_source.job_leads.where("published_at > ?", published_at)    
+  def next_lead_by_status(status_value = nil)
+    leads_list = job_source.job_leads.where('published_at > ?', published_at)
     leads_list = leads_list.where(status: status_value) if status_value.present?
     leads_list.ordered.last
   end
@@ -51,6 +51,6 @@ class JobLead < ApplicationRecord
 
   def generate_external_id
     self.external_id = SecureRandom.urlsafe_base64
-    generate_external_id if self.class.exists?(external_id: self.external_id)
+    generate_external_id if self.class.exists?(external_id: external_id)
   end
 end

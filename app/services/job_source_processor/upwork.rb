@@ -3,16 +3,16 @@ require 'open-uri'
 
 module JobSourceProcessor
   class Upwork < Base
-    ID_FROM_LINK_REGEX = /%7E(?<external_id>.*)\?source\=rss/.freeze
-    RATE_FROM_DESC_REGEX = /<b>Hourly Range<\/b>:(?<hourly_range>.*)\n\n/.freeze
-    COUNTRY_FROM_DESC_REGEX = /<b>Country<\/b>:(?<country>.*)\n/.freeze
+    ID_FROM_LINK_REGEX = /%7E(?<external_id>.*)\?source=rss/.freeze
+    RATE_FROM_DESC_REGEX = %r{<b>Hourly Range</b>:(?<hourly_range>.*)\n\n}.freeze
+    COUNTRY_FROM_DESC_REGEX = %r{<b>Country</b>:(?<country>.*)\n}.freeze
 
     delegate :rss_url, to: :job_source
 
     def run
       raise 'The Feed has not RSS URL' if rss_url.blank?
 
-      URI.open(rss_url) do |rss|
+      URI.parse(rss_url).open do |rss|
         feed = RSS::Parser.parse(rss)
         feed.items.each do |their_lead|
           job_lead = job_source.job_leads.find_or_initialize_by(external_id: their_id(their_lead.link))
@@ -22,11 +22,11 @@ module JobSourceProcessor
           if job_lead.valid?
             job_lead.save
             notice_about_lead(job_lead)
-            log("Job Lead was imported")
+            log('Job Lead was imported')
           else
-            log "#{job_source.name}. Failed to import an job lead: "\
-                "errors: <#{job_lead.errors.messages}>"\
-                "attributes: <#{job_lead.attributes}>; "\
+            log "#{job_source.name}. Failed to import an job lead: " \
+                "errors: <#{job_lead.errors.messages}>" \
+                "attributes: <#{job_lead.attributes}>; " \
                 "params: <#{their_lead.inspect}>; "
           end
         end
@@ -38,11 +38,11 @@ module JobSourceProcessor
     # TODO: move next mapping logic to a separate class
     def attributes(their_lead)
       {
-        title:         their_lead.title,
-        link:          their_lead.link,
-        published_at:  their_lead.pubDate,
-        description:   their_lead.description,
-        hourly_rate:   their_hourly_rate(their_lead.description),
+        title: their_lead.title,
+        link: their_lead.link,
+        published_at: their_lead.pubDate,
+        description: their_lead.description,
+        hourly_rate: their_hourly_rate(their_lead.description),
         owner_country: their_owner_country(their_lead.description)
       }.compact
     end

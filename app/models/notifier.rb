@@ -13,16 +13,16 @@
 #  updated_at :datetime         not null
 #
 class Notifier < ApplicationRecord
-  KINDS = %i(
+  KINDS = %i[
     slack_webhook
     email
     phone
-  ).freeze
+  ].freeze
 
   SETTINGS_FIELDS = {
-    slack_webhook: %i( url ),
-    email:         %i( address subject ),
-    phone:         %i( number )
+    slack_webhook: %i[url],
+    email: %i[address subject],
+    phone: %i[number]
   }.freeze
 
   def self.all_settings_fields
@@ -35,7 +35,7 @@ class Notifier < ApplicationRecord
   belongs_to :owner, polymorphic: true
   belongs_to :user
 
-  validates :kind, :name, :owner, :user, presence: true
+  validates :kind, :name, presence: true
   validate :kind_not_changed
 
   def settings_fields
@@ -45,8 +45,8 @@ class Notifier < ApplicationRecord
   private
 
   def kind_not_changed
-    if kind_changed? && self.persisted?
-      errors.add(:kind, "Change of kind not allowed!")
-    end
+    return unless kind_changed? && persisted?
+
+    errors.add(:kind, 'Change of kind not allowed!')
   end
 end

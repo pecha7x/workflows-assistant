@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
-  before_action :set_owner_from_params, only: %i[ new create ]
-  before_action :set_note, only: %i[ destroy ]
+  before_action :set_owner_from_params, only: %i[new create]
+  before_action :set_note, only: %i[destroy]
 
   def new
     @note = current_user.notes.build(note_params)
@@ -10,9 +10,9 @@ class NotesController < ApplicationController
     @note = current_user.notes.build(note_params)
     if @note.save
       respond_to do |format|
-        format.html { redirect_to edit_polymorphic_path(@owner), notice: "Note was successfully created." }
-        format.turbo_stream { flash.now[:notice] = "Note was successfully created." }
-      end  
+        format.html { redirect_to edit_polymorphic_path(@owner), notice: t('.notice') }
+        format.turbo_stream { flash.now[:notice] = t('.notice') }
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -22,7 +22,7 @@ class NotesController < ApplicationController
     @note.destroy
 
     respond_to do |format|
-      format.turbo_stream { flash.now[:notice] = "Note was successfully destroyed." }
+      format.turbo_stream { flash.now[:notice] = t('.notice') }
     end
   end
 

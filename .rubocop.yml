@@ -1,0 +1,23 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+
+inherit_from:
+  - .rubocop_base.yml
+
+Rails:
+  Enabled: true
+
+AllCops:
+  TargetRubyVersion: 2.7.1
+  TargetRailsVersion: 7.0.4
+  DisplayCopNames: true
+  NewCops: enable
+  Exclude:
+    - bin/**/*
+    - config/environments/*
+    - config/importmap.rb
+    - config/puma.rb
+    - vendor/**/*
+    - tmp/**/*
+    - node_modules/**/*
