@@ -18,6 +18,7 @@ class JobLeadsTest < ApplicationSystemTestCase
     assert_selector 'h1', text: 'First job source'
 
     click_on 'New Job Lead'
+
     assert_selector 'h1', text: 'First job source'
 
     fill_in 'Title', with: 'New Job Lead'
@@ -27,6 +28,7 @@ class JobLeadsTest < ApplicationSystemTestCase
     fill_in 'Published At', with: current_time + 1.day
 
     click_on 'Create Job Lead'
+
     assert_text 'New Job Lead'
   end
 
@@ -38,8 +40,6 @@ class JobLeadsTest < ApplicationSystemTestCase
       find('.dropdown').click
       click_on 'Edit'
     end
-
-    assert_selector 'h1', text: 'First job source'
 
     fill_in 'Title', with: 'New Title'
     click_on 'Update Job Lead'

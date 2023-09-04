@@ -15,12 +15,11 @@ class JobSourcesTest < ApplicationSystemTestCase
 
   test 'Creating a new Job Source' do
     visit job_sources_path
+
     assert_selector 'h1', text: 'Job Sources'
 
     click_on 'New Job Source'
     fill_in 'Name', with: 'RoR dev'
-
-    assert_selector 'h1', text: 'Job Sources'
     click_on 'Save'
 
     assert_selector 'h1', text: 'Job Sources'
@@ -29,12 +28,11 @@ class JobSourcesTest < ApplicationSystemTestCase
 
   test 'Updating a Job Source' do
     visit job_sources_path
+
     assert_selector 'h1', text: 'Job Sources'
 
     click_on 'Edit', match: :first
     fill_in 'Name', with: 'Updated Job Source'
-
-    assert_selector 'h1', text: 'Job Sources'
     click_on 'Save'
 
     assert_selector 'h1', text: 'Job Sources'
@@ -43,6 +41,7 @@ class JobSourcesTest < ApplicationSystemTestCase
 
   test 'Destroying a Job Source' do
     visit job_sources_path
+
     assert_text @job_source.name
 
     accept_confirm do

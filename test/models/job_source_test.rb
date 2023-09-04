@@ -55,25 +55,29 @@ class JobSourceTest < ActiveSupport::TestCase
   class Validations < JobSourceTest
     test 'job source should be valid' do
       job_source = JobSource.new(name: 'Test', kind: 'website', user: users(:user1))
-      assert job_source.valid?
+
+      assert_predicate job_source, :valid?
     end
 
     class Presence < Validations
       test 'name should be present' do
         job_source = JobSource.new(name: nil, kind: 'website', user: users(:user1))
-        assert job_source.invalid?
+
+        assert_predicate job_source, :invalid?
         assert_has_errors_on job_source, :name
       end
 
       test 'kind should be present' do
         job_source = JobSource.new(name: 'Test', kind: '', user: users(:user1))
-        assert job_source.invalid?
+
+        assert_predicate job_source, :invalid?
         assert_has_errors_on job_source, :kind
       end
 
       test 'user should be present' do
         job_source = JobSource.new(name: 'Test', kind: 'website', user: nil)
-        assert job_source.invalid?
+
+        assert_predicate job_source, :invalid?
         assert_has_errors_on job_source, :user
       end
     end
@@ -81,13 +85,15 @@ class JobSourceTest < ActiveSupport::TestCase
     class RefreshRate < Validations
       test 'refresh_rate should be present' do
         job_source = JobSource.new(name: 'Test', kind: 'website', refresh_rate: nil, user: users(:user1))
-        assert job_source.invalid?
+
+        assert_predicate job_source, :invalid?
         assert_has_errors_on job_source, :refresh_rate
       end
 
       test 'refresh_rate should be greater than 20' do
         job_source = JobSource.new(name: 'Test', kind: 'website', refresh_rate: 19, user: users(:user1))
-        assert job_source.invalid?
+
+        assert_predicate job_source, :invalid?
         assert_has_errors_on job_source, :refresh_rate
       end
     end
@@ -96,7 +102,8 @@ class JobSourceTest < ActiveSupport::TestCase
       test 'change of kind not allowed' do
         job_source = job_sources(:first)
         job_source.kind = 'upwork'
-        assert job_source.invalid?
+
+        assert_predicate job_source, :invalid?
         assert_has_errors_on job_source, :kind
       end
     end
