@@ -7,7 +7,7 @@ class SlackPublisher
     @note_color   = note_color
     @channel_url  = channel_url
 
-    @notifier = Slack::Notifier.new(@channel_url, username: username)
+    @notifier = Slack::Notifier.new(@channel_url, username:)
   end
 
   def publish

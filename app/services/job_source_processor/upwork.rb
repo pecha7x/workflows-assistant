@@ -3,9 +3,9 @@ require 'open-uri'
 
 module JobSourceProcessor
   class Upwork < Base
-    ID_FROM_LINK_REGEX = /%7E(?<external_id>.*)\?source=rss/.freeze
-    RATE_FROM_DESC_REGEX = %r{<b>Hourly Range</b>:(?<hourly_range>.*)\n\n}.freeze
-    COUNTRY_FROM_DESC_REGEX = %r{<b>Country</b>:(?<country>.*)\n}.freeze
+    ID_FROM_LINK_REGEX = /%7E(?<external_id>.*)\?source=rss/
+    RATE_FROM_DESC_REGEX = %r{<b>Hourly Range</b>:(?<hourly_range>.*)\n\n}
+    COUNTRY_FROM_DESC_REGEX = %r{<b>Country</b>:(?<country>.*)\n}
 
     delegate :rss_url, to: :job_source
 

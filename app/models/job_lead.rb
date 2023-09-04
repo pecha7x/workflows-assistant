@@ -51,6 +51,6 @@ class JobLead < ApplicationRecord
 
   def generate_external_id
     self.external_id = SecureRandom.urlsafe_base64
-    generate_external_id if self.class.exists?(external_id: external_id)
+    generate_external_id if self.class.exists?(external_id:)
   end
 end

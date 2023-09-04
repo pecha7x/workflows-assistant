@@ -11,8 +11,8 @@ Rails:
   Enabled: true
 
 AllCops:
-  TargetRubyVersion: 2.7.1
-  TargetRailsVersion: 7.0.4
+  TargetRubyVersion: 3.1.2
+  TargetRailsVersion: 7.0.7
   DisplayCopNames: true
   NewCops: enable
   Exclude:

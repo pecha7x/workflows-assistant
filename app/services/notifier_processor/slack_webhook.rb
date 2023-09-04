@@ -11,9 +11,9 @@ module NotifierProcessor
     def run
       SlackPublisher.new(
         message: subject,
-        note_text: note_text,
-        note_color: note_color,
-        channel_url: channel_url,
+        note_text:,
+        note_color:,
+        channel_url:,
         username: from
       ).publish
     end
