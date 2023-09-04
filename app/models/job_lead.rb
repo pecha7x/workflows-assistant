@@ -15,6 +15,7 @@
 #  updated_at    :datetime         not null
 #  owner_country :string           default("United States"), not null
 #  external_id   :string           not null
+#  deleted_at    :datetime
 #
 class JobLead < ApplicationRecord
   include TextFieldsSanitization
@@ -29,7 +30,7 @@ class JobLead < ApplicationRecord
 
   validates :published_at, :description, :title, :link, :status, :potential, presence: true
   validates :hourly_rate, presence: true, numericality: { greater_than: 0 }
-  validates :external_id, uniqueness: { scope: :job_source_id }
+  validates_uniqueness_of_without_deleted :external_id, scope: :job_source_id
 
   delegate :user, to: :job_source
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_04_100303) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_04_103443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_100303) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_assistant_configurations_on_deleted_at"
     t.index ["user_id"], name: "index_assistant_configurations_on_user_id"
   end
 
@@ -36,6 +38,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_100303) do
     t.datetime "updated_at", null: false
     t.string "owner_country", default: "United States", null: false
     t.string "external_id", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_job_leads_on_deleted_at"
     t.index ["external_id", "job_source_id"], name: "index_job_leads_on_external_id_and_job_source_id", unique: true
     t.index ["job_source_id"], name: "index_job_leads_on_job_source_id"
   end
@@ -49,6 +53,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_100303) do
     t.integer "refresh_rate", default: 60
     t.jsonb "settings"
     t.string "background_job_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_job_sources_on_deleted_at"
     t.index ["user_id"], name: "index_job_sources_on_user_id"
   end
 
@@ -59,6 +65,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_100303) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_notes_on_deleted_at"
     t.index ["owner_type", "owner_id"], name: "index_notes_on_owner"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
@@ -72,6 +80,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_100303) do
     t.jsonb "settings"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_notifiers_on_deleted_at"
     t.index ["owner_type", "owner_id"], name: "index_notifiers_on_owner"
     t.index ["user_id"], name: "index_notifiers_on_user_id"
   end
@@ -85,6 +95,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_100303) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_admin"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

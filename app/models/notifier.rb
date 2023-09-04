@@ -11,6 +11,7 @@
 #  settings   :jsonb
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  deleted_at :datetime
 #
 class Notifier < ApplicationRecord
   KINDS = %i[

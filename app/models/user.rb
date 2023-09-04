@@ -11,6 +11,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  is_admin               :boolean
+#  deleted_at             :datetime
 #
 class User < ApplicationRecord
   devise :database_authenticatable, :validatable

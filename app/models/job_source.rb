@@ -11,6 +11,7 @@
 #  refresh_rate      :integer          default(60)
 #  settings          :jsonb
 #  background_job_id :string
+#  deleted_at        :datetime
 #
 class JobSource < ApplicationRecord
   REFRESH_RATES = [30, 60, 120, 360].freeze
