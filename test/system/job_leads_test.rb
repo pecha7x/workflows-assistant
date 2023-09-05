@@ -25,7 +25,7 @@ class JobLeadsTest < ApplicationSystemTestCase
     fill_in 'Description', with: 'Description'
     fill_in 'Link', with: 'http://link.com'
     fill_in 'Rate $/h', with: 60.0
-    fill_in 'Published At', with: current_time + 1.day
+    fill_in 'Published', with: current_time + 1.day
 
     click_on 'Create Job Lead'
 

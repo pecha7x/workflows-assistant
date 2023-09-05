@@ -1,0 +1,23 @@
+<h2>Log in to your account</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form", "data-turbo" => "false" }) do |f| %>
+  <%= form_error_notification(resource) %>
+  <%= f.input :email,
+              required: true,
+              autofocus: true,
+              placeholder: 'Enter your email address',
+              input_html: { autocomplete: "email" },
+              wrapper_html: { class: 'form__group-vertical' } %>
+
+  <%= f.input :password,
+              required: true,
+              placeholder: 'Enter your password',
+              input_html: { autocomplete: "current-password" },
+              wrapper_html: { class: 'form__group-vertical' } %>
+
+  <%= f.button :submit, "Log in", class: "btn btn--secondary form__submit" %>
+<% end %>
+
+<div class="authentication__actions">
+  <%= render "devise/shared/links" %>
+</div>  

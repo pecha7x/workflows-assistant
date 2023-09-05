@@ -16,7 +16,9 @@
   &__brand {
     font-weight: bold;
     font-size: var(--font-size-xl);
-    color: var(--color-text-header);
+    a {
+      color: var(--color-text-header);
+    }
   }
 
   &__links {

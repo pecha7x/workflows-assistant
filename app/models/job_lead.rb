@@ -13,7 +13,7 @@
 #  published_at  :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  owner_country :string           default("United States"), not null
+#  owner_country :string           default("'US'::character varying"), not null
 #  external_id   :string           not null
 #  deleted_at    :datetime
 #

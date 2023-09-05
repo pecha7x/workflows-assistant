@@ -25,6 +25,7 @@ gem 'simple_form', '~> 5.1.0'
 gem 'slack-notifier'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
+gem 'strong_password', '~> 0.0.9'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -45,6 +46,7 @@ group :development do
   gem 'capistrano-nvm', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm'
+  gem 'letter_opener'
   gem 'rubocop', require: false
   gem 'rubocop-capybara', require: false
   gem 'rubocop-minitest', require: false

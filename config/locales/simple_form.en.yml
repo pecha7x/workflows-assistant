@@ -14,8 +14,19 @@ en:
       job_source:
         name: Name
         kind: Kind
+        refresh_rate: Refresh Rate (seconds)
       job_lead:
-        published_at: Published At  
+        title: Title
+        description: Description
+        link: Web Link
+        owner_country: Country
+        hourly_rate: Rate $/h
+        status:  Status
+        potential: Potential
+        published_at: Published
+      notifier:
+        name: Name
+        
   helpers:
     submit:
       job_source:

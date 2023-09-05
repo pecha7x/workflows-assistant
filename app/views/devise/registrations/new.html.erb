@@ -1,0 +1,31 @@
+<h2>Create your account</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form", "data-turbo" => "false" }) do |f| %>
+  <%= form_error_notification(resource) %>
+
+  <%= f.input :email,
+              required: true,
+              autofocus: true,
+              placeholder: 'Enter your email address',
+              input_html: { autocomplete: "email" },
+              wrapper_html: { class: 'form__group-vertical' } %>
+
+  <%= f.input :password,
+              required: true,
+              placeholder: 'Create a password',
+              hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+              input_html: { autocomplete: "new-password" },
+              wrapper_html: { class: 'form__group-vertical' } %>
+
+  <%= f.input :password_confirmation,
+              required: true,
+              placeholder: 'Repeat your password',
+              input_html: { autocomplete: "new-password" },
+              wrapper_html: { class: 'form__group-vertical' } %>
+
+  <%= f.button :submit, "Sign Up", class: "btn btn--secondary form__submit" %>
+<% end %>
+
+<div class="authentication__actions">
+  <%= render "devise/shared/links" %>
+</div>  

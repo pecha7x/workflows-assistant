@@ -1,6 +1,6 @@
 <header class="navbar">
   <div class="navbar__brand">
-    Daily Workflow Assistant
+    <%= link_to "Daily Workflow Assistant", authenticated_root_path %>
   </div>
 
   <div class="navbar__links">
@@ -16,8 +16,6 @@
         <%= current_user.name %>
       <% end %>
       <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn--dark" %>
-    <% else %>
-     <%= link_to "Sign in", new_user_session_path, class: "btn btn--dark" %>
     <% end %>
   </div>
 </header>

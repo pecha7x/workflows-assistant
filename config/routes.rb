@@ -9,6 +9,15 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  devise_scope :user do
+    authenticated :user do
+      root 'job_leads#index', as: :authenticated_root
+    end
+    unauthenticated do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+
   resource :assistant_configuration, only: [:settings] do
     get :settings, on: :member
   end
@@ -18,6 +27,4 @@ Rails.application.routes.draw do
   resources :job_leads, only: %i[index show]
   resources :notifiers, except: %i[index show]
   resources :notes, only: %i[new create destroy]
-
-  root to: 'pages#home'
 end

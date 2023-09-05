@@ -21,16 +21,11 @@
     gap: var(--space-xs);
   }
 
-  &__form-field-name {
-    width: 40%;
-  }
-
   &__form-notifiers {
     display: flex;
     width: 100%;
     gap: var(--space-s);
     flex-direction: column;
-    border-top: var(--border-light);
     padding: var(--space-s) 20% 0 20%;
     &-title {
       display: flex;

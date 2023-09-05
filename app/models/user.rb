@@ -12,9 +12,13 @@
 #  updated_at             :datetime         not null
 #  is_admin               :boolean
 #  deleted_at             :datetime
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
 #
 class User < ApplicationRecord
-  devise :database_authenticatable, :validatable
+  devise :database_authenticatable, :validatable, :confirmable,
+         :registerable, :recoverable, :rememberable
 
   has_one :assistant_configuration, dependent: :destroy
   has_many :job_sources, dependent: :destroy
@@ -22,7 +26,14 @@ class User < ApplicationRecord
   has_many :notifiers, dependent: :destroy
   has_many :notes, dependent: :destroy
 
+  validates_password_strength :password
+  validates_uniqueness_of_without_deleted :email
+
   def name
     email.split('@').first.capitalize
+  end
+
+  def remember_me
+    super.nil? ? '1' : super
   end
 end

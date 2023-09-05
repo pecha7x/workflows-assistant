@@ -1,37 +1,24 @@
-<%= simple_form_for [job_source, job_lead], html: { class: "form form-vertical" } do |f| %>
+<%= simple_form_for [job_source, job_lead], html: { class: "form" } do |f| %>
   <%= form_error_notification(job_lead) %>
-
   <%= f.input :status_filter, as: :hidden, input_html: { value: @status_filter } %>
 
-  <div class="form-vertical__column">
-    <%= f.label :title %>
-    <%= f.input :title %>
-  </div>
+  <%= f.input :title, wrapper_html: { class: 'form__group-vertical' } %>
 
-  <div class="form-vertical__column">
-    <%= f.label :description %>
-    <%= f.input :description, input_html: { rows: 5 } %>
-  </div>
+  <%= f.input :description, input_html: { rows: 5 }, wrapper_html: { class: 'form__group-vertical' } %>
 
-  <div class="form-vertical__row">
-    <%= f.label :link %>
-    <%= f.input :link, as: :string %>
+  <%= f.input :link, as: :string, wrapper_html: { class: 'form__group-vertical' } %>
 
-    <%= f.label :owner_country, label: 'Country' %>
+  <div class="form__row">
+    <%= f.input :hourly_rate %>
+
     <%= f.input :owner_country, collection: ISO3166::Country.all_names_with_codes, selected: job_lead.owner_country %>
   </div>
 
-  <div class="form-vertical__row">
-    <%= f.label :hourly_rate, label: 'Rate $/h' %>
-    <%= f.input :hourly_rate %>
-
-    <%= f.label :status %>
+  <div class="form__row">
     <%= f.input :status, collection: JobLead.statuses.keys, selected: job_lead.status %>
 
-    <%= f.label :potential %>
     <%= f.input :potential, collection: JobLead.potentials.keys, selected: job_lead.potential %>
 
-     <%= f.label :published_at %>
     <%= f.input :published_at, html5: true %>
   </div>
 

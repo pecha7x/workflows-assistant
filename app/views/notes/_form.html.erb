@@ -4,10 +4,10 @@
   <%= f.input :owner_type, as: :hidden, wrapper: false, input_html: { value: @owner.class.name } %>
   <%= f.input :owner_id, as: :hidden, wrapper: false, input_html: { value: @owner.id } %>
 
-  <%= f.input :description, input_html: { rows: 3 } %>
+  <%= f.input :description, label: false, input_html: { rows: 3 } %>
 
-  <div style="display: flex; flex-direction: column; gap: 8px;">
+  <div class="form__actions">
     <%= link_to "Cancel", polymorphic_path(@owner), class: "btn btn--light" %>
     <%= f.submit 'Save', class: "btn btn--secondary" %>
-  </div>  
+  </div>
 <% end %>

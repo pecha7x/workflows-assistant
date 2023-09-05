@@ -1,0 +1,46 @@
+.authentication {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-l);
+
+  width: 100%;
+  padding: var(--space-xl);
+  margin-top: 12vh;
+  max-width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
+
+  background-color: var(--color-white);
+  border-radius: 1.2rem;
+  box-shadow: var(--shadow-small);
+
+  @include media(tabletAndMore) {
+    max-width: 25rem;
+  }
+
+  .form {
+    width: 100%;
+    box-shadow: none;
+    &__description {
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+    &__submit {
+      width: 100%;
+      margin-top: var(--space-l);
+    }
+    .error_notification {
+      color: var(--color-primary);
+      text-align: center;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding-top: var(--space-s);
+    border-top: var(--border-light);
+  }
+}
