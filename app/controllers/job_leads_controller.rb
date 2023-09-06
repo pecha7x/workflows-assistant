@@ -5,6 +5,7 @@ class JobLeadsController < ApplicationController
 
   def index
     @job_leads = current_user.job_leads.includes(:job_source).ordered
+    verify_sources_present { return }
     return if @status_filter.blank?
 
     @job_leads = @job_leads.where(status: params[:status_filter])
@@ -73,5 +74,11 @@ class JobLeadsController < ApplicationController
     return unless @status_filter.present? && JobLead.statuses.keys.exclude?(@status_filter)
 
     raise ActionController::ActionControllerError, 'invalid value for :status_filter parameter'
+  end
+
+  def verify_sources_present
+    if current_user.job_sources.blank?
+      redirect_to job_sources_path and yield
+    end
   end
 end

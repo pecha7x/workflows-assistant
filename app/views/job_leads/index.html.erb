@@ -5,10 +5,12 @@
     <h1>Job Leads</h1>
   </div>
 
-  <% if @job_leads.blank? && current_user.job_sources.empty? %>
+  <% if @job_leads.blank? %>
     <div class="empty-state">
       <p class="empty-state__text">
-        You don't have any job sources yet!
+        You don't have any leads yet.<br />
+        Please go to Job Sources page and add leads there<br />
+        or customize the source for auto SYNC leads to your feed. 
       </p>
       <%= link_to "Go to Job Sources", job_sources_path, class: "btn btn--primary" %>
     </div>

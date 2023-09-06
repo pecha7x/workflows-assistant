@@ -3,10 +3,15 @@
 <main class="container">
   <div class="header">
     <h1>Job Sources</h1>
-    <%= link_to "New Job Source",
-                new_job_source_path,
-                class: "btn btn--primary",
-                data: { turbo_frame: dom_id(JobSource.new) } %>
+
+    <%= turbo_frame_tag "new_job_source_button" do %>
+      <% if @job_sources.any? %>
+        <%= link_to "New Job Source",
+                    new_job_source_path,
+                    class: "btn btn--primary",
+                    data: { turbo_frame: dom_id(JobSource.new) } %>
+      <% end %>
+    <% end %>
   </div>
 
   <%= turbo_frame_tag JobSource.new %>
