@@ -20,9 +20,8 @@ http {
   ssl_prefer_server_ciphers on;
 
   include /etc/nginx/conf.d/*.conf;
-
-  ################
-
+  
+  ###########^^^###############
   log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
                     '$status $body_bytes_sent "$http_referer" '
                     '"$http_user_agent" "$http_x_forwarded_for"';
@@ -35,9 +34,51 @@ http {
     server unix:/home/deploy/workflows-assistant/shared/tmp/sockets/puma.sock fail_timeout=0;
   }
 
+  ## http://myworkflow.net redirects to https://myworkflow.net
   server {
     listen 80;
-    server_name localhost;
+    listen [::]:80;
+    server_name myworkflow.net;
+
+    location / {
+      return 301 https://myworkflow.net$request_uri;
+    }
+  }
+
+  ## http://www.myworkflow.net redirects to https://www.myworkflow.net
+  server {
+  	listen 80 default_server;
+  	listen [::]:80 default_server ipv6only=on;
+  	server_name www.myworkflow.net;
+
+  	location / {
+  		return 301 https://www.myworkflow.net$request_uri;
+  	}
+  }
+
+  ## https://myworkflow.net redirects to https://www.myworkflow.net
+  server {
+  	listen 443 ssl http2;
+  	listen [::]:443 ssl http2;
+  	server_name myworkflow.net;
+
+  	ssl_certificate /etc/letsencrypt/live/www.myworkflow.net/fullchain.pem;
+  	ssl_certificate_key /etc/letsencrypt/live/www.myworkflow.net/privkey.pem;
+  	ssl_trusted_certificate /etc/letsencrypt/live/www.myworkflow.net/fullchain.pem;
+
+  	location / {
+  		return 301 https://www.myworkflow.net$request_uri;
+  	}
+  }
+
+  server {
+    server_name www.myworkflow.net;
+  	listen 443 ssl http2 default_server;
+  	listen [::]:443 ssl http2 default_server ipv6only=on;
+
+    ssl_certificate /etc/letsencrypt/live/www.myworkflow.com/fullchain.pem;
+  	ssl_certificate_key /etc/letsencrypt/live/www.myworkflow.com/privkey.pem;
+  	ssl_trusted_certificate /etc/letsencrypt/live/www.myworkflow.com/fullchain.pem;
 
     root /home/deploy/workflows-assistant/current/public;
 

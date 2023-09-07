@@ -41,6 +41,7 @@ namespace :deploy do
     task :symlink_config do
       on roles :nginx do
         within release_path do
+          # TODO replace "default" sites-available config
           sudo :cp, '-f', "config/nginx.#{fetch(:stage)}.conf", '/etc/nginx/nginx.conf'
         end
       end
