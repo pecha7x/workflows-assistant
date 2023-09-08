@@ -77,8 +77,8 @@ class JobLeadsController < ApplicationController
   end
 
   def verify_sources_present
-    if current_user.job_sources.blank?
-      redirect_to job_sources_path and yield
-    end
+    return if current_user.job_sources.present?
+
+    redirect_to job_sources_path and yield
   end
 end
