@@ -22,7 +22,7 @@ class Notifier < ApplicationRecord
 
   SETTINGS_FIELDS = {
     slack_webhook: %i[url],
-    email: %i[address subject],
+    email: %i[address],
     phone: %i[number]
   }.freeze
 

@@ -7,6 +7,7 @@ module NotifierProcessor
     }.freeze
 
     alias note_text message
+    alias note_color potential_to_color
 
     def run
       SlackPublisher.new(
@@ -19,10 +20,6 @@ module NotifierProcessor
     end
 
     private
-
-    def note_color
-      POTENTIAL_TO_COLOR_MAPPING[potential]
-    end
 
     def channel_url
       settings['url']
