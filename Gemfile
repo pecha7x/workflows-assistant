@@ -28,6 +28,7 @@ gem 'slack-notifier'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'strong_password', '~> 0.0.9'
+gem 'telegram-bot-ruby', '~> 1.0'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 

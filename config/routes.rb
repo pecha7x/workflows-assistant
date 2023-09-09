@@ -27,4 +27,7 @@ Rails.application.routes.draw do
   resources :job_leads, only: %i[index show]
   resources :notifiers, except: %i[index show]
   resources :notes, only: %i[new create destroy]
+  namespace :telegram, defaults: { format: :json } do
+    post :message
+  end
 end

@@ -17,13 +17,13 @@ class Notifier < ApplicationRecord
   KINDS = %i[
     slack_webhook
     email
-    phone
+    telegram
   ].freeze
 
   SETTINGS_FIELDS = {
     slack_webhook: %i[url],
     email: %i[address],
-    phone: %i[number]
+    telegram: %i[chat_id]
   }.freeze
 
   def self.all_settings_fields
