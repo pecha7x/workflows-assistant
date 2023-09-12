@@ -30,6 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  application:
+    user_not_authorized_error: 'Access denied.'
   time:
     formats:
       specific_format: '%F %T'

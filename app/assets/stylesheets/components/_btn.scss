@@ -69,6 +69,24 @@
       color: var(--color-white);
     }
   }
+
+  &--copy-to-clipboard {
+    color: var(--color-secondary-rotate);
+    border-color: var(--color-secondary-rotate);
+    padding: var(--space-xxxs) var(--space-xxs);
+
+    &:hover,
+    &:focus,
+    &:focus-within,
+    &:active {
+      color: var(--color-secondary);
+      border-color: var(--color-secondary);
+    }
+
+    span {
+      font-size: var(--font-size-s);
+    }
+  }
 }
 
 .btn-group {

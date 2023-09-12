@@ -7,3 +7,12 @@ second:
   name: Second notifier
   owner: first (JobSource)
   user: user1
+
+telegram:
+  name: Telegram notifier
+  owner: first (JobSource)
+  user: user1
+  kind: telegram
+  settings:
+    t_me_chat_id: 12345
+    t_me_username: telegramUser

@@ -29,6 +29,32 @@ class NotifierTest < ActiveSupport::TestCase
         assert_predicate notifier, :invalid?
         assert_has_errors_on notifier, :user
       end
+
+      class TelegramFieldsPresence < Presence
+        test 'telegram notifier should be valid' do
+          notifier = Notifier.new(
+            name: 'Notifier',
+            owner: job_leads(:today_active),
+            user: users(:user1),
+            kind: 'telegram',
+            settings: { t_me_chat_id: 123, t_me_username: 'telegramUser' }
+          )
+
+          assert_predicate notifier, :valid?
+        end
+
+        test 'chat_id and username should be present for a new record' do
+          notifier = Notifier.new(
+            name: 'Notifier',
+            owner: job_leads(:today_active),
+            user: users(:user1),
+            kind: 'telegram'
+          )
+
+          assert_predicate notifier, :invalid?
+          assert_has_errors_on notifier, %i[t_me_chat_id t_me_username]
+        end
+      end
     end
   end
 
@@ -39,6 +65,16 @@ class NotifierTest < ActiveSupport::TestCase
 
       assert_predicate notifier, :invalid?
       assert_has_errors_on notifier, :kind
+    end
+  end
+
+  class TelegramFieldsNotChanged < Validations
+    test 'change of settings fields not allowed for telegram kind' do
+      notifier = notifiers(:telegram)
+      notifier.t_me_chat_id = 543
+
+      assert_predicate notifier, :invalid?
+      assert_has_errors_on notifier, :t_me_chat_id
     end
   end
 end

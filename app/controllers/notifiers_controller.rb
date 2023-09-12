@@ -4,6 +4,7 @@ class NotifiersController < ApplicationController
 
   def new
     @notifier = current_user.notifiers.build(notifier_params)
+    @notifier.generate_t_me_start_token if @notifier.telegram_kind?
   end
 
   def edit

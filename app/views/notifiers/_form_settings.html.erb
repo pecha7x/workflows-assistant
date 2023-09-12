@@ -1,8 +1,12 @@
-<%= form.simple_fields_for :settings do |s| %>
-  <% notifier.settings_fields.each do |field_name| %>
-    <%= s.input field_name,
-        placeholder: settings_field_placeholder(field_name),
-        label: false,
-        input_html: { value: notifier.send(field_name) } %>
-  <% end %>
+<% if notifier.telegram_kind? %>
+  <%= render partial: 'form_telegram_settings', locals: { notifier: notifier } %>
+<% else %>
+  <%= form.simple_fields_for :settings do |s| %>
+    <% notifier.settings_fields.each do |field_name| %>
+      <%= s.input field_name,
+          placeholder: settings_field_placeholder(field_name),
+          label: false,
+          input_html: { value: notifier.send(field_name) } %>
+    <% end %>
+  <% end %>  
 <% end %>

@@ -14,6 +14,8 @@
 #  deleted_at :datetime
 #
 class Notifier < ApplicationRecord
+  include Notifier::Telegram
+
   KINDS = %i[
     slack_webhook
     email
@@ -23,7 +25,7 @@ class Notifier < ApplicationRecord
   SETTINGS_FIELDS = {
     slack_webhook: %i[url],
     email: %i[address],
-    telegram: %i[chat_id]
+    telegram: %i[t_me_chat_id t_me_username t_me_start_token]
   }.freeze
 
   def self.all_settings_fields
@@ -37,7 +39,7 @@ class Notifier < ApplicationRecord
   belongs_to :user
 
   validates :kind, :name, presence: true
-  validate :kind_not_changed
+  validate :kind_not_changed, if: -> { persisted? && kind_changed? }
 
   def settings_fields
     SETTINGS_FIELDS[kind.to_sym].uniq
@@ -46,8 +48,6 @@ class Notifier < ApplicationRecord
   private
 
   def kind_not_changed
-    return unless kind_changed? && persisted?
-
     errors.add(:kind, 'Change of kind not allowed!')
   end
 end
