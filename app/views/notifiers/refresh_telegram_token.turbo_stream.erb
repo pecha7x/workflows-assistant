@@ -1,0 +1,5 @@
+<%= render_turbo_stream_flash_messages %>
+
+<%= turbo_stream.update "#{dom_id(@notifier)}_telegram_bot_link" do %>
+  <%= render partial: "telegram_bot_link", locals: { notifier: @notifier } %>
+<% end %>

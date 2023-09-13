@@ -16,7 +16,7 @@
           <%= confirmation_link_to "Open Link",
                                    job_lead.link,
                                    target: '_blank',
-                                   data: { turbo_method: :patch, message: "Open #{job_lead.link} ?" } %>
+                                   data: { message: "Open #{job_lead.link} ?" } %>
         </li>
         <li>
           <%= link_to "Job Source", job_source_path(job_lead.job_source), data: { turbo_frame: "_top" } %>

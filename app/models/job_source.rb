@@ -65,7 +65,7 @@ class JobSource < ApplicationRecord
   private
 
   def kind_not_changed
-    return unless kind_changed? && persisted?
+    return unless will_save_change_to_kind? && persisted?
 
     errors.add(:kind, 'Change of kind not allowed!')
   end

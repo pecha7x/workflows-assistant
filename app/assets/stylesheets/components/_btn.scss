@@ -18,6 +18,10 @@
     transition: filter 250ms, color 200ms;
   }
 
+  span {
+    font-size: var(--font-size-s);
+  }
+
   &--primary {
     color: var(--color-white);
     background-image: linear-gradient(to right, var(--color-primary), var(--color-primary-rotate));
@@ -68,6 +72,36 @@
     &:active {
       color: var(--color-white);
     }
+  }
+
+  &--copy-to-clipboard {
+    color: var(--color-secondary-rotate);
+    border-color: var(--color-secondary-rotate);
+
+    &:hover,
+    &:focus,
+    &:focus-within,
+    &:active {
+      color: var(--color-secondary);
+      border-color: var(--color-secondary);
+    }
+  }
+
+  &--refresh {
+    color: var(--color-primary-rotate);
+    border-color: var(--color-primary-rotate);
+
+    &:hover,
+    &:focus,
+    &:focus-within,
+    &:active {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+  }
+
+  &--compact {
+    padding: var(--space-xxxs) var(--space-xxs);
   }
 }
 

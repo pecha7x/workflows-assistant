@@ -1,0 +1,24 @@
+<% if notifier.telegram_chat_id.present?  %>
+  <b>You have connected</b>
+  <%= link_to notifier.telegram_bot_link, target: '_blank' do %>
+    @<%= TelegramBot::BOT_NAME %>
+  <% end %>
+  <b>to @<%= notifier.telegram_username %></b>
+<% else %>
+  For connect the Telegram Notifier Bot please click on <a href="<%= notifier.telegram_bot_link %>">@<%= TelegramBot::BOT_NAME %></a>
+  <div class="form__group-copy-to-clipboard" data-controller="copy-to-clipboard">  
+    Or copy and open the link on your device
+    <input class="form__input" type="text" data-copy-to-clipboard-target="text" value="<%= notifier.telegram_bot_link %>">
+    <div class="btn btn--copy-to-clipboard btn--compact prevent-select" data-action="click->copy-to-clipboard#copy">
+      <i class="fa-solid fa-copy fa-xl"></i>
+      <span>copy</span>
+    </div>
+    <%= confirmation_link_to refresh_telegram_token_notifier_path(notifier),
+                             class: "btn btn--refresh btn--compact",
+                             data: { turbo_method: :patch, message: "Are you sure about refresh Telegram Bot connection link?" } do %>
+      <i class="fa-solid fa-arrows-rotate fa-xl"></i>
+      <span>refresh</span>
+    <% end %> 
+  </div>
+  <i>*the link expires in 1 hour</i>
+<% end %>

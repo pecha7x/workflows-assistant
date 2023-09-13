@@ -7,3 +7,22 @@ second:
   name: Second notifier
   owner: first (JobSource)
   user: user1
+
+telegram:
+  name: Connected Telegram Notifier
+  owner: first (JobSource)
+  user: user1
+  kind: telegram
+  settings:
+    telegram_username: telegramUser
+    telegram_chat_id: 12345
+
+unconnected_telegram:
+  name: Unconnected Telegram Notifier
+  owner: first (JobSource)
+  user: user1
+  kind: telegram
+  settings:
+    telegram_username: telegramUser
+    telegram_start_token: 1244414
+

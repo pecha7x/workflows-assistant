@@ -1,0 +1,14 @@
+<div style="width: 100%; text-align: center;">
+  <% if notifier.persisted? %>
+    <%= turbo_stream_from :notifiers %>
+    <%= turbo_frame_tag "#{dom_id(notifier)}_telegram_bot_link" do %>
+      <%= render partial: "telegram_bot_link", locals: { notifier: notifier } %>
+    <% end %>
+  <% else %>
+    <%= form.simple_fields_for :settings do |s| %>
+      <%= s.input :telegram_username,
+          placeholder: "@username",
+          label: false %>
+    <% end %>
+  <% end %>
+</div>

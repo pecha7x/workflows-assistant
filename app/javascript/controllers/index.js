@@ -10,11 +10,11 @@ application.register("collapsible", CollapsibleController)
 import ConfirmationController from "./confirmation_controller"
 application.register("confirmation", ConfirmationController)
 
+import CopyToClipboardController from "./copy_to_clipboard_controller"
+application.register("copy-to-clipboard", CopyToClipboardController)
+
 import ElementController from "./element_controller"
 application.register("element", ElementController)
-
-import RemovalsController from "./removals_controller"
-application.register("removals", RemovalsController)
 
 import SearchParamsController from "./search_params_controller"
 application.register("search-params", SearchParamsController)

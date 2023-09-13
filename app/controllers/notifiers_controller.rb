@@ -1,6 +1,6 @@
 class NotifiersController < ApplicationController
   before_action :set_owner_from_params, only: %i[new create update]
-  before_action :set_notifier, only: %i[edit update destroy]
+  before_action :set_notifier, only: %i[edit update destroy refresh_telegram_token]
 
   def new
     @notifier = current_user.notifiers.build(notifier_params)
@@ -14,7 +14,8 @@ class NotifiersController < ApplicationController
     @notifier = current_user.notifiers.build(notifier_params)
     if @notifier.save
       respond_to do |format|
-        format.html { redirect_to edit_polymorphic_path(@owner), notice: t('.notice') }
+        path = @notifier.telegram_kind? ? edit_notifier_path(@notifier) : edit_polymorphic_path(@owner)
+        format.html { redirect_to path, notice: t('.notice') }
       end
     else
       render :new, status: :unprocessable_entity
@@ -35,6 +36,16 @@ class NotifiersController < ApplicationController
     @notifier.destroy
 
     respond_to do |format|
+      format.turbo_stream { flash.now[:notice] = t('.notice') }
+    end
+  end
+
+  def refresh_telegram_token
+    @notifier.generate_telegram_start_token
+
+    # render status: :ok
+    respond_to do |format|
+      format.html { redirect_to edit_notifier_path(@notifier), notice: t('.notice') }
       format.turbo_stream { flash.now[:notice] = t('.notice') }
     end
   end

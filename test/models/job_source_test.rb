@@ -1,12 +1,9 @@
 require 'test_helper'
-require 'active_support/testing/method_call_assertions'
 
 class JobSourceTest < ActiveSupport::TestCase
   class Callbacks < JobSourceTest
     class BackgroundProcessing < Callbacks
       class CreateBackgroundJob < BackgroundProcessing
-        include ActiveSupport::Testing::MethodCallAssertions
-
         test "after_create doesn't call the processing when kind is 'simple'" do
           job_source = JobSource.new(kind: 'simple', name: 'Test', user: users(:user1))
           assert_called(job_source, :background_processing, times: 0) do

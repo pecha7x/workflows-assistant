@@ -30,6 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  application:
+    user_not_authorized_error: 'Access denied.'
   time:
     formats:
       specific_format: '%F %T'
@@ -59,3 +61,5 @@ en:
       notice: 'Notifier was successfully updated.'
     destroy:
       notice: 'Notifier was successfully destroyed.'
+    refresh_telegram_token:
+      notice: 'The link was successfully refreshed.'

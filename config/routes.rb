@@ -25,7 +25,11 @@ Rails.application.routes.draw do
     resources :job_leads, except: %i[index show]
   end
   resources :job_leads, only: %i[index show]
-  resources :notifiers, except: %i[index show]
+  resources :notifiers, except: %i[index show] do
+    member do
+      patch :refresh_telegram_token
+    end
+  end
   resources :notes, only: %i[new create destroy]
   namespace :telegram, defaults: { format: :json } do
     post :message

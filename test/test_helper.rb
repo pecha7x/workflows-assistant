@@ -3,9 +3,11 @@ require_relative '../config/environment'
 require 'rails/test_help'
 require 'mocha/minitest'
 require 'minitest/spec'
+require 'active_support/testing/method_call_assertions'
 
 module ActiveSupport
   class TestCase
+    include ActiveSupport::Testing::MethodCallAssertions
     # Run tests in parallel with specified workers
     parallelize(workers: :number_of_processors)
 

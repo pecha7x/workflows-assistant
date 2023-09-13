@@ -1,4 +1,4 @@
-class SlackPublisher
+class SlackSender
   attr_reader :message, :note_text, :note_color, :channel_url, :notifier
 
   def initialize(message:, note_color:, channel_url:, note_text: '', username: 'SlackPublish')
@@ -10,7 +10,7 @@ class SlackPublisher
     @notifier = Slack::Notifier.new(@channel_url, username:)
   end
 
-  def publish
+  def run
     notifier.ping message, attachments: [note]
   end
 

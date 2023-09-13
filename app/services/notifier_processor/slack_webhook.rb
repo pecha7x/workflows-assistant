@@ -10,13 +10,13 @@ module NotifierProcessor
     alias note_color potential_to_color
 
     def run
-      SlackPublisher.new(
+      SlackSender.new(
         message: subject,
         note_text:,
         note_color:,
         channel_url:,
         username: from
-      ).publish
+      ).run
     end
 
     private
