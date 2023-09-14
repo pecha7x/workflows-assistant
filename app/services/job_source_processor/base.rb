@@ -2,12 +2,12 @@ module JobSourceProcessor
   class Base
     delegate :time_ago_in_words, :link_to, to: 'ActionController::Base.helpers'
     delegate :job_source_job_lead_url, to: 'Rails.application.routes.url_helpers'
+    delegate :notifiers, to: :job_source 
 
-    attr_reader :job_source, :notifiers
+    attr_reader :job_source
 
     def initialize(job_source_id)
       @job_source = JobSource.find(job_source_id)
-      @notifiers = job_source.notifiers
     end
 
     def run
@@ -16,12 +16,13 @@ module JobSourceProcessor
 
     private
 
-    def log(_message, severity = :info)
-      BGProcessing.logger.send(severity, "#{self.class.name}.")
+    def log(message, severity = :info)
+      BGProcessing.logger.send(severity, "#{self.class.name}. #{message}")
     end
 
     def notice_about_lead(lead)
       notifiers.each do |notifier|
+        log(notifier.inspect, :info)
         "NotifierProcessor::#{notifier.kind.capitalize.camelize}".constantize.new(
           settings: notifier.settings,
           from: lead.job_source.name,
