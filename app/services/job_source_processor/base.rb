@@ -33,7 +33,7 @@ module JobSourceProcessor
     end
 
     def subject_by(lead)
-      title_link = link_to(lead.formatted_title, job_source_job_lead_url(lead.job_source, lead))
+      title_link = link_to(lead.formatted_title, job_lead_url(lead))
       "#{title_link} / $#{lead.hourly_rate} / #{time_ago_in_words(lead.published_at)} ago"
     end
   end
