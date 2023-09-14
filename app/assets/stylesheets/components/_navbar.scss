@@ -1,5 +1,6 @@
 .navbar {
   display: grid;
+  gap: 2rem;
   height: 3.5rem;
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: 1fr;
@@ -15,9 +16,9 @@
 
   &__brand {
     font-weight: bold;
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-xxl);
     a {
-      color: var(--color-text-header);
+      color: var(--color-white);
     }
   }
 
