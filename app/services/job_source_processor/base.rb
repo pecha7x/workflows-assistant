@@ -1,7 +1,7 @@
 module JobSourceProcessor
   class Base
     delegate :time_ago_in_words, :link_to, to: 'ActionController::Base.helpers'
-    delegate :job_source_job_lead_url, to: 'Rails.application.routes.url_helpers'
+    delegate :job_lead_url, to: 'Rails.application.routes.url_helpers'
     delegate :notifiers, to: :job_source 
 
     attr_reader :job_source
@@ -22,7 +22,6 @@ module JobSourceProcessor
 
     def notice_about_lead(lead)
       notifiers.each do |notifier|
-        log(notifier.inspect, :info)
         "NotifierProcessor::#{notifier.kind.capitalize.camelize}".constantize.new(
           settings: notifier.settings,
           from: lead.job_source.name,
