@@ -1,11 +1,11 @@
 <% if notifier.telegram_chat_id.present?  %>
   <b>You have connected</b>
   <%= link_to notifier.telegram_bot_link, target: '_blank' do %>
-    @<%= TelegramBot::BOT_NAME %>
+    @<%= Rails.application.credentials.telegram.bot.name %>
   <% end %>
   <b>to @<%= notifier.telegram_username %></b>
 <% else %>
-  For connect the Telegram Notifier Bot please click on <a href="<%= notifier.telegram_bot_link %>">@<%= TelegramBot::BOT_NAME %></a>
+  For connect the Telegram Notifier Bot please click on <%= link_to "@#{Rails.application.credentials.telegram.bot.name}", notifier.telegram_bot_link, target: '_blank' %>
   <div class="form__group-copy-to-clipboard" data-controller="copy-to-clipboard">  
     Or copy and open the link on your device
     <input class="form__input" type="text" data-copy-to-clipboard-target="text" value="<%= notifier.telegram_bot_link %>">

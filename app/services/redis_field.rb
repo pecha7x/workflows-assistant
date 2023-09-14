@@ -2,57 +2,59 @@
 require 'redis'
 
 class RedisField
-  attr_reader :redis, :key
+  attr_reader :redis_conn, :key
 
   def initialize(key)
-    @redis = Redis.new(url: Rails.application.credentials.redis_url)
+    @redis_conn = Redis.new(url: Rails.application.credentials.redis_url)
     @key = key
   end
 
   # rubocop:disable Style/CaseLikeIf
-  def set_value(value, expires_in: nil)
-    delete
+  def set_value(val, expires_in: nil)
+    delete if exists?
 
-    if value.is_a?(Hash)
+    if val.is_a?(Hash)
       # Redis doesn't support nested hashes in general
       # so we just convert this to a string of JSON
-      redis.set(key, value.to_json)
-      # redis.hset(key, value)
-    elsif value.is_a?(Array)
-      redis.rpush(key, value)
-    elsif value.is_a?(String)
-      redis.set(key, value)
+      redis_conn.set(key, val.to_json)
+      # redis.hset(key, val)
+    elsif val.is_a?(Array)
+      redis_conn.rpush(key, val)
+    elsif val.is_a?(String)
+      redis_conn.set(key, val)
     else
-      raise "'#{value.class.name}' is not supported type of field by the adapter"
+      raise "'#{val.class.name}' is not supported type of field by the adapter"
     end
 
-    redis.expire(key, expires_in) if expires_in.present?
+    redis_conn.expire(key, expires_in) if expires_in.present?
   end
   # rubocop:enable Style/CaseLikeIf
 
   def value
-    case redis.type(key)
+    case redis_conn.type(key)
     when 'none'
       nil
     when 'string'
-      val = redis.get(key)
+      val = redis_conn.get(key)
       valid_json?(val) ? JSON.parse(val) : val
     # when 'hash'
-    #   redis.hgetall(key)
+    #   redis_conn.hgetall(key)
     when 'list'
-      redis.lrange(key, 0, -1)
+      redis_conn.lrange(key, 0, -1)
     else
-      raise "'#{redis.type(key)}' is not supported type of field by the adapter"
+      raise "'#{redis_conn.type(key)}' is not supported type of field by the adapter"
     end
   end
 
-  def delete
-    redis.del(key)
+  def exists?
+    redis_conn.exists?(key)
   end
 
-  def exists?
-    redis.exists?(key)
+  def delete
+    redis_conn.del(key)
   end
+
+  private
 
   def valid_json?(json)
     JSON.parse(json)

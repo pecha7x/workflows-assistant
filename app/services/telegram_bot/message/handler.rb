@@ -10,10 +10,11 @@ module TelegramBot
       attr_reader :message, :chat_id, :username, :parsed_action, :response_text
 
       def initialize(message_data:)
+        Rails.logger.info "TelegramBot message processing. message_data - #{message_data}"
         @message = Telegram::Bot::Types::Update.new(message_data).message
         @chat_id = message.chat.id
         @username = message.from.username
-        @parsed_action = message.text[%r{^/(.*)\s}, 1]
+        @parsed_action = message.text && message.text[%r{^/(.*)\s}, 1]
       end
 
       def run
@@ -26,6 +27,9 @@ module TelegramBot
         TelegramBot::Message::Sender.new(message_text: response_text, chat_id:, parse_mode: 'HTML').run
 
         "TelegramBot::Action::#{parsed_action.capitalize}".constantize.new(message:).run unless help_action?
+      rescue StandardError => e
+        TelegramBot::Message::Sender.new(message_text: 'Sorry, something went wrong', chat_id:, parse_mode: 'HTML').run
+        Rails.logger.error "TelegramBot message processing error. Details - #{e.message}"
       end
 
       private

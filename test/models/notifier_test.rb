@@ -86,7 +86,7 @@ class NotifierTest < ActiveSupport::TestCase
         setup do
           @notifier = Notifier.new(
             name: 'Notifier',
-            owner: job_leads(:today_active),
+            owner: job_source(:first),
             user: users(:user1),
             kind: 'telegram',
             settings: {

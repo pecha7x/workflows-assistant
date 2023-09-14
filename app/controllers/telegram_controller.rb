@@ -6,7 +6,7 @@ class TelegramController < ApplicationController
   def message
     message_processor = TelegramBot::Message::Handler.new(message_data: JSON.parse(request.raw_post))
     message_processor.run
-
+  ensure
     render json: {}, status: :ok
   end
 

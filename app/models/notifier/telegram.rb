@@ -18,7 +18,7 @@ class Notifier
       end
 
       def telegram_bot_link
-        telegram_link = "https://t.me/#{TelegramBot::BOT_NAME}"
+        telegram_link = "https://t.me/#{Rails.application.credentials.telegram.bot.name}"
         telegram_link += "?start=#{telegram_start_token}" if telegram_start_token.present?
         telegram_link
       end

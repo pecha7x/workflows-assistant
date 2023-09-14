@@ -9,7 +9,7 @@ module TelegramBot
       def initialize(message_text:, chat_id:, parse_mode:)
         raise "#{parse_mode} is not allowed parse_mode" if PARSE_MODE_OPTIONS.exclude?(parse_mode)
 
-        @bot = Telegram::Bot::Api.new(Rails.application.credentials.telegram.bot_token)
+        @bot = Telegram::Bot::Api.new(Rails.application.credentials.telegram.bot.token)
         @message_text = message_text
         @chat_id = chat_id
         @parse_mode = parse_mode

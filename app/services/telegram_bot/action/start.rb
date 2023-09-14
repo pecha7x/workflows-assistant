@@ -19,9 +19,6 @@ module TelegramBot
             send_invalid_username_message
           end
         end
-      rescue StandardError => e
-        send_message_to_bot('Sorry, something went wrong')
-        raise e
       end
 
       private
