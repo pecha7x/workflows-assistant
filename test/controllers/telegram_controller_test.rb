@@ -18,9 +18,15 @@ class TelegramControllerTest < ActionDispatch::IntegrationTest
       end
 
       test 'post message with valid token should return success response' do
-        post telegram_message_path, params: '{}', session: { headers: { 'X-Telegram-Bot-Api-Secret-Token': Rails.application.credentials.telegram.webhook_token } }
+        TelegramBot::Message::Handler.stub_any_instance(:run, true) do
+          post  telegram_message_path,
+                params: '{}',
+                headers: {
+                  'X-Telegram-Bot-Api-Secret-Token': Rails.application.credentials.telegram.webhook_token
+                }
 
-        assert_response 200
+          assert_response 200
+        end
       end
     end
   end

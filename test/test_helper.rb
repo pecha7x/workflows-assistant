@@ -4,6 +4,7 @@ require 'rails/test_help'
 require 'mocha/minitest'
 require 'minitest/spec'
 require 'active_support/testing/method_call_assertions'
+require 'minitest/stub_any_instance'
 
 module ActiveSupport
   class TestCase

@@ -197,6 +197,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.5)
     minitest (5.19.0)
+    minitest-stub_any_instance (1.0.3)
     mocha (2.1.0)
       ruby2_keywords (>= 0.0.5)
     msgpack (1.7.2)
@@ -402,6 +403,7 @@ DEPENDENCIES
   kramdown
   letter_opener
   lograge (~> 0.3.1)
+  minitest-stub_any_instance
   mocha
   newrelic_rpm
   paper_trail

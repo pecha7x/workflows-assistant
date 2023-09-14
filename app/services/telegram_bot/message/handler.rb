@@ -7,17 +7,16 @@ module TelegramBot
         end
       end
 
-      attr_reader :message, :chat_id, :username, :parsed_action, :response_text
+      attr_reader :message_data, :message, :chat_id, :username, :parsed_action, :response_text
 
       def initialize(message_data:)
+        @message_data = message_data
         Rails.logger.info "TelegramBot message processing. message_data - #{message_data}"
-        @message = Telegram::Bot::Types::Update.new(message_data).message
-        @chat_id = message.chat.id
-        @username = message.from.username
-        @parsed_action = message.text && message.text[%r{^/(.*)\s}, 1]
       end
 
       def run
+        parse_message_data
+
         if unavailable_command?
           @response_text = "Thank you, #{username}. But I understand only next commands: #{available_command_list} for now"
         else
@@ -33,6 +32,13 @@ module TelegramBot
       end
 
       private
+
+      def parse_message_data
+        @message = Telegram::Bot::Types::Update.new(message_data).message
+        @chat_id = message.chat.id
+        @username = message.from.username
+        @parsed_action = message.text && message.text[%r{^/(.*)\s}, 1]
+      end
 
       def build_response_text
         @response_text = send("response_text_on_#{parsed_action}")

@@ -59,6 +59,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'minitest-stub_any_instance'
   gem 'mocha'
   gem 'selenium-webdriver'
   gem 'webdrivers'

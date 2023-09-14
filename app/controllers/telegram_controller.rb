@@ -4,8 +4,8 @@ class TelegramController < ApplicationController
   protect_from_forgery with: :null_session
 
   def message
-    message_processor = TelegramBot::Message::Handler.new(message_data: JSON.parse(request.raw_post))
-    message_processor.run
+    @message_processor = TelegramBot::Message::Handler.new(message_data: JSON.parse(request.raw_post))
+    @message_processor.run
   ensure
     render json: {}, status: :ok
   end
