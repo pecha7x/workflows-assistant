@@ -35,3 +35,5 @@ Rails.application.routes.draw do
     post :message
   end
 end
+
+Rails.application.routes.default_url_options[:host] = Rails.application.credentials.host

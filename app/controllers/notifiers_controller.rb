@@ -66,6 +66,7 @@ class NotifiersController < ApplicationController
       :owner_type,
       :name,
       :kind,
+      :sanitized_links,
       settings: Notifier.all_settings_fields
     )
   end

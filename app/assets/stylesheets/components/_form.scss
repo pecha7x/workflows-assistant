@@ -16,7 +16,7 @@
 
   &__row {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     width: 100%;
     gap: var(--space-xxl);
     justify-content: space-between;
@@ -31,13 +31,20 @@
     align-items: center;
     width: 100%;
     gap: var(--space-s);
+
     &-vertical {
       flex-direction: column;
       gap: var(--space-xxxs);
       align-items: flex-start;
     }
+
+    &-checkbox {
+      width: auto;
+    }
+
     label {
       font-weight: bold;
+      white-space: nowrap;
     }
     &-copy-to-clipboard {
       margin-top: var(--space-s);
@@ -73,6 +80,11 @@
 
     &[type=number] {
       max-width: 5rem;
+    }
+
+    &[type=checkbox] {
+      width: 1.3rem;
+      height: 1.3rem;
     }
 
     &:is(select) {

@@ -2,16 +2,17 @@
 #
 # Table name: notifiers
 #
-#  id         :bigint           not null, primary key
-#  name       :string           not null
-#  kind       :integer          default("slack_webhook")
-#  owner_type :string           not null
-#  owner_id   :bigint           not null
-#  user_id    :bigint           not null
-#  settings   :jsonb
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  deleted_at :datetime
+#  id              :bigint           not null, primary key
+#  name            :string           not null
+#  kind            :integer          default("slack_webhook")
+#  owner_type      :string           not null
+#  owner_id        :bigint           not null
+#  user_id         :bigint           not null
+#  settings        :jsonb
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  deleted_at      :datetime
+#  sanitized_links :boolean          default(FALSE), not null
 #
 class Notifier < ApplicationRecord
   include Notifier::Telegram
