@@ -25,13 +25,13 @@ module TelegramBot
 
       def start_bot
         parsed_object.telegram_bot_start!(message.chat.id)
-        send_message_to_bot("Great news! <u>#{parsed_object.class.name.titleize} '#{parsed_object.name}'</u> has been successfully configured.")
+        send_message_to_bot("Great news! #{parsed_object.class.name.titleize} <b>'#{parsed_object.name}'</b> has been successfully configured.")
       end
 
       def send_invalid_username_message
         send_message_to_bot(
           "Sorry <b>#{message.from.username}</b>,&#10;
-          but <u>#{parsed_object.class.name.titleize} '#{parsed_object.name}'</u> has another member.&#10;
+          but #{parsed_object.class.name.titleize} <u>'#{parsed_object.name}'</u> has another member.&#10;
           The member's username - <b>#{parsed_object.telegram_username}</b>."
         )
       end
