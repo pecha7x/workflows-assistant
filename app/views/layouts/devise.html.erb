@@ -5,20 +5,32 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+                
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 
     <%= favicon_link_tag asset_path('favicon.png') %>
   </head>
 
-  <body>
+  <body style="background-color: var(--color-light-glint);">
     <div id="flash" class="flash">
       <%= render "layouts/flash" %>
     </div>
 
     <main class="authentication">
-      <%= yield %>
-    </main>  
+      <div class="authentication__column-space-left">
+        <div class="authentication__form-container">
+          <%= yield %>
+        </div>
+      </div>
+      
+      <div class="authentication__column-space-right">
+        <div class="authentication__brand-name">
+          <div>My Workflow</div>
+          <div>Assistant</div>
+        </div>
+        <div class="authentication__brand-slogan">leave your workflow's routine to automation and AI</div>
+      </div>
+    </main>
   </body>
 </html>

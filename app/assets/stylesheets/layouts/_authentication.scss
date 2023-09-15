@@ -1,27 +1,75 @@
 .authentication {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--space-l);
-
-  width: 100%;
-  padding: var(--space-xl);
+  flex-direction: column-reverse;
   margin-top: 12vh;
-  max-width: 90vw;
-  margin-left: auto;
-  margin-right: auto;
+  gap: 2rem;
 
-  background-color: var(--color-white);
-  border-radius: 1.2rem;
-  box-shadow: var(--shadow-small);
+  &__column-space-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-white);
+  }
+
+  &__brand-name {
+    display: flex;
+    flex-direction: column;
+    width: 36rem;
+    font-family: 'Bubble Letters', sans-serif;
+    font-size: 3.6em;
+    line-height: 0.8em;
+    font-weight: bold;
+  }
+
+  &__brand-slogan {
+    font-style: italic;
+    font-size: 1em;
+  }
 
   @include media(tabletAndMore) {
-    max-width: 25rem;
+    flex-direction: row;
+    &__column-space-left {
+      flex-basis: 50%;
+    }
+    &__column-space-right {
+      flex-basis: 50%;
+      text-align: left;
+    }
+    &__brand-name {
+      text-align: center;
+      font-size: 5.5em;
+    }
+    &__brand-slogan {
+      font-size: 1.6em;
+    }
+  }
+
+  &__form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-l);
+    width: 100%;
+    padding: var(--space-xl);
+    max-width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--color-white-transparent);
+    border-radius: 1.2rem;
+    box-shadow: var(--shadow-small);
+
+    @include media(tabletAndMore) {
+      max-width: 25rem;
+    }
   }
 
   .form {
     width: 100%;
+    padding: var(--space-l) var(--space-m);
     box-shadow: none;
+    background-color: var(--color-white-transparent);
     &__description {
       color: var(--color-text-muted);
       text-align: center;
