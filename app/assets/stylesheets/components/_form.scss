@@ -70,6 +70,16 @@
     outline: none;
     transition: box-shadow 250ms;
 
+    &::-webkit-input-placeholder {
+      font-weight: 300;
+    }
+    &::-moz-placeholder {
+      font-weight: 300;
+    }
+    &::-ms-input-placeholder {
+      font-weight: 300;
+    }
+
     &:focus {
       box-shadow: 0 0 0 2px var(--color-glint);
     }
