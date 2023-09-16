@@ -1,26 +1,24 @@
-<main class="container">
-  <%= link_to sanitize("&larr; Back to job sources"), job_sources_path %>
+<%= link_to sanitize("&larr; Back to job sources"), job_sources_path %>
 
-  <div class="header">
-    <h1>
-      <%= @job_source.name %>
-    </h1>
+<div class="header">
+  <h2>
+    <%= @job_source.name %>
+  </h2>
 
-    <div class="btn-group">
-      <%= link_to "Edit",
-                  edit_job_source_path(@job_source),
-                  data: { turbo_frame: "_top" },
-                  class: "btn btn--light" %>
-      <%= link_to "New Job Lead",
-                  new_job_source_job_lead_path(@job_source),
-                  data: { turbo_frame: dom_id(JobLead.new) },
-                  class: "btn btn--primary" %>
-    </div>
+  <div class="btn-group">
+    <%= link_to "Edit",
+                edit_job_source_path(@job_source),
+                data: { turbo_frame: "_top" },
+                class: "btn btn--light" %>
+    <%= link_to "New Job Lead",
+                new_job_source_job_lead_path(@job_source),
+                data: { turbo_frame: dom_id(JobLead.new) },
+                class: "btn btn--primary" %>
   </div>
+</div>
 
-  <%= turbo_frame_tag JobLead.new %>
+<%= turbo_frame_tag JobLead.new %>
 
-  <%= turbo_frame_tag "job_source_leads" do %>
-    <%= render @job_leads, job_source: @job_source %>
-  <% end %>
-</main>
+<%= turbo_frame_tag "job_source_leads" do %>
+  <%= render @job_leads, job_source: @job_source %>
+<% end %>

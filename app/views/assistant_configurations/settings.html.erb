@@ -1,15 +1,13 @@
-<h1>Assistant configuration:</h1>
+<div class="header">
+  <h2>Assistant configuration</h2>
+</div>
 
-<div id="assistant_configuration">
+<div class="assistant-configuration">
 
   <%= link_to job_sources_path, class: "btn btn--light" do %>
     <i class="fas fa-solid fa-rss"></i>
     Job Sources
   <% end %>
 
-  <p>
-    <strong>User:</strong>
-    <%= @assistant_configuration.user_id %>
-    <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn--dark" %>
-  </p>
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn--dark" %>
 </div>

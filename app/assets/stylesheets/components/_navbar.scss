@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;  
   height: var(--navbar-height);
-  z-index: 10;
+  z-index: 11;
   top: 0;
   box-shadow: var(--shadow-large);
   padding: var(--space-xs) var(--space-l);
@@ -18,12 +18,19 @@
     font-family: 'Bubble Letters', sans-serif;
     font-weight: bold;
     font-size: 1.8rem;
-    color: var(--color-dark);
+    color: var(--color-white);
+
+    &:hover,
+    &:focus,
+    &:focus-within,
+    &:active {
+      color: var(--color-dark);
+      filter: saturate(1.4) brightness(115%);
+    }
 
     @include media(tabletAndLower) {
       font-size: 1.5rem;
-      line-height: 2.5rem;
-      color: var(--color-white);
+      line-height: 2.5rem;      
     }
   }
 

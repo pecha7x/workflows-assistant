@@ -1,11 +1,9 @@
-<main class="container">
-  <%= link_to sanitize("&larr; Back to Job Source"), job_source_path(@job_source) %>
+<%= link_to sanitize("&larr; Back to Job Source"), job_source_path(@job_source) %>
 
-  <div class="header">
-    <h1>New Job Lead</h1>
-  </div>
+<div class="header">
+  <h2>New Job Lead</h2>
+</div>
 
-  <%= turbo_frame_tag @job_lead do %>
-    <%= render "form", job_source: @job_source, job_lead: @job_lead %>
-  <% end %>
-</main>
+<%= turbo_frame_tag @job_lead do %>
+  <%= render "form", job_source: @job_source, job_lead: @job_lead %>
+<% end %>

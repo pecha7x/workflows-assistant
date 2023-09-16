@@ -1,11 +1,9 @@
-<main class="container">
-  <%= link_to sanitize("&larr; Back to Job Source"), edit_polymorphic_path(@owner) %>
+<%= link_to sanitize("&larr; Back to Job Source"), edit_polymorphic_path(@owner) %>
 
-  <div class="header">
-    <h1>Edit Notifier</h1>
-  </div>
+<div class="header">
+  <h2>Edit Notifier</h2>
+</div>
 
-  <%= turbo_frame_tag @notifier do %>
-    <%= render "form", owner: @owner, notifier: @notifier %>
-  <% end %>  
-</main>
+<%= turbo_frame_tag @notifier do %>
+  <%= render "form", owner: @owner, notifier: @notifier %>
+<% end %>  

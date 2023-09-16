@@ -24,6 +24,7 @@
   }
 
   &__options {
+    right: 0;
     opacity: 0;
     z-index: 2;
     visibility: hidden;
@@ -33,6 +34,7 @@
     box-shadow: var(--shadow-large);
     font-weight: bold;
     padding-top: var(--space-xs);
+    list-style: none;
     
     li {
       min-width: 9rem;

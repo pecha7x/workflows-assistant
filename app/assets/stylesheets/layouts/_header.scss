@@ -5,4 +5,9 @@
   justify-content: space-between;
   margin-top: var(--space-m);
   margin-bottom: var(--space-l);
+  align-items: center;
+
+  @include media(tabletAndLower) {
+    justify-content: center;
+  }
 }

@@ -1,23 +1,21 @@
 <%= turbo_stream_from current_user, "job_sources" %>
 
-<main class="container">
-  <div class="header">
-    <h1>Job Sources</h1>
+<div class="header">
+  <h2>Job Sources</h2>
 
-    <%= turbo_frame_tag "new_job_source_button" do %>
-      <% if @job_sources.any? %>
-        <%= link_to "New Job Source",
-                    new_job_source_path,
-                    class: "btn btn--primary",
-                    data: { turbo_frame: dom_id(JobSource.new) } %>
-      <% end %>
+  <%= turbo_frame_tag "new_job_source_button" do %>
+    <% if @job_sources.any? %>
+      <%= link_to "New Job Source",
+                  new_job_source_path,
+                  class: "btn btn--primary",
+                  data: { turbo_frame: dom_id(JobSource.new) } %>
     <% end %>
-  </div>
+  <% end %>
+</div>
 
-  <%= turbo_frame_tag JobSource.new %>
+<%= turbo_frame_tag JobSource.new %>
 
-  <%= turbo_frame_tag "job_sources" do %>
-    <%= render "job_sources/empty_state" %>
-    <%= render @job_sources %>
-  <% end %>  
-</main>
+<%= turbo_frame_tag "job_sources" do %>
+  <%= render "job_sources/empty_state" %>
+  <%= render @job_sources %>
+<% end %>  

@@ -8,21 +8,24 @@
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-small);
   margin-bottom: var(--space-m);
-  padding: var(--space-xs);
-
-  @include media(tabletAndMore) {
-    padding: var(--space-xs) var(--space-m);
+  padding: var(--space-xs) var(--space-m);
+ 
+  @include media(tabletAndLower) {
+    padding: var(--space-xs);
   }
 
   &__row {
     display: flex;
-    align-items: center;
     width: 100%;
     gap: var(--space-xxl);
     justify-content: space-between;
     padding-top: var(--space-s);
     padding-bottom: var(--space-l);
     border-bottom: var(--border-light);
+
+    @include media(tabletAndLower) {
+      flex-direction: column;
+    }
   }
 
   &__group {
@@ -98,7 +101,9 @@
     }
 
     &:is(select) {
-      width: auto;
+      @include media(tabletAndMore) {
+        width: auto;
+      }
     }
   }
 
