@@ -16,5 +16,8 @@ application.register("copy-to-clipboard", CopyToClipboardController)
 import ElementController from "./element_controller"
 application.register("element", ElementController)
 
+import NavbarController from "./navbar_controller"
+application.register("navbar", NavbarController)
+
 import SearchParamsController from "./search_params_controller"
 application.register("search-params", SearchParamsController)

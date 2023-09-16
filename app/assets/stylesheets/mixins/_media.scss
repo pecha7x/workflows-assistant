@@ -2,4 +2,7 @@
   @if $query == tabletAndMore {
     @media (min-width: 50rem) { @content; }
   }
+  @if $query == tabletAndLower {
+    @media (max-width: 49rem) { @content; }
+  }
 }
