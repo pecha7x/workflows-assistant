@@ -15,11 +15,11 @@ class NotifiersTest < ApplicationSystemTestCase
   end
 
   test 'Creating a new job lead' do
-    assert_selector 'h1', text: 'First job source'
+    assert_selector 'h2', text: 'First job source'
 
     click_on 'New Job Lead'
 
-    assert_selector 'h1', text: 'First job source'
+    assert_selector 'h2', text: 'First job source'
 
     fill_in 'Title', with: 'New Job Lead'
     fill_in 'Description', with: 'Description'
@@ -33,7 +33,7 @@ class NotifiersTest < ApplicationSystemTestCase
   end
 
   test 'Updating Job Lead' do
-    assert_selector 'h1', text: 'First job source'
+    assert_selector 'h2', text: 'First job source'
     assert_text 'Today Active'
 
     within id: dom_id(@job_lead) do

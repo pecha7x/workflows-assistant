@@ -78,13 +78,6 @@
         <label>Go Ahead</label>
       <% end %>
     <% end %>
-    
-    <%= link_to job_source_path(@job_lead.job_source),
-                class: "btn btn--light",
-                data: { turbo_frame: "_top" } do %>
-      <i class="fa-solid fa-rss fa-lg"></i>
-      <label>Open Job Source</label>
-    <% end %>
 
     <%= link_to [:edit, @job_lead.job_source, @job_lead],
                 class: "btn btn--light" do %>

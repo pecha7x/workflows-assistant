@@ -2,7 +2,7 @@ module JobSourceProcessor
   class Base
     delegate :time_ago_in_words, :link_to, to: 'ActionController::Base.helpers'
     delegate :job_lead_url, to: 'Rails.application.routes.url_helpers'
-    delegate :notifiers, to: :job_source 
+    delegate :notifiers, to: :job_source
 
     attr_reader :job_source
 
