@@ -21,7 +21,6 @@ module JobSourceProcessor
           job_lead.assign_attributes(attributes(their_lead))
           if job_lead.valid?
             job_lead.save
-            notice_about_lead(job_lead)
             log('Job Lead was imported')
           else
             log "#{job_source.name}. Failed to import an job lead: " \

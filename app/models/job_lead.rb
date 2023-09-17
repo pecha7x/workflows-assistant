@@ -19,6 +19,7 @@
 #
 class JobLead < ApplicationRecord
   include TextFieldsSanitization
+  include JobLead::NotifiersProcessing
 
   enum :status, %i[entry active detached], suffix: true, default: :entry
   enum :potential, %i[low medium high], suffix: true, default: :medium
@@ -34,6 +35,7 @@ class JobLead < ApplicationRecord
   validates_uniqueness_of_without_deleted :external_id, scope: :job_source_id
 
   delegate :user, to: :job_source
+  delegate :notifiers, to: :job_source
 
   scope :ordered, -> { order(published_at: :desc) }
 

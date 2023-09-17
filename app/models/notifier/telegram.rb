@@ -46,6 +46,8 @@ class Notifier
       end
     end
 
+    private
+
     def telegram_fields_presence
       errors.add(:telegram_username, 'should be present!') if send(:telegram_username).blank?
     end
