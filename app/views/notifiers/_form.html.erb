@@ -1,5 +1,5 @@
-<%= simple_form_for notifier, html: { class: "form" } do |f| %>
-  <%= form_error_notification(notifier) %>
+<%= simple_form_for notifier do |f| %>
+  <%= form_server_error_notification(notifier) %>
 
   <%= f.input :owner_type, as: :hidden, input_html: { value: owner.class.name } %>
   <%= f.input :owner_id, as: :hidden, input_html: { value: owner.id } %>
@@ -8,7 +8,7 @@
     <div class="form__row">
       <div data-controller="search-params element">
         <%= f.input :kind,
-                    input_html: { 
+                    input_html: {
                       "disabled" => notifier.persisted?,
                       "data-action" => "change->search-params#encode change->element#click"
                     },

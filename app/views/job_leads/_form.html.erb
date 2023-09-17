@@ -1,5 +1,5 @@
-<%= simple_form_for [job_source, job_lead], html: { class: "form" } do |f| %>
-  <%= form_error_notification(job_lead) %>
+<%= simple_form_for [job_source, job_lead] do |f| %>
+  <%= form_server_error_notification(job_lead) %>
   <%= f.input :status_filter, as: :hidden, input_html: { value: @status_filter } %>
 
   <%= f.input :title, wrapper_html: { class: 'form__group-vertical' } %>

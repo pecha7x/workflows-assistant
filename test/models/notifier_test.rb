@@ -43,6 +43,18 @@ class NotifierTest < ActiveSupport::TestCase
   end
 
   class TelegramKind < NotifierTest
+    def build_telegram_notifier(params = {})
+      Notifier.new({
+        name: 'Telegram Notifier',
+        owner: job_sources(:first),
+        user: users(:user1),
+        kind: 'telegram',
+        settings: {
+          telegram_username: 'telegramUser'
+        }
+      }.merge(params))
+    end
+
     class Validations < TelegramKind
       class TelegramFieldsPresence < Validations
         test 'telegram notifier should be valid' do
@@ -81,18 +93,26 @@ class NotifierTest < ActiveSupport::TestCase
       end
     end
 
+    class TelegramUsernameFormattedCallback < TelegramKind
+      test 'should call the callback before create a telegram kind notifier' do
+        notifier = build_telegram_notifier
+        assert_called(notifier, :telegram_username_formatted, times: 1) do
+          notifier.save
+        end
+      end
+
+      test 'should remove "@" symbol from telegram_username when its present' do
+        notifier = build_telegram_notifier(settings: { telegram_username: '@user123' })
+        notifier.save
+
+        assert_equal('user123', notifier.telegram_username)
+      end
+    end
+
     class GenerateStartToken < TelegramKind
       class AfterCreateCallback < GenerateStartToken
         setup do
-          @notifier = Notifier.new(
-            name: 'Notifier',
-            owner: job_sources(:first),
-            user: users(:user1),
-            kind: 'telegram',
-            settings: {
-              telegram_username: 'telegramUser'
-            }
-          )
+          @notifier = build_telegram_notifier
         end
 
         test 'should call the callback after create a telegram kind notifier' do

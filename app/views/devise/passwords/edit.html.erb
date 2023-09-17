@@ -1,7 +1,7 @@
 <h2>Change your password</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: "form", "data-turbo" => "false", method: :put }) do |f| %>
-  <%= form_error_notification(resource) %>
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { "data-turbo" => "false", method: :put }) do |f| %>
+  <%= form_server_error_notification(resource) %>
 
   <%= f.input :reset_password_token, as: :hidden %>
   <%= f.full_error :reset_password_token %>

@@ -3,7 +3,7 @@ module ApplicationHelper
     turbo_stream.prepend 'flash', partial: 'layouts/flash'
   end
 
-  def form_error_notification(object)
+  def form_server_error_notification(object)
     return unless object.errors.any?
 
     tag.div class: 'error-message' do

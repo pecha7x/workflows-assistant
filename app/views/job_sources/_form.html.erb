@@ -1,5 +1,5 @@
-<%= simple_form_for job_source, html: { class: "form" } do |f| %>
-  <%= form_error_notification(job_source) %>
+<%= simple_form_for job_source do |f| %>
+  <%= form_server_error_notification(job_source) %>
 
   <div class="form__row">
     <div data-controller="search-params element">

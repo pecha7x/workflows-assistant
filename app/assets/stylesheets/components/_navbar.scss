@@ -24,8 +24,9 @@
     &:focus,
     &:focus-within,
     &:active {
-      color: var(--color-dark);
-      filter: saturate(1.4) brightness(115%);
+      color: var(--color-white);
+      // color: var(--color-dark);
+      // filter: saturate(1.4) brightness(115%);
     }
 
     @include media(tabletAndLower) {

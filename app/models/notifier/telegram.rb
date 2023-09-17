@@ -11,11 +11,8 @@ class Notifier
         persisted? && telegram_kind? && !skip_telegram_fields_validation
       }
 
+      before_create :telegram_username_formatted, if: -> { telegram_kind? }
       after_create :generate_telegram_start_token
-
-      def telegram_username=(value)
-        super(value.sub(/^@/, ''))
-      end
 
       def telegram_bot_link
         telegram_link = "https://t.me/#{Rails.application.credentials.telegram.bot.name}"
@@ -50,11 +47,15 @@ class Notifier
     end
 
     def telegram_fields_presence
-      errors.add(:telegram_username, 'Value of Username should be present!') if send(:telegram_username).blank?
+      errors.add(:telegram_username, 'should be present!') if send(:telegram_username).blank?
     end
 
     def telegram_fields_not_changed
-      errors.add(:settings_field, 'Change of Settings not allowed!') if will_save_change_to_settings?
+      errors.add(:settings_field, 'changes not allowed!') if will_save_change_to_settings?
+    end
+
+    def telegram_username_formatted
+      self.telegram_username = telegram_username.sub(/^@/, '')
     end
   end
 end
