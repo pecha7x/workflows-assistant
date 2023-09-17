@@ -22,7 +22,7 @@ module NotifierProcessor
     private
 
     def channel_url
-      settings['url']
+      settings['webhook_url']
     end
   end
 end

@@ -2,7 +2,7 @@ module NotifierProcessor
   class Email < Base
     def run
       JobLeadNotifierMailer.with(
-        to_address: settings['address'],
+        to_address: settings['email_address'],
         from_source_name: from,
         message_text: message,
         subject:,
