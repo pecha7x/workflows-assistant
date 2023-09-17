@@ -1,7 +1,7 @@
 <%= form.simple_fields_for :settings do |s| %>
   <% job_source.settings_fields.each do |field_name| %>
     <%= s.input field_name,
-        placeholder: settings_field_placeholder(field_name),
+        placeholder: (I18n.t!(field_name.to_s, scope: 'simple_form.labels.job_source') rescue settings_field_placeholder(field_name)),
         label: false,
         input_html: { value: job_source.send(field_name) } %>
   <% end %>

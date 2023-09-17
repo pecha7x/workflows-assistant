@@ -13,7 +13,7 @@ class JobSourceTest < ActiveSupport::TestCase
 
         test "after_save doesn't call the processing when kind is 'simple'" do
           job_source = JobSource.create(kind: 'simple', name: 'Test', user: users(:user1))
-          job_source.web_url = 'https://example.com'
+          job_source.website = 'https://example.com'
           assert_called(job_source, :background_processing, times: 0) do
             job_source.save
           end

@@ -24,8 +24,8 @@ class Notifier < ApplicationRecord
   ].freeze
 
   SETTINGS_FIELDS = {
-    slack_webhook: %i[url],
-    email: %i[address],
+    slack_webhook: %i[webhook_url],
+    email: %i[email_address],
     telegram: %i[telegram_username telegram_chat_id telegram_start_token]
   }.freeze
 

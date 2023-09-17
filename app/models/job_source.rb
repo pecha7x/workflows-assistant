@@ -23,15 +23,15 @@ class JobSource < ApplicationRecord
     linkedin
   ].freeze
 
-  SPECIFIC_SETTINGS_FIELDS = {
-    simple: %i[web_url messenger_id],
-    website: %i[web_url username password],
+  SETTINGS_FIELDS = {
+    simple: %i[website contact],
+    website: %i[page_url username password],
     upwork: %i[rss_url],
     linkedin: %i[api_key api_secret]
   }.freeze
 
   def self.all_settings_fields
-    SPECIFIC_SETTINGS_FIELDS.values.flatten.uniq
+    SETTINGS_FIELDS.values.flatten.uniq
   end
 
   enum :kind, KINDS, suffix: true, default: :simple
@@ -54,7 +54,7 @@ class JobSource < ApplicationRecord
   scope :ordered, -> { order(id: :desc) }
 
   def settings_fields
-    SPECIFIC_SETTINGS_FIELDS[kind.to_sym]
+    SETTINGS_FIELDS[kind.to_sym]
   end
 
   def background_processing(run_in_seconds = 5)

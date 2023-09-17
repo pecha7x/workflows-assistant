@@ -15,6 +15,7 @@ en:
         name: Name
         kind: Kind
         refresh_rate: Refresh Rate (seconds)
+        contact: Contact (email address, phone, etc)
       job_lead:
         title: Title
         description: Description
