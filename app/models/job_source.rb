@@ -40,7 +40,11 @@ class JobSource < ApplicationRecord
   validates :name, :kind, presence: true
   validates :refresh_rate, presence: true, numericality: { greater_than: 20 }
   validate :kind_not_changed
+  validates_uniqueness_of_without_deleted :name
 
+  after_initialize do
+    self.name ||= "My new #{kind&.capitalize} Job Source" if new_record?
+  end
   after_create :background_processing, if: -> { !simple_kind? }
   after_update :restart_background_processing, if: lambda {
     !simple_kind? && (saved_change_to_refresh_rate? || saved_change_to_settings?)

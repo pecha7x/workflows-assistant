@@ -58,7 +58,8 @@ class JobSourceTest < ActiveSupport::TestCase
 
     class Presence < Validations
       test 'name should be present' do
-        job_source = JobSource.new(name: nil, kind: 'website', user: users(:user1))
+        job_source = job_sources(:first)
+        job_source.name = nil
 
         assert_predicate job_source, :invalid?
         assert_has_errors_on job_source, :name
@@ -76,6 +77,16 @@ class JobSourceTest < ActiveSupport::TestCase
 
         assert_predicate job_source, :invalid?
         assert_has_errors_on job_source, :user
+      end
+    end
+
+    class Uniqueness < Validations
+      test 'name should be unique' do
+        job_source_first = job_sources(:first)
+        job_source_second = job_source_first.dup
+
+        assert_predicate job_source_second, :invalid?
+        assert_has_errors_on job_source_second, :name
       end
     end
 

@@ -10,7 +10,8 @@ class NotifierTest < ActiveSupport::TestCase
 
     class Presence < Validations
       test 'name should be present' do
-        notifier = Notifier.new(name: nil, owner: job_leads(:today_active), user: users(:user1))
+        notifier = notifiers(:first)
+        notifier.name = nil
 
         assert_predicate notifier, :invalid?
         assert_has_errors_on notifier, :name
@@ -28,6 +29,24 @@ class NotifierTest < ActiveSupport::TestCase
 
         assert_predicate notifier, :invalid?
         assert_has_errors_on notifier, :user
+      end
+    end
+
+    class Uniqueness < Validations
+      test 'notifier should be valid with already been taken name but at another job_source_id scope' do
+        notifier_first = notifiers(:first)
+        notifier_second = notifier_first.dup
+        notifier_second.owner = job_sources(:second)
+
+        assert_predicate notifier_second, :valid?
+      end
+
+      test 'name should be unique in job_source_id scope' do
+        notifier_first = notifiers(:first)
+        notifier_second = notifier_first.dup
+
+        assert_predicate notifier_second, :invalid?
+        assert_has_errors_on notifier_second, :name
       end
     end
 

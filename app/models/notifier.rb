@@ -39,8 +39,13 @@ class Notifier < ApplicationRecord
   belongs_to :owner, polymorphic: true
   belongs_to :user
 
+  after_initialize do
+    self.name ||= "My new #{kind&.capitalize} Notifier" if new_record?
+  end
+
   validates :kind, :name, presence: true
   validate :kind_not_changed, if: -> { persisted? && will_save_change_to_kind? }
+  validates_uniqueness_of_without_deleted :name, scope: :owner_id
 
   def settings_fields
     SETTINGS_FIELDS[kind.to_sym].uniq
