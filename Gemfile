@@ -31,6 +31,8 @@ gem 'telegram-bot-ruby', '~> 1.0'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+gem 'google-apis-gmail_v1', '~> 0.2.0'
+
 group :production do
   gem 'lograge', '~> 0.3.1'
   gem 'syslogger', '~> 1.6.0'

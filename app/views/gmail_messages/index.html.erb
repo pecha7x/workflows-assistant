@@ -1,0 +1,9 @@
+<div class="header">
+  <h2>Gmail Messages</h2>
+</div>
+
+<ul>
+  <% @messages_list.messages.each do |message| %>
+    <li><%= message.id %></li>
+  <% end %>
+</ul>

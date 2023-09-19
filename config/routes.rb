@@ -31,8 +31,16 @@ Rails.application.routes.draw do
     end
   end
   resources :notes, only: %i[new create destroy]
+  resources :gmail_messages, only: %i[index]
+
   namespace :telegram, defaults: { format: :json } do
     post :message
+  end
+  namespace :google_oauth2 do
+    namespace :gmail do
+      get :auth
+      get :callback
+    end
   end
 end
 
