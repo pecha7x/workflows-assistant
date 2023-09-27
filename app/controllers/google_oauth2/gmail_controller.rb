@@ -1,29 +1,24 @@
-class GoogleOauth2::GmailController < ApplicationController
-  def auth
-    client = Signet::OAuth2::Client.new({
-      client_id: Rails.application.credentials.google_api.client_id,
-      client_secret: Rails.application.credentials.google_api.client_secret,
-      authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
-      scope: Google::Apis::GmailV1::AUTH_GMAIL_READONLY,
-      redirect_uri: url_for(action: :callback)
-    })
+module GoogleOauth2
+  class GmailController < ApplicationController
+    before_action :initialize_client
 
-    redirect_to client.authorization_uri.to_s, allow_other_host: true
-  end
+    def auth
+      authorization_uri = @client.authorization_uri(url_for(action: :callback), Google::Apis::GmailV1::AUTH_GMAIL_READONLY)
 
-  def callback
-    client = Signet::OAuth2::Client.new({
-      client_id: Rails.application.credentials.google_api.client_id,
-      client_secret: Rails.application.credentials.google_api.client_secret,
-      token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
-      redirect_uri: url_for(action: :callback),
-      code: params[:code]
-    })
-  
-    response = client.fetch_access_token!
-  
-    session[:access_token] = response['access_token']
-  
-    redirect_to gmail_messages_path
+      redirect_to authorization_uri, allow_other_host: true
+    end
+
+    def callback
+      access_token = @client.fetch_access_token!(url_for(action: :callback), params[:code])
+      session[:access_token] = access_token
+
+      redirect_to gmail_messages_path
+    end
+
+    private
+
+    def initialize_client
+      @client = GoogleApi::Client.new
+    end
   end
 end

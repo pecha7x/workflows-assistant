@@ -5,11 +5,10 @@ class ApplicationController < ActionController::Base
   class UnauthorizedUsageError < StandardError; end
   rescue_from UnauthorizedUsageError, with: :user_not_authorized
   def user_not_authorized(*)
+    flash.now[:notice] = t('application.user_not_authorized_error')
     if request.xhr? || request.format == :json
-      flash.now[:notice] = t('application.user_not_authorized_error')
       render json: { errors: { message: 'Access denied.' } }, status: :forbidden
     else
-      flash.now[:notice] = t('application.user_not_authorized_error')
       redirect_to authenticated_root_url
     end
   end
