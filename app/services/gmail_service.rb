@@ -7,7 +7,7 @@ module GmailService
     client.access_token = access_token
 
     service = Google::Apis::GmailV1::GmailService.new
-    service.authorization = client
+    service.authorization = client.signet_client
 
     service.list_user_messages('me')
   rescue Google::Apis::AuthorizationError => e
