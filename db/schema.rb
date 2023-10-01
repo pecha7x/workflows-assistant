@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_30_184057) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_01_184243) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -21,8 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_30_184057) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_assistant_configurations_on_deleted_at"
-    t.index ["user_id"], name: "index_assistant_configurations_on_user_id"
+    t.index ["user_id", "deleted_at"], name: "index_assistant_configurations_on_user_id_and_deleted_at"
   end
 
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
@@ -54,9 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_30_184057) do
     t.string "owner_country", default: "'US'::character varying", null: false
     t.string "external_id", null: false
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_job_leads_on_deleted_at"
-    t.index ["external_id", "job_source_id"], name: "index_job_leads_on_external_id_and_job_source_id", unique: true
-    t.index ["job_source_id"], name: "index_job_leads_on_job_source_id"
+    t.index ["job_source_id", "external_id", "deleted_at"], name: "index_job_leads_on_job_source_id_and_external_id_and_deleted_at"
   end
 
   create_table "job_sources", force: :cascade do |t|
@@ -69,8 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_30_184057) do
     t.jsonb "settings"
     t.string "background_job_id"
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_job_sources_on_deleted_at"
-    t.index ["user_id"], name: "index_job_sources_on_user_id"
+    t.index ["user_id", "deleted_at"], name: "index_job_sources_on_user_id_and_deleted_at"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -81,9 +77,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_30_184057) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_notes_on_deleted_at"
-    t.index ["owner_type", "owner_id"], name: "index_notes_on_owner"
-    t.index ["user_id"], name: "index_notes_on_user_id"
+    t.index ["owner_type", "owner_id", "deleted_at"], name: "index_notes_on_owner_type_and_owner_id_and_deleted_at"
+    t.index ["user_id", "deleted_at"], name: "index_notes_on_user_id_and_deleted_at"
   end
 
   create_table "notifiers", force: :cascade do |t|
@@ -97,9 +92,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_30_184057) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.boolean "sanitized_links", default: false, null: false
-    t.index ["deleted_at"], name: "index_notifiers_on_deleted_at"
-    t.index ["owner_type", "owner_id"], name: "index_notifiers_on_owner"
-    t.index ["user_id"], name: "index_notifiers_on_user_id"
+    t.index ["owner_type", "owner_id", "deleted_at"], name: "index_notifiers_on_owner_type_and_owner_id_and_deleted_at"
+    t.index ["user_id", "deleted_at"], name: "index_notifiers_on_user_id_and_deleted_at"
   end
 
   create_table "users", force: :cascade do |t|
