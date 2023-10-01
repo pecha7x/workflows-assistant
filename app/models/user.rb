@@ -21,6 +21,7 @@ class User < ApplicationRecord
          :registerable, :recoverable, :rememberable
 
   has_one :assistant_configuration, dependent: :destroy
+  has_many :gmail_messages, dependent: :destroy
   has_many :job_sources, dependent: :destroy
   has_many :job_leads, through: :job_sources
   has_many :notifiers, dependent: :destroy

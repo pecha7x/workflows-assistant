@@ -2,8 +2,20 @@
   <h2>Gmail Messages</h2>
 </div>
 
-<ul>
-  <% @messages_list.messages.each do |message| %>
-    <li><%= message.id %></li>
-  <% end %>
-</ul>
+<table class="gmail-messages">
+  <thead>
+    <tr>
+      <th>From</th>
+      <th>Created At</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @messages.each do |message| %>
+      <%= render message %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @messages %>

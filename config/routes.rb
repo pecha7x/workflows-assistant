@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     end
   end
   resources :notes, only: %i[new create destroy]
-  resources :gmail_messages, only: %i[index]
+  resources :gmail_messages, only: %i[index show]
 
   namespace :telegram, defaults: { format: :json } do
     post :message

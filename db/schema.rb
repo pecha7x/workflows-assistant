@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_14_102229) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_30_184057) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -26,6 +26,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_14_102229) do
   end
 
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
+  end
+
+  create_table "gmail_messages", force: :cascade do |t|
+    t.string "from", null: false
+    t.string "subject"
+    t.text "body"
+    t.string "external_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "external_id", "deleted_at"], name: "index_gmail_messages_on_user_id_and_external_id_and_deleted_at", unique: true
   end
 
   create_table "job_leads", force: :cascade do |t|
@@ -121,6 +133,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_14_102229) do
   end
 
   add_foreign_key "assistant_configurations", "users"
+  add_foreign_key "gmail_messages", "users"
   add_foreign_key "job_leads", "job_sources"
   add_foreign_key "job_sources", "users"
   add_foreign_key "notes", "users"

@@ -1,0 +1,7 @@
+<div>
+  <%= @message.from %><br />
+  <%= @message.subject %><br />
+  <%= @message.sanitized_body %><br />
+  <%= @message.created_at %><br />
+</div>
+<%= link_to "Back", :back %>

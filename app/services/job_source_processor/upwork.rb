@@ -15,6 +15,7 @@ module JobSourceProcessor
       URI.parse(rss_url).open do |rss|
         feed = RSS::Parser.parse(rss)
         feed.items.each do |their_lead|
+          # TODO: move find_or_initialize_by logic to base class
           job_lead = job_source.job_leads.find_or_initialize_by(external_id: their_id(their_lead.link))
           next if job_lead.persisted? # skip duplicates
 

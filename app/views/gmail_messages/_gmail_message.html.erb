@@ -1,0 +1,7 @@
+<%= turbo_frame_tag gmail_message do %>
+  <tr class="gmail-message-item">
+    <td class="gmail-message-item__from"><%= gmail_message.from %></td>
+    <td class="gmail-message-item__created-at"><%= l(gmail_message.created_at, format: :specific_format) %></td>
+    <td class="gmail-message-item__action-show"><%= link_to 'Show', gmail_message %></td>
+  </tr>
+<% end %>
