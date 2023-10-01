@@ -1,5 +1,5 @@
 class AssistantConfigurationsController < ApplicationController
-  def settings
-    @assistant_configuration = current_user.assistant_configuration
+  def index
+    @assistant_configurations = current_user.assistant_configurations
   end
 end

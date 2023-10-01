@@ -20,7 +20,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :validatable, :confirmable,
          :registerable, :recoverable, :rememberable
 
-  has_one :assistant_configuration, dependent: :destroy
+  has_many :assistant_configurations, dependent: :destroy
   has_many :gmail_messages, dependent: :destroy
   has_many :job_sources, dependent: :destroy
   has_many :job_leads, through: :job_sources
@@ -30,20 +30,11 @@ class User < ApplicationRecord
   validates_password_strength :password
   validates_uniqueness_of_without_deleted :email
 
-  after_create :ensure_configuration_settings
-
   def name
     email.split('@').first.capitalize
   end
 
   def remember_me
     super.nil? ? '1' : super
-  end
-
-  private
-
-  def ensure_configuration_settings
-    # TODO: add to more params there after expand configuration
-    create_assistant_configuration
   end
 end
