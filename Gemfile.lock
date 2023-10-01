@@ -267,6 +267,8 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.3)
+    pghero (3.3.4)
+      activerecord (>= 6)
     postmark (1.24.0)
       json
     postmark-rails (0.22.1)
@@ -464,6 +466,7 @@ DEPENDENCIES
   newrelic_rpm
   paper_trail
   pg (~> 1.1)
+  pghero
   postmark-rails
   puma (~> 5.0)
   rails (~> 7.0.7)
