@@ -1,0 +1,14 @@
+<%= turbo_frame_tag configuration do %>
+  <%= link_to configuration.name,
+              assistant_configuration_path(configuration),
+              data: { turbo_frame: "_top" } %>
+  <div class="assistant-configuration__actions">
+    <%= confirmation_link_to "Delete",
+                             assistant_configuration_path(configuration),
+                             class: "btn btn--light",
+                             data: { turbo_method: :delete } %>
+    <%= link_to "Edit",
+                edit_assistant_configuration_path(configuration),
+                class: "btn btn--light" %>
+  </div>
+<% end %>

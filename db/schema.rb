@@ -10,17 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_01_184243) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_01_193143) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "assistant_configurations", force: :cascade do |t|
+    t.string "type", null: false
+    t.jsonb "settings"
     t.bigint "user_id", null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["user_id", "deleted_at"], name: "index_assistant_configurations_on_user_id_and_deleted_at"
   end
 

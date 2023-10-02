@@ -10,10 +10,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class AssistantConfiguration < ApplicationRecord
-  belongs_to :user
+class GmailSettings < AssistantConfiguration
+  include Notifier::Telegram
 
-  def name
-    self.model_name.human
-  end
+  SETTINGS_FIELDS = %i[refresh_rate].freeze
+
+  store_accessor :settings, SETTINGS_FIELDS
 end

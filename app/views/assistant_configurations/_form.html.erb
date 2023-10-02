@@ -1,0 +1,29 @@
+<%= simple_form_for assistant_configuration, url: assistant_configurations_path do |f| %>
+  <%= form_server_error_notification(assistant_configuration) %>
+
+  <div class="form__row">
+    <%= render partial: 'form_settings', locals: { form: f, assistant_configuration: assistant_configuration } %>
+  </div>
+
+  <% if assistant_configuration.persisted? && respond_to?('notifiers') %>
+    <div class="job_source__form-notifiers">
+      <div class="job_source__form-notifiers-title">
+        <b>Notifiers</b>
+        <%= link_to new_notifier_path(notifier: { owner_type: assistant_configuration.class.name, owner_id: assistant_configuration.id }),
+                    class: "btn btn--secondary",
+                    data: { turbo_frame: "_top" } do %>
+          <i class="fas fa-solid fa-plus fa-lg"></i>
+        <% end %>            
+      </div>
+
+      <%= turbo_frame_tag "notifiers" do %>
+        <%= render @notifiers %>
+      <% end %>
+    </div>
+  <% end %>  
+
+  <div class="form__actions">
+    <%= link_to "Cancel", assistant_configurations_path, class: "btn btn--light" %>
+    <%= f.submit "Save", class: "btn btn--secondary" %>
+  </div>
+<% end %>

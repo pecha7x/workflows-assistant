@@ -22,13 +22,14 @@ module GoogleApi
       signet_client.authorization_uri.to_s
     end
 
-    def fetch_access_token!(redirect_uri, code)
+    def fetch_access_and_refresh_tokens!(redirect_uri, code)
       signet_client.update!(
         token_credential_uri: TOKEN_CREDENTIAL_URI,
         redirect_uri:,
         code:
       )
       response = signet_client.fetch_access_token!
+      p response
       response['access_token']
     rescue Signet::AuthorizationError => e
       log("Fetch access token Error - #{e.message}", :error)

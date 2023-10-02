@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :assistant_configurations, only: %i[index show]
+  resources :assistant_configurations
   resources :job_sources do
     resources :job_leads, except: %i[index show]
   end

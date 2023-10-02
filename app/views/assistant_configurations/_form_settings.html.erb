@@ -1,0 +1,8 @@
+<%= form.simple_fields_for :settings do |s| %>
+  <% assistant_configuration.class::SETTINGS_FIELDS.each do |field_name| %>
+    <%= s.input field_name,
+        placeholder: (I18n.t!(field_name.to_s, scope: 'simple_form.labels.job_source') rescue settings_field_placeholder(field_name)),
+        label: false,
+        input_html: { value: assistant_configuration.send(field_name) } %>
+  <% end %>
+<% end %>

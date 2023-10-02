@@ -2,11 +2,13 @@
   <h2>Assistant configuration</h2>
 </div>
 
-<div class="assistant-configuration">
-  <%= link_to job_sources_path, class: "btn btn--light" do %>
-    <i class="fas fa-solid fa-rss"></i>
-    Job Sources
-  <% end %>
-
-  <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn--dark" %>
+<div class="assistant-settings">
+  <%= render partial: "configurations",  locals: { configurations: @assistant_configurations } %>
+  <div class="assistant-settings__bottom">
+    <%= link_to job_sources_path, class: "btn btn--light" do %>
+      <i class="fas fa-solid fa-rss"></i>
+      Job Sources
+    <% end %>
+    <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn--dark" %>
+  </div>
 </div>

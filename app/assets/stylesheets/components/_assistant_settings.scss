@@ -1,0 +1,17 @@
+.assistant-settings {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-small);
+  padding: var(--space-xl) var(--space-l);
+  &__configurations {
+    display: flex;
+    justify-content: center;
+    &-item {
+      margin-bottom: 1rem;
+    }
+  }
+  &__bottom {
+    display: flex;
+    justify-content: space-around;
+  }
+}
