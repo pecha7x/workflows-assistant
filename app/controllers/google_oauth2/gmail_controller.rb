@@ -9,10 +9,10 @@ module GoogleOauth2
     end
 
     def callback
-      access_token = @client.fetch_access_token!(url_for(action: :callback), params[:code])
+      access_token = @client.fetch_access_and_refresh_tokens!(url_for(action: :callback), params[:code])
       session[:access_token] = access_token
 
-      redirect_to gmail_messages_path
+      redirect_to assistant_configurations_path
     end
 
     private

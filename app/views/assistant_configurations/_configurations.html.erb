@@ -1,17 +1,13 @@
 <div class="assistant-settings__configurations">
-  <%= turbo_frame_tag "assistant_configurations" do %>
-    <% configurations.each do |configuration| %>
-      <div class="assistant-settings__configurations-item">
-        <% if configuration.persisted? %>
-          <%= render partial: "configuration", locals: { configuration: configuration } %>
-        <% else %>
-          <%= turbo_frame_tag configuration %>
-          <%= link_to configuration.name,
-                      new_assistant_configuration_path(assistant_configuration: { type: configuration.type }),
-                      class: "btn btn--light",
-                      data: { turbo_frame: dom_id(configuration) } %>
-        <% end %>
-      </div>
-    <% end %>
+  <% configurations.each do |configuration| %>
+    <div class="assistant-settings__configurations-item">
+      <% if configuration.persisted? %>
+        <%= render partial: "configuration", locals: { configuration: configuration } %>
+      <% else %>
+        <%= link_to "Configure #{configuration.name}",
+                    new_assistant_configuration_path(assistant_configuration: { type: configuration.type }),
+                    class: "btn btn--light" %>
+      <% end %>
+    </div>
   <% end %>
 </div>

@@ -29,7 +29,7 @@ module GoogleApi
         code:
       )
       response = signet_client.fetch_access_token!
-      p response
+      log("fetch_access_and_refresh_tokens - #{response.inspect}", :error)
       response['access_token']
     rescue Signet::AuthorizationError => e
       log("Fetch access token Error - #{e.message}", :error)

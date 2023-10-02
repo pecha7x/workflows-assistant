@@ -10,7 +10,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class GmailSettings < AssistantConfiguration
+class GmailIntegration < AssistantConfiguration
   include Notifier::Telegram
 
   SETTINGS_FIELDS = %i[refresh_rate].freeze

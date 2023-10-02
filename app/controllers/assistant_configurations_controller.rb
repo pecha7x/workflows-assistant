@@ -4,7 +4,9 @@ class AssistantConfigurationsController < ApplicationController
   end
 
   def new
-    @assistant_configuration = AssistantConfiguration.new(assistant_configuration_params)
+    @assistant_configuration = current_user.assistant_configurations.build(assistant_configuration_params)
+    
+    render "assistant_configurations/new/#{@assistant_configuration.class.name.underscore}"
   end
 
   private

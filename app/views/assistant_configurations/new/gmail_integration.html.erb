@@ -1,0 +1,16 @@
+<%= link_to sanitize("&larr; Back to Configuration Settings"), assistant_configurations_path %>
+
+<div class="header">
+  <h2>Gmail Messages Integration Setup</h2>
+</div>
+
+<p>
+  First of all, you need to give the READ access to your Gmail mailbox. <br />
+  Don't worry, you will not share your credentials - the setup process goes via Google OAuth screen.  
+</p>
+
+<div>
+  <%= link_to "Setup",
+              google_oauth2_gmail_auth_path,
+              class: "btn btn--primary" %>
+</div>
