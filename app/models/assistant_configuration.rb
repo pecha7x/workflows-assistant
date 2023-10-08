@@ -14,6 +14,6 @@ class AssistantConfiguration < ApplicationRecord
   belongs_to :user
 
   def name
-    self.model_name.human
+    model_name.human
   end
 end

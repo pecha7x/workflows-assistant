@@ -3,7 +3,7 @@ module GmailService
 
   # https://github.com/googleapis/google-api-ruby-client/blob/main/generated/google-apis-gmail_v1/lib/google/apis/gmail_v1/service.rb
   def self.user_messages(access_token:)
-    client = GoogleApi::Client.new
+    client = GoogleApiClient.new
     client.access_token = access_token
 
     service = Google::Apis::GmailV1::GmailService.new

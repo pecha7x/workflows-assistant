@@ -31,6 +31,8 @@ class RedisField
   # rubocop:enable Style/CaseLikeIf
 
   def value
+    return nil unless exists?
+
     case redis_conn.type(key)
     when 'none'
       nil

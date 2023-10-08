@@ -20,7 +20,11 @@ module Myworkflow
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.autoload_paths   << Rails.root.join('lib')
-    config.autoload_paths   << Rails.root.join('app', 'models', 'assistant_configuration')
+    config.autoload_paths   << Rails.root.join('app/models/assistant_configuration')
     config.eager_load_paths << Rails.root.join('lib')
+  end
+
+  Application.reloader.to_prepare do
+    Dir[Rails.root.join('app/models/assistant_configuration/*.rb').to_s].each { |file| require_dependency file }
   end
 end

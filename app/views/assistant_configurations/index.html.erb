@@ -4,6 +4,7 @@
 
 <div class="assistant-settings">
   <%= render partial: "configurations",  locals: { configurations: @assistant_configurations } %>
+
   <div class="assistant-settings__bottom">
     <%= link_to job_sources_path, class: "btn btn--light" do %>
       <i class="fas fa-solid fa-rss"></i>

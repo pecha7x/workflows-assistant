@@ -11,9 +11,9 @@
 #  updated_at :datetime         not null
 #
 class GmailIntegration < AssistantConfiguration
-  include Notifier::Telegram
+  # include Notifier::GmailIntegration
 
-  SETTINGS_FIELDS = %i[refresh_rate].freeze
+  SETTINGS_FIELDS = %i[api_refresh_token gmail_user_email].freeze
 
   store_accessor :settings, SETTINGS_FIELDS
 end

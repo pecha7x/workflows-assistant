@@ -9,8 +9,14 @@ module GoogleOauth2
     end
 
     def callback
-      access_token = @client.fetch_access_and_refresh_tokens!(url_for(action: :callback), params[:code])
-      session[:access_token] = access_token
+      @client.authorize!(url_for(action: :callback), params[:code])
+
+      if @client.access_token
+        gmail_configuration = current_user.gmail_integration || current_user.create_gmail_integration
+        GmailService::AccessToken::Assign.run(gmail_configuration, @client.access_token, @client.refresh_token)
+      else
+        flash.now[:notice] = t('application.user_not_authorized_error')
+      end  
 
       redirect_to assistant_configurations_path
     end
@@ -18,7 +24,7 @@ module GoogleOauth2
     private
 
     def initialize_client
-      @client = GoogleApi::Client.new
+      @client = GoogleApiClient.new
     end
   end
 end
