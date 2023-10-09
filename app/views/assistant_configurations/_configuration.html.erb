@@ -1,14 +1,11 @@
 <%= turbo_frame_tag configuration do %>
-  <%= link_to configuration.name,
-              assistant_configuration_path(configuration),
-              data: { turbo_frame: "_top" } %>
+  <b><%= configuration.name %></b>
   <div class="assistant-configuration__actions">
-    <%= confirmation_link_to "Delete",
-                             assistant_configuration_path(configuration),
-                             class: "btn btn--light",
-                             data: { turbo_method: :delete } %>
-    <%= link_to "Edit",
-                edit_assistant_configuration_path(configuration),
-                class: "btn btn--light" %>
+    <%= link_to edit_assistant_configuration_path(configuration), data: { turbo_frame: "_top" }, class: "btn btn--light" do %>
+      <i class="fa-solid fa-pen-to-square"></i>
+    <% end %>
+    <%= confirmation_link_to assistant_configuration_path(configuration), class: "btn btn--light", data: { turbo_method: :delete } do %>
+      <i class="fa-solid fa-trash-can"></i>             
+    <% end %>
   </div>
 <% end %>

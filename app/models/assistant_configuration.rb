@@ -12,6 +12,9 @@
 #
 class AssistantConfiguration < ApplicationRecord
   belongs_to :user
+  has_many :notifiers, lambda { |ac|
+    unscope(:where).where(owner_type: ac.model_name.name, owner_id: ac.id, deleted_at: nil)
+  }, class_name: 'Notifier', inverse_of: :owner, dependent: :destroy # due to STI we have to use notifiers(polymorphic relation) in this odd way
 
   def name
     model_name.human

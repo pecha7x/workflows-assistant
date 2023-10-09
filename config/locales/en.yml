@@ -30,6 +30,17 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  assistant_configurations:
+    create:
+      notice: 'Configuration was successfully created.'
+    update:
+      notice: 'Configuration was successfully updated.'
+    destroy:
+      notice: 'Configuration was successfully destroyed.'
+  activerecord:
+     models:
+      gmail_integration:
+        one: Gmail Integration
   application:
     user_not_authorized_error: 'Access denied.'
   time:

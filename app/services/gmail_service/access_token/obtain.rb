@@ -17,6 +17,7 @@ module GmailService
       private
 
       attr_reader :gmail_configuration, :existing_value
+
       delegate :api_refresh_token, to: :gmail_configuration
 
       def refresh_value

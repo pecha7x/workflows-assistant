@@ -1,11 +1,11 @@
-<%= simple_form_for assistant_configuration, url: assistant_configurations_path do |f| %>
+<%= simple_form_for assistant_configuration, as: :assistant_configuration, url: assistant_configuration_path(assistant_configuration) do |f| %>
   <%= form_server_error_notification(assistant_configuration) %>
 
   <div class="form__row">
     <%= render partial: 'form_settings', locals: { form: f, assistant_configuration: assistant_configuration } %>
   </div>
 
-  <% if assistant_configuration.persisted? && respond_to?('notifiers') %>
+  <% if assistant_configuration.persisted? && assistant_configuration.respond_to?('notifiers') %>
     <div class="job_source__form-notifiers">
       <div class="job_source__form-notifiers-title">
         <b>Notifiers</b>
@@ -17,7 +17,7 @@
       </div>
 
       <%= turbo_frame_tag "notifiers" do %>
-        <%= render @notifiers %>
+        <%= render assistant_configuration.notifiers %>
       <% end %>
     </div>
   <% end %>  

@@ -40,7 +40,7 @@ class Notifier < ApplicationRecord
   belongs_to :user
 
   after_initialize do
-    self.name ||= "My new #{kind&.capitalize} Notifier" if new_record?
+    self.name ||= "My new #{kind&.humanize} Notifier" if new_record?
   end
 
   validates :kind, :name, presence: true

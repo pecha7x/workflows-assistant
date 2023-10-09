@@ -1,0 +1,7 @@
+<%= link_to sanitize("&larr; Back to Configuration Settings"), assistant_configurations_path %>
+
+<div class="header">
+  <h2>Gmail Messages Integration</h2>
+</div>
+
+<%= render partial: 'form', locals: { assistant_configuration: @assistant_configuration } %>

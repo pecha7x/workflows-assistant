@@ -13,9 +13,7 @@ class JobSourcesController < ApplicationController
     @job_source = JobSource.new(job_source_params)
   end
 
-  def edit
-    @notifiers = @job_source.notifiers
-  end
+  def edit; end
 
   def create
     @job_source = current_user.job_sources.build(job_source_params)

@@ -1,9 +1,0 @@
-<%= link_to sanitize("&larr; Back to Configuration Settings"), assistant_configurations_path %>
-
-<div class="header">
-  <h2>New Configuration Setting</h2>
-</div>
-
-<%= turbo_frame_tag @assistant_configuration do %>
-  <%= render "form", assistant_configuration: @assistant_configuration %>
-<% end %>

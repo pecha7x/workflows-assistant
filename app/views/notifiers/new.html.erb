@@ -1,4 +1,4 @@
-<%= link_to sanitize("&larr; Back to Job Source"), edit_polymorphic_path(@owner) %>
+<%= link_to sanitize("&larr; Back to #{@owner.model_name.human}"), edit_polymorphic_path(@owner) %>
 
 <div class="header">
   <h2>New Notifier</h2>

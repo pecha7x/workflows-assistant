@@ -19,7 +19,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :assistant_configurations
+  resources :assistant_configurations, except: %i[show create]
+  resources :gmail_integrations, controller: 'assistant_configurations'
+
   resources :job_sources do
     resources :job_leads, except: %i[index show]
   end

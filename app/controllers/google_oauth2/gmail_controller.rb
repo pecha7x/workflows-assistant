@@ -16,7 +16,7 @@ module GoogleOauth2
         GmailService::AccessToken::Assign.run(gmail_configuration, @client.access_token, @client.refresh_token)
       else
         flash.now[:notice] = t('application.user_not_authorized_error')
-      end  
+      end
 
       redirect_to assistant_configurations_path
     end

@@ -4,6 +4,7 @@ class GoogleApiClient
   TOKEN_CREDENTIAL_URI = 'https://accounts.google.com/o/oauth2/token'.freeze
 
   attr_reader :signet_client
+
   delegate :access_token, :refresh_token, to: :signet_client
 
   def initialize
@@ -34,7 +35,7 @@ class GoogleApiClient
     response['access_token']
   rescue Signet::AuthorizationError => e
     Rails.logger.error("Fetch access token Error - #{e.message}")
-    return nil
+    nil
   end
 
   def fetch_access_token!(refresh_token)
@@ -47,7 +48,7 @@ class GoogleApiClient
     response['access_token']
   rescue Signet::AuthorizationError => e
     Rails.logger.error("Fetch access token Error - #{e.message}")
-    return nil
+    nil
   end
 
   def access_token=(value)

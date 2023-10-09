@@ -1,14 +1,27 @@
 class AssistantConfigurationsController < ApplicationController
-  before_action :set_assistant_configuration, only: %i[destroy]
+  before_action :set_assistant_configuration, only: %i[edit update destroy]
 
   def index
     @assistant_configurations = AssistantConfigurations::List.run(current_user)
   end
 
   def new
-    @assistant_configuration = current_user.assistant_configurations.build(assistant_configuration_params)
+    render "assistant_configurations/new/#{resource_name.underscore}"
+  end
 
-    render "assistant_configurations/new/#{@assistant_configuration.class.name.underscore}"
+  def edit
+    render "assistant_configurations/edit/#{resource_name.underscore}"
+  end
+
+  def update
+    if @assistant_configuration.update(update_assistant_configuration_params)
+      respond_to do |format|
+        format.html { redirect_to assistant_configurations_path, notice: t('.notice') }
+        format.turbo_stream { flash.now[:notice] = t('.notice') }
+      end
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -26,12 +39,16 @@ class AssistantConfigurationsController < ApplicationController
     @assistant_configuration = current_user.assistant_configurations.find(params[:id])
   end
 
-  def assistant_configuration_params
+  def update_assistant_configuration_params
     params
       .fetch(:assistant_configuration, {})
       .permit(
         :type,
-        settings: params[:assistant_configuration][:type].constantize::SETTINGS_FIELDS
+        settings: @assistant_configuration.class.editable_settings_fields.keys
       )
+  end
+
+  def resource_name
+    @assistant_configuration.class.name
   end
 end
