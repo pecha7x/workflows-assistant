@@ -18,7 +18,7 @@ class AssistantConfiguration < ApplicationRecord
 
   class << self
     def settings_fields
-      { associated_resource_linked_to_sidebar: { type: 'boolean', editable: true, visible: true } }.freeze
+      { associated_resource_linked_to_navbar: { type: 'boolean', editable: true, visible: true } }.freeze
     end
 
     def visible_settings_fields
@@ -32,7 +32,7 @@ class AssistantConfiguration < ApplicationRecord
 
   store_accessor :settings, settings_fields.keys
 
-  scope :linked_to_sidebar, -> { where(settings: { associated_resource_linked_to_sidebar: 'true' }) }
+  scope :linked_to_navbar, -> { where(settings: { associated_resource_linked_to_navbar: 'true' }) }
 
   validates_uniqueness_of_without_deleted :type, scope: :user_id
 
