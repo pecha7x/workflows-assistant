@@ -1,1 +1,4 @@
 <%= render_turbo_stream_flash_messages %>
+<%= turbo_stream.update "configurations_associated_resources_links" do %>
+  <%= links_for_associated_resources_of_configurations %>
+<% end %>

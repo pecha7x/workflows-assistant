@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_01_193143) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_10_054122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -39,6 +39,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_193143) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "assistant_configuration_id", null: false
+    t.index ["assistant_configuration_id"], name: "index_gmail_messages_on_assistant_configuration_id"
     t.index ["user_id", "external_id", "deleted_at"], name: "index_gmail_messages_on_user_id_and_external_id_and_deleted_at", unique: true
   end
 
@@ -130,6 +132,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_193143) do
   end
 
   add_foreign_key "assistant_configurations", "users"
+  add_foreign_key "gmail_messages", "assistant_configurations"
   add_foreign_key "gmail_messages", "users"
   add_foreign_key "job_leads", "job_sources"
   add_foreign_key "job_sources", "users"

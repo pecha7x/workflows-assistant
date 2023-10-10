@@ -38,9 +38,12 @@ en:
     destroy:
       notice: 'Configuration was successfully destroyed.'
   activerecord:
-     models:
+    models:
       gmail_integration:
         one: Gmail Integration
+      gmail_message:
+        one: Gmail Message
+        many: Gmail Messages
   application:
     user_not_authorized_error: 'Access denied.'
   time:

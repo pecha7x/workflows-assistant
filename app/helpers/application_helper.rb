@@ -65,5 +65,13 @@ module ApplicationHelper
 
     html.html_safe
   end
+
+  def links_for_associated_resources_of_configurations
+    current_user.assistant_configurations.linked_to_sidebar.map do |assistant_configuration|
+      link_to url_for(assistant_configuration.associated_resource), class: 'btn btn--light' do
+        assistant_configuration.associated_resource.model_name.human.pluralize
+      end
+    end.join.html_safe
+  end
   # rubocop:enable Rails/OutputSafety
 end

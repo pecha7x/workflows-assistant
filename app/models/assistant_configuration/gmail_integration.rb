@@ -11,26 +11,22 @@
 #  updated_at :datetime         not null
 #
 class GmailIntegration < AssistantConfiguration
-  # TODO: move the settings fields definition structure to base class via some decorator
-  SETTINGS_FIELDS = {
-    api_refresh_token: { type: 'string', editable: false, visible: false },
-    gmail_user_email: { type: 'string', editable: false, visible: true },
-    link_to_sidebar: { type: 'boolean', editable: true, visible: true }
-  }.freeze
+  has_many :gmail_messages, foreign_key: :assistant_configuration_id, inverse_of: :gmail_integration, dependent: :destroy
 
-  class << self
-    def all_settings_fields
-      SETTINGS_FIELDS.keys
-    end
-
-    def visible_settings_fields
-      SETTINGS_FIELDS.select { |_k, v| v[:visible] }
-    end
-
-    def editable_settings_fields
-      SETTINGS_FIELDS.select { |_k, v| v[:editable] }
-    end
+  def self.settings_fields
+    {
+      api_refresh_token: { type: 'string', editable: false, visible: false },
+      gmail_user_email: { type: 'string', editable: false, visible: true }
+    }.merge(super).freeze
   end
 
-  store_accessor :settings, all_settings_fields
+  store_accessor :settings, settings_fields.keys
+
+  def notifiable?
+    true
+  end
+
+  def associated_resource
+    GmailMessage
+  end
 end

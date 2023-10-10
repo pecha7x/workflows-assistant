@@ -8,6 +8,14 @@
     justify-content: center;
     &-item {
       margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      &-actions {
+        margin-left: 0.5rem;
+        .btn {
+          padding: 0 var(--space-xs);
+        }
+      }
     }
   }
   &__bottom {

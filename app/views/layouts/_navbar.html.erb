@@ -4,6 +4,11 @@
   <% end %>
 
   <ul class="navbar__menu" data-navbar-target="menu" data-action="click->navbar#menuClick">
+    <%# to the cache this >> %>
+      <%= turbo_frame_tag "configurations_associated_resources_links" do %>
+        <%= links_for_associated_resources_of_configurations %>
+      <% end %>  
+    <%# to the cache this << %>
     <li class="navbar__menu-item">
       <%= link_to job_leads_path, class: "btn btn--light" do %>
         <i class="fas fa-solid fa-briefcase fa-lg"></i>

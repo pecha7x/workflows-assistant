@@ -5,7 +5,7 @@
     <%= render partial: 'form_settings', locals: { form: f, assistant_configuration: assistant_configuration } %>
   </div>
 
-  <% if assistant_configuration.persisted? && assistant_configuration.respond_to?('notifiers') %>
+  <% if assistant_configuration.persisted? && assistant_configuration.notifiable? %>
     <div class="job_source__form-notifiers">
       <div class="job_source__form-notifiers-title">
         <b>Notifiers</b>
