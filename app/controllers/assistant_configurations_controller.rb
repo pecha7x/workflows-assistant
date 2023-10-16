@@ -6,11 +6,12 @@ class AssistantConfigurationsController < ApplicationController
   end
 
   def new
-    render "assistant_configurations/new/#{resource_name.underscore}"
+    @assistant_configuration = current_user.assistant_configurations.build(type: params[:assistant_configuration][:type])
+    render "assistant_configurations/new/#{@assistant_configuration.class.name.underscore}"
   end
 
   def edit
-    render "assistant_configurations/edit/#{resource_name.underscore}"
+    render "assistant_configurations/edit/#{@assistant_configuration.class.name.underscore}"
   end
 
   def update
@@ -46,9 +47,5 @@ class AssistantConfigurationsController < ApplicationController
         :type,
         settings: @assistant_configuration.class.editable_settings_fields.keys
       )
-  end
-
-  def resource_name
-    @assistant_configuration.class.name
   end
 end

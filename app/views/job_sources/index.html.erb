@@ -1,5 +1,7 @@
 <%= turbo_stream_from current_user, "job_sources" %>
 
+<%= link_to sanitize("&larr; Back to Configuration Settings"), assistant_configurations_path %>
+
 <div class="header">
   <h2>Job Sources</h2>
 
