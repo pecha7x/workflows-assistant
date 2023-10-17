@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_10_054122) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_16_194046) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -24,6 +24,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_054122) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "background_job_id"
+    t.index ["background_job_id", "deleted_at"], name: "index_assistant_configurations_on_bg_job_id_and_deleted_at"
     t.index ["user_id", "deleted_at"], name: "index_assistant_configurations_on_user_id_and_deleted_at"
   end
 
