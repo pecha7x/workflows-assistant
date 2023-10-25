@@ -13,17 +13,17 @@ module AssistantConfigurations
 
       def run
         api_client.user_messages.each do |message_data|
-          gmail_message = gmail_messages.find_or_initialize_by(external_id: message_data.id, user_id:)
-          next if gmail_message.persisted? # skip duplicates
-
           process_message(message_data.id)
         end
       end
 
       private
 
-      def process_message(id)
-        message_data = api_client.user_message(id)
+      def process_message(external_id)
+        gmail_message = gmail_messages.find_or_initialize_by(external_id: message_data.id, user_id:)
+        return if gmail_message.persisted? # skip duplicates
+
+        message_data = api_client.user_message(external_id)
         return unless message_data
 
         message_attributes = AssistantConfigurations::Sync::Mapping::GmailMessage.new(message_data).build
