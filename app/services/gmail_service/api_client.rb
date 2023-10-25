@@ -18,7 +18,7 @@ module GmailService
 
     def user_messages
       messages_data = service.list_user_messages('me')
-      messages_data ? [] : messages_data.messages
+      messages_data ? messages_data.messages : []
     end
 
     def user_message(id, format = 'full')
