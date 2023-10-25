@@ -36,12 +36,14 @@ class GmailIntegration < AssistantConfiguration
     GmailMessage
   end
 
-  private
-
   def background_processing
+    cancel_background_job
+
     bg_job = SyncGmailMessagesJob.set(wait: REFRESH_RATE_IN_SECONDS.seconds).perform_later(id)
     bg_job && update(background_job_id: bg_job.provider_job_id)
   end
+
+  private
 
   def cancel_background_job
     # TODO: add more logic when background_job is running
