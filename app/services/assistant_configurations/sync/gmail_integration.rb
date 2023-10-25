@@ -20,7 +20,7 @@ module AssistantConfigurations
       private
 
       def process_message(external_id)
-        gmail_message = gmail_messages.find_or_initialize_by(external_id: message_data.id, user_id:)
+        gmail_message = gmail_messages.find_or_initialize_by(external_id:, user_id:)
         return if gmail_message.persisted? # skip duplicates
 
         message_data = api_client.user_message(external_id)
