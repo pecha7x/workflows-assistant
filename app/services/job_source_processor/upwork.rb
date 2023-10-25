@@ -7,7 +7,7 @@ module JobSourceProcessor
     RATE_FROM_DESC_REGEX = %r{<b>Hourly Range</b>:(?<hourly_range>.*)\n\n}
     COUNTRY_FROM_DESC_REGEX = %r{<b>Country</b>:(?<country>.*)\n}
 
-    delegate :rss_url, to: :job_source
+    delegate :rss_url, :job_leads, to: :job_source
 
     def run
       raise 'The Feed has not RSS URL' if rss_url.blank?
@@ -16,7 +16,7 @@ module JobSourceProcessor
         feed = RSS::Parser.parse(rss)
         feed.items.each do |their_lead|
           # TODO: move find_or_initialize_by logic to base class
-          job_lead = job_source.job_leads.find_or_initialize_by(external_id: their_id(their_lead.link))
+          job_lead = job_leads.find_or_initialize_by(external_id: their_id(their_lead.link))
           next if job_lead.persisted? # skip duplicates
 
           job_lead.assign_attributes(attributes(their_lead))

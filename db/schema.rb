@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_16_194046) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_25_060655) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -34,16 +34,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_194046) do
 
   create_table "gmail_messages", force: :cascade do |t|
     t.string "from", null: false
-    t.string "subject"
-    t.text "body"
+    t.text "short_body", null: false
+    t.text "raw_body", null: false
     t.string "external_id", null: false
     t.bigint "user_id", null: false
+    t.bigint "assistant_configuration_id", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "assistant_configuration_id", null: false
-    t.index ["assistant_configuration_id"], name: "index_gmail_messages_on_assistant_configuration_id"
-    t.index ["user_id", "external_id", "deleted_at"], name: "index_gmail_messages_on_user_id_and_external_id_and_deleted_at", unique: true
+    t.index ["user_id", "external_id", "deleted_at"], name: "index_gmail_messages_on_user_id_and_external_id_and_deleted_at"
   end
 
   create_table "job_leads", force: :cascade do |t|

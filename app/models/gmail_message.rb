@@ -4,14 +4,14 @@
 #
 #  id                         :bigint           not null, primary key
 #  from                       :string           not null
-#  subject                    :string
-#  body                       :text
+#  short_body                 :text             not null
+#  raw_body                   :text             not null
 #  external_id                :string           not null
 #  user_id                    :bigint           not null
+#  assistant_configuration_id :bigint           not null
 #  deleted_at                 :datetime
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
-#  assistant_configuration_id :bigint           not null
 #
 class GmailMessage < ApplicationRecord
   include TextFieldsSanitization

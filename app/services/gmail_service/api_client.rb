@@ -1,6 +1,8 @@
 module GmailService
   class ApiClient
     # https://github.com/googleapis/google-api-ruby-client/blob/main/generated/google-apis-gmail_v1/lib/google/apis/gmail_v1/service.rb
+    # https://developers.google.com/gmail/api/reference/rest/v1/
+    #
     attr_reader :service
 
     def initialize(access_token)
@@ -15,11 +17,12 @@ module GmailService
     end
 
     def user_messages
-      service.list_user_messages('me')
+      messages_data = service.list_user_messages('me')
+      messages_data ? [] : messages_data.messages
     end
 
-    def user_message(id)
-      service.get_user_message('me', id)
+    def user_message(id, format = 'full')
+      service.get_user_message('me', id, format:)
     end
   end
 end
