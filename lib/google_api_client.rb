@@ -31,7 +31,9 @@ class GoogleApiClient
     )
 
     response = signet_client.fetch_access_token!
-
+    Rails.logger.error("Fetch access token response - #{response.inspect}")
+    Rails.logger.error("Fetch access token response - #{response}")
+    Rails.logger.error("Fetch access token response - #{response['access_token']}")
     response['access_token']
   rescue Signet::AuthorizationError => e
     Rails.logger.error("Fetch access token Error - #{e.message}")

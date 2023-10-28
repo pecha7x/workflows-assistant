@@ -6,14 +6,15 @@
 #
 first:
   from: example1@email.com
-  subject: New Message 1
-  body: New Message 1 body
+  short_body: New Message 1 body
+  raw_body: New Message 1 raw body
   external_id: 1
   user: user1
-
+  gmail_integration: first
 second:
   from: example2@email.com
-  subject: New Message 2
-  body: New Message 2 body
+  short_body: New Message 2 body
+  raw_body: New Message 2 raw body
   external_id: 2
   user: user1
+  gmail_integration: first
