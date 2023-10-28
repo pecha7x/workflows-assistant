@@ -20,4 +20,14 @@ class GmailMessage < ApplicationRecord
   belongs_to :gmail_integration, foreign_key: :assistant_configuration_id, inverse_of: :gmail_messages
 
   scope :ordered, -> { order(created_at: :desc) }
+
+  after_create :notify
+
+  private
+
+  def notify
+    gmail_integration.notifiers.each do |notifier|
+      NewGmailMessageNotificationJob.set(wait: 2.seconds).perform_later(id, notifier.id)
+    end
+  end
 end
