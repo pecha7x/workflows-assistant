@@ -33,7 +33,7 @@ class AssistantConfiguration < ApplicationRecord
 
   store_accessor :settings, settings_fields.keys
 
-  scope :linked_to_navbar, -> { where(settings: { associated_resource_linked_to_navbar: 'true' }) }
+  scope :linked_to_navbar, -> { where("settings ->> 'associated_resource_linked_to_navbar' = 'true'") }
 
   validates_uniqueness_of_without_deleted :type, scope: :user_id
 

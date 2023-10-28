@@ -15,7 +15,8 @@ class AssistantConfigurationsController < ApplicationController
   end
 
   def update
-    if @assistant_configuration.update(update_assistant_configuration_params)
+    permitted_params_of_settings.each { |k, v| @assistant_configuration.send("#{k}=", v) }
+    if @assistant_configuration.save
       respond_to do |format|
         format.html { redirect_to assistant_configurations_path, notice: t('.notice') }
         format.turbo_stream { flash.now[:notice] = t('.notice') }
@@ -40,12 +41,12 @@ class AssistantConfigurationsController < ApplicationController
     @assistant_configuration = current_user.assistant_configurations.find(params[:id])
   end
 
-  def update_assistant_configuration_params
+  def permitted_params_of_settings
     params
       .fetch(:assistant_configuration, {})
+      .fetch(:settings, {})
       .permit(
-        :type,
-        settings: @assistant_configuration.class.editable_settings_fields.keys
+        @assistant_configuration.class.editable_settings_fields.keys
       )
   end
 end
