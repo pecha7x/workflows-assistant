@@ -14,7 +14,7 @@ module GoogleOauth2
           gmail_configuration = current_user.gmail_integration || current_user.create_gmail_integration
           GmailService::AccessToken::Assign.run(gmail_configuration, @api_client.access_token, @api_client.refresh_token)
         else
-          flash.now[:notice] = t('google_auth.refresh_token_blank')
+          flash.now[:notice] = t('google_oauth.refresh_token_blank')
         end
       else
         flash.now[:notice] = t('application.user_not_authorized_error')
