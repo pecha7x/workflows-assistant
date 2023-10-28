@@ -7,7 +7,7 @@ module NotifierProcessor
     private
 
     def message_text
-      text = "New Lead from <u>#{from}</u>:&#10;&#10;"
+      text = "New Record from <u>#{from}</u>:&#10;&#10;"
       text += "#{subject}&#10;&#10;"
       text += message
       text

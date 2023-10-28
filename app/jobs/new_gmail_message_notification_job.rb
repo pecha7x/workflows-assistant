@@ -22,6 +22,6 @@ class NewGmailMessageNotificationJob < ApplicationJob
   private
 
   def gmail_message_subject
-    "New Message from #{gmail_message.from} / #{time_ago_in_words(gmail_message.created_at)} ago"
+    "Message from #{gmail_message.from.gsub(/<|>/, '')} / #{time_ago_in_words(gmail_message.created_at)} ago"
   end
 end
