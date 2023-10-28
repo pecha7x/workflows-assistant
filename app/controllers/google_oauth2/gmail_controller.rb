@@ -3,17 +3,19 @@ module GoogleOauth2
     before_action :initialize_client
 
     def auth
-      authorization_uri = @client.authorization_uri(url_for(action: :callback), Google::Apis::GmailV1::AUTH_GMAIL_READONLY)
+      authorization_uri = @api_client.authorization_uri(url_for(action: :callback), Google::Apis::GmailV1::AUTH_GMAIL_READONLY)
 
       redirect_to authorization_uri, allow_other_host: true
     end
 
     def callback
-      @client.authorize!(url_for(action: :callback), params[:code])
-
-      if @client.access_token
-        gmail_configuration = current_user.gmail_integration || current_user.create_gmail_integration
-        GmailService::AccessToken::Assign.run(gmail_configuration, @client.access_token, @client.refresh_token)
+      if @api_client.authorize!(url_for(action: :callback), params[:code])
+        if @api_client.refresh_token
+          gmail_configuration = current_user.gmail_integration || current_user.create_gmail_integration
+          GmailService::AccessToken::Assign.run(gmail_configuration, @api_client.access_token, @api_client.refresh_token)
+        else
+          flash.now[:notice] = t('google_auth.refresh_token_blank')
+        end
       else
         flash.now[:notice] = t('application.user_not_authorized_error')
       end
@@ -24,7 +26,7 @@ module GoogleOauth2
     private
 
     def initialize_client
-      @client = GoogleApiClient.new
+      @api_client = GoogleApiClient.new
     end
   end
 end

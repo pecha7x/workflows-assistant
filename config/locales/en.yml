@@ -46,9 +46,8 @@ en:
         many: Gmail Messages
   application:
     user_not_authorized_error: 'Access denied.'
-  time:
-    formats:
-      specific_format: '%d %b %T'
+  google_oauth:
+    refresh_token_blank: 'Authorization Failed. It seems you already have authorized before, so please to try delete the auth from your security settings https://myaccount.google.com/u/0/security and try again.'
   job_sources:
     create:
       notice: 'Job Source was successfully created.'
@@ -77,3 +76,6 @@ en:
       notice: 'Notifier was successfully destroyed.'
     refresh_telegram_token:
       notice: 'The link was successfully refreshed.'
+  time:
+    formats:
+      specific_format: '%d %b %T'
