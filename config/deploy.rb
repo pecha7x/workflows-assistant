@@ -8,7 +8,7 @@ set :deploy_to, '/home/deploy/workflows-assistant'
 set :pty, true
 set :linked_files, %w[config/database.yml config/master.key config/credentials/production.key config/credentials/production.yml.enc]
 set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads]
-set :keep_releases, 5
+set :keep_releases, 3
 set :nvm_node, 'v18.7.0'
 set :nvm_map_bins, %w[node npm yarn rake]
 
@@ -41,7 +41,7 @@ namespace :deploy do
     task :symlink_config do
       on roles :nginx do
         within release_path do
-          sudo :cp, '-f', "config/nginx.#{fetch(:stage)}.conf", '/etc/nginx/nginx.conf'
+          sudo :cp, '-f', "config/nginx.#{fetch(:stage)}.conf", '/etc/nginx/sites-available/myworkflow.conf'
         end
       end
     end
