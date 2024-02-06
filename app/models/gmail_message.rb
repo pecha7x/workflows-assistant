@@ -26,7 +26,8 @@ class GmailMessage < ApplicationRecord
   private
 
   def notify
-    return true if from.match?(/(medium\.com)|(linkedin\.com)|(github\.com)/)
+    # return true if from.match?(/(medium\.com)|(linkedin\.com)|(github\.com)/)
+    return true unless from.match?(/(upwork)|(pecha7x)/)
 
     gmail_integration.notifiers.each do |notifier|
       NewGmailMessageNotificationJob.set(wait: 2.seconds).perform_later(id, notifier.id)
