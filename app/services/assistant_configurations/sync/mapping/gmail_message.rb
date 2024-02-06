@@ -20,7 +20,7 @@ module AssistantConfigurations
           {
             from: headers.find { |header| header.name == 'From' }&.value,
             short_body: message_data.snippet,
-            raw_body: payload.parts&.to_json,
+            raw_body: payload.parts&.to_json || '',
             created_at: headers.find { |header| header.name == 'Date' }&.value
           }.compact
         end
