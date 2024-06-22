@@ -41,7 +41,7 @@ namespace :deploy do
     task :symlink_config do
       on roles :nginx do
         within release_path do
-          sudo :cp, '-f', "config/nginx.#{fetch(:stage)}.conf", '/etc/nginx/sites-available/myworkflow.conf'
+          sudo :cp, '-f', "config/nginx.#{fetch(:stage)}.conf", '/etc/nginx/sites-enabled/myworkflow.conf'
         end
       end
     end
