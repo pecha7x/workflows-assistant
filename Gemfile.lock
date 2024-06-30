@@ -250,7 +250,6 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     net-ssh (7.2.0)
-    newrelic_rpm (9.11.0)
     nio4r (2.5.9)
     nokogiri (1.15.4-x86_64-darwin)
       racc (~> 1.4)
@@ -463,7 +462,6 @@ DEPENDENCIES
   lograge (~> 0.3.1)
   minitest-stub_any_instance
   mocha
-  newrelic_rpm
   paper_trail
   pg (~> 1.1)
   pghero
